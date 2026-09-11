@@ -120,6 +120,21 @@ we obtain
   \label{eq:q1a_dp_recursion}
 \end{equation}
 
+\paragraph{Step 5: forward substitution.}
+Equation (\ref{eq:q1a_dp_recursion}) holds at every date, so shifting it one period forward,
+\begin{equation}
+  \dpr_{t+1} = -\kappa_0 + \kappa\, \dpr_{t+2} + r_{t+2} - \Delta \mathit{cf}_{t+2}.
+  \label{eq:q1a_dp_recursion_t1}
+\end{equation}
+Plugging (\ref{eq:q1a_dp_recursion_t1}) into the $\dpr_{t+1}$ term on the right-hand side of
+(\ref{eq:q1a_dp_recursion}) gives
+\begin{equation}
+  \dpr_t = -\kappa_0 - \kappa\,\kappa_0 + \kappa^{2}\, \dpr_{t+2}
+           + r_{t+1} + \kappa\, r_{t+2}
+           - \Delta \mathit{cf}_{t+1} - \kappa\, \Delta \mathit{cf}_{t+2}.
+  \label{eq:q1a_two_step}
+\end{equation}
+
 \subsection{Variance decomposition by horizon (data)}
 % TODO (Q1b): figure H vs (b_re^(H), b_dd^(H), b_dp^(H)) + inference
 % \begin{figure}[H]
