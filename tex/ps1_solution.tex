@@ -78,12 +78,8 @@ approximated by a first-order Taylor expansion around a point $a$:
   \label{eq:q1a_taylor}
 \end{equation}
 which is accurate for small enough $x - a$. The expansion point $a$ is taken to be the
-average of $\mathit{cf}_{t+1} - p_{t+1}$ over time, denoted
-$a = \overline{\mathit{cf}} - \overline{p}$.
-% STUDENT TO DECIDE: formal definition of the average. The student's proposed notation
-%   \sum_{\tau=t}^{\infty} (cf_{\tau+1} - p_{\tau+1}) / (\infty - t)
-% is not a well-defined expression (infinity minus t is not a number). A time-invariant
-% constant is needed here because it will define kappa below.
+time average of $\mathit{cf}_{t+1} - p_{t+1}$, which is assumed to converge to a constant,
+denoted $a = \overline{\mathit{cf}} - \overline{p}$.
 
 \paragraph{Step 3: substituting the approximation.}
 Applying the Taylor approximation (\ref{eq:q1a_taylor}) to the right-hand side of
@@ -119,10 +115,10 @@ both sides by $-1$, and defining
   \label{eq:q1a_dp_def}
 \end{equation}
 we obtain
-% STUDENT TO CONFIRM: the equation was sent as
-%   dp_t = -kappa_0 - kappa dp_{t+1} + r_{t+1} - Delta cf_{t+1},
-% but collecting the kappa terms gives  +kappa dp_{t+1}  (see chat). Left untranscribed
-% until the student confirms the intended form.
+\begin{equation}
+  \dpr_t = -\kappa_0 + \kappa\, \dpr_{t+1} + r_{t+1} - \Delta \mathit{cf}_{t+1}.
+  \label{eq:q1a_dp_recursion}
+\end{equation}
 
 \subsection{Variance decomposition by horizon (data)}
 % TODO (Q1b): figure H vs (b_re^(H), b_dd^(H), b_dp^(H)) + inference
