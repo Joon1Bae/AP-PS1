@@ -43,4 +43,4 @@ where the small letter stands for the log of capital, i.e., log(R_t+1) = r_t+1."
 - **Substantive mathematical / economic / empirical suggestions made:** none
 - **Type of assistance:** formatting/translation (LaTeX transcription of the student's derivation)
 - **Grouped follow-up requests:** (subsequent Q1a derivation steps sent by the student in this session will be listed here as they are transcribed, each followed by a new "TP after" commit)
-- **Git commit after:** <pending>
+- **Git commit after:** 46783c59f3ce20812644614340b76876218a1585
