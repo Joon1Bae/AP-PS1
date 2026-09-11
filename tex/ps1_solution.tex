@@ -1,0 +1,139 @@
+% BUSFIN 8200 -- Problem Set 1 -- Solution
+% Build: cd tex && latexmk -pdf ps1_solution.tex
+% Figures/tables are produced by src/*.py into output/ and included from there.
+
+\documentclass[11pt]{article}
+
+% ---------- Packages ----------
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{bm}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{float}
+\usepackage{enumitem}
+\usepackage[colorlinks=true, linkcolor=blue, citecolor=blue, urlcolor=blue]{hyperref}
+
+\graphicspath{{../output/}}
+
+% ---------- Macros ----------
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\Var}{\mathrm{Var}}
+\newcommand{\Cov}{\mathrm{Cov}}
+\newcommand{\dpr}{\mathit{dp}}   % \dp is a TeX primitive (box depth), so use \dpr
+\newcommand{\dy}{\mathit{dy}}
+\newcommand{\xR}{\mathit{xR}}
+\newcommand{\xr}{\mathit{xr}}
+\newcommand{\xy}{\mathit{xy}}
+\newcommand{\xf}{\mathit{xf}}
+
+% ---------- Title ----------
+\title{BUSFIN 8200: Asset Pricing Foundations\Problem Set 1}
+\author{Joon Bae}
+\date{\today}
+
+\begin{document}
+\maketitle
+
+% =====================================================================
+\section{Question 1}
+% =====================================================================
+
+\subsection{Derivation of Equations 1.1--1.3}
+% TODO (Q1a): derivation starting from R_{e,t+1} = (P_{t+1} + D_{t+1}) / P_t
+
+\subsection{Variance decomposition by horizon (data)}
+% TODO (Q1b): figure H vs (b_re^(H), b_dd^(H), b_dp^(H)) + inference
+% \begin{figure}[H]
+%   \centering
+%   \includegraphics[width=0.8\textwidth]{q1b_decomposition.pdf}
+%   \caption{}
+%   \label{fig:q1b}
+% \end{figure}
+
+\subsection{Variance decomposition by horizon (VAR-implied)}
+% TODO (Q1c): VAR z_{t+1} = Gamma_0 + Gamma z_t + e_{t+1}, z_t = [dd_t, r_{e,t}, dp_t]
+% \begin{figure}[H] ... q1c_decomposition_var.pdf ... \end{figure}
+
+\subsection{Infinite-horizon decomposition}
+% TODO (Q1d): b_re^(inf), b_dd^(inf) from the VAR + interpretation
+
+\subsection{Derivation of Equations 1.7--1.9 (Gao and Martin, 2021)}
+% TODO (Q1e): derivation with dy_t = log(1 + D_t/P_t), kappa = e^{-dy}
+
+% =====================================================================
+\section{Question 2}
+% =====================================================================
+
+\subsection{Predictive regressions by horizon}
+% TODO (Q2a): figure H vs adjusted R^2, H = 1..15 + description
+% \begin{figure}[H] ... q2a_r2adj.pdf ... \end{figure}
+
+\subsection{Standard errors for the one-year predictive regression}
+% TODO (Q2b): table with b-hat and t-stats under OLS / White / NW(11) / HH(11) / NW(1994)
+% \begin{table}[H]
+%   \centering
+%   \input{../output/q2b_se_table.tex}
+%   \caption{}
+%   \label{tab:q2b}
+% \end{table}
+
+\subsection{Amihud and Hurvich (2004) bias-corrected estimate}
+% TODO (Q2c): report b-hat, contrast with Q2b, explain why they differ
+
+\subsection{Out-of-sample estimation (expanding window)}
+% TODO (Q2d): time-series plot of xRbar, E^IS, E^OS from 1940-12; R^2_OS; 50-year rolling R^2_OS plot
+% \begin{figure}[H] ... q2d_forecasts.pdf ... \end{figure}
+% \begin{figure}[H] ... q2d_r2os_rolling.pdf ... \end{figure}
+
+\subsection{Out-of-sample estimation with steady-state restrictions}
+% TODO (Q2e): same as Q2d with a_t = G_t - 1, b_t = G_t
+% \begin{figure}[H] ... q2e_forecasts.pdf ... \end{figure}
+% \begin{figure}[H] ... q2e_r2os_rolling.pdf ... \end{figure}
+
+% =====================================================================
+\section{Question 3}
+% =====================================================================
+
+\subsection{Momentum signal construction and validation}
+% TODO (Q3a): three time-series plots (intercept, slope, R^2) of MOM_CZ on MOM
+
+\subsection{Book-to-market signal construction and validation}
+% TODO (Q3b): three time-series plots (intercept, slope, R^2) of BM_CZ on BM
+
+\subsection{Decile portfolios}
+% TODO (Q3c): five scatterplots (decile vs. avg excess return; blue = BM, red = MOM, green = GP)
+%             + table of 15 HML average returns with NW(1994) t-stats
+
+\subsection{Fama--MacBeth regressions}
+% TODO (Q3d): table, specifications (i)--(vii), OLS and WLS (ME weights), with t-stats
+
+\subsection{Portfolio-level multivariate regressions}
+% TODO (Q3e): table, specifications (i)--(vii), VW and EW portfolios, Driscoll--Kraay t-stats
+
+% =====================================================================
+\section{Question 4}
+% =====================================================================
+
+\subsection{Yields, forward rates, and returns}
+% TODO (Q4a): table of average xy^(H), xf^(H), xr^(H) for H = 2..5
+
+\subsection{Hold-to-maturity excess return regressions}
+% TODO (Q4b): table analogous to slide 5.5, first table, first panel; Hansen--Hodrick t-stats
+
+\subsection{One-year excess return regressions on forward spreads}
+% TODO (Q4c): table analogous to slide 5.5, first table, second panel; NW(1994) t-stats
+
+\subsection{Cochrane--Piazzesi factor}
+% TODO (Q4d): time-series plot of cp_t with NBER recession shading
+
+\subsection{Excess return regressions on the CP factor}
+% TODO (Q4e): table analogous to slide 5.5, second table; NW(1994) t-stats
+
+% =====================================================================
+% \bibliographystyle{...}
+% \bibliography{references}
+
+\end{document}
