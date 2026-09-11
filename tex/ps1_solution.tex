@@ -90,14 +90,22 @@ Applying the Taylor approximation (\ref{eq:q1a_taylor}) to the right-hand side o
 (\ref{eq:q1a_rearranged}), with $x = \mathit{cf}_{t+1} - p_{t+1}$ and
 $a = \overline{\mathit{cf}} - \overline{p}$, and rearranging the terms, we obtain
 \begin{equation}
-  p_t = \kappa_0 + (1 - \kappa)\,\mathit{cf}_{t+1} - r_{t+1} + \kappa\, p_{t+1}.
+  p_t = \kappa_0 + (1 - \kappa)\,\mathit{cf}_{t+1} - r_{t+1} + \kappa\, p_{t+1},
   \label{eq:q1a_price_recursion}
 \end{equation}
-% STUDENT TO ADD: the definitions of kappa and kappa_0 in terms of the expansion point a
-% (i.e., how they arise from the Taylor coefficients log(1+e^a) and e^a/(1+e^a)) are not
-% yet stated anywhere in this derivation. The problem statement defines
-%   kappa = 1/(1+e^{dp-bar}),  kappa_0 = -log(kappa) - (1-kappa) log(1/kappa - 1),
-% so the link between these and the Taylor coefficients needs to be shown here.
+where, as in the problem statement,
+\begin{equation}
+  \kappa = \frac{1}{1 + e^{\,a}}
+  \qquad \text{and} \qquad
+  \kappa_0 = -\log(\kappa) - (1 - \kappa)\,\log\!\left(\frac{1}{\kappa} - 1\right),
+  \label{eq:q1a_kappa_def}
+\end{equation}
+with $a = \overline{\mathit{cf}} - \overline{p}$ the expansion point of Step 2
+(the problem statement writes this average as $\overline{\dpr}$).
+% NOTE: the two definitions above are copied from the problem statement (with dp-bar
+% written as a). What is still missing is the derivation-side link: showing that the
+% Taylor coefficients log(1+e^a) and e^a/(1+e^a) from Step 2 reduce to these kappa_0 and
+% (1-kappa) after the rearrangement. STUDENT TO ADD.
 % The intermediate line (after substitution, before rearranging) was also not written by
 % the student; whether to display it is the student's choice.
 
