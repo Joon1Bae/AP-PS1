@@ -94,7 +94,7 @@ when all three hold: same item, same session, documented together. A new item or
 substantive request always starts a new `/TP` cycle.
 
 ## Report to the user
-Finish by telling the user (in Korean): the item, `before_hash`, `after_hash`, the entry number,
+Finish by telling the user: the item, `before_hash`, `after_hash`, the entry number,
 and any ambiguities that still need their decision.
 
 This skill helps create an auditable record. It does not weaken or replace any requirement of

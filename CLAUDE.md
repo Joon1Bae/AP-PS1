@@ -5,8 +5,8 @@ This folder is a **standalone Git repository** submitted for grading. It is nest
 Any `CLAUDE.md` found in parent directories is for the study project and does **not** apply here.
 The rules in this file take precedence.
 
-Conversation with the user is in **Korean**. Files committed to this repo (code, comments,
-`AI_INTERACTIONS.md`, `AI_USAGE.md`, LaTeX) should be in **English** so the instructor can audit them.
+Files committed to this repo (code, comments, `AI_INTERACTIONS.md`, `AI_USAGE.md`, LaTeX)
+should be in **English** so the instructor can audit them.
 
 ## Course AI policy — MANDATORY
 Full text: `../../Problem Sets AI Policy.pdf` (in the parent study repo, not part of this submission).
