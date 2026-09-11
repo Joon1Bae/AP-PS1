@@ -109,6 +109,21 @@ with $a = \overline{\mathit{cf}} - \overline{p}$ the expansion point of Step 2
 % The intermediate line (after substitution, before rearranging) was also not written by
 % the student; whether to display it is the student's choice.
 
+\paragraph{Step 4: rewriting in terms of the log cash-flow--price ratio.}
+Subtracting $\mathit{cf}_t$ from both sides of (\ref{eq:q1a_price_recursion}) and multiplying
+both sides by $-1$, and defining
+\begin{equation}
+  \dpr_t := \mathit{cf}_t - p_t
+  \qquad \text{and} \qquad
+  \Delta \mathit{cf}_{t+1} := \mathit{cf}_{t+1} - \mathit{cf}_t,
+  \label{eq:q1a_dp_def}
+\end{equation}
+we obtain
+% STUDENT TO CONFIRM: the equation was sent as
+%   dp_t = -kappa_0 - kappa dp_{t+1} + r_{t+1} - Delta cf_{t+1},
+% but collecting the kappa terms gives  +kappa dp_{t+1}  (see chat). Left untranscribed
+% until the student confirms the intended form.
+
 \subsection{Variance decomposition by horizon (data)}
 % TODO (Q1b): figure H vs (b_re^(H), b_dd^(H), b_dp^(H)) + inference
 % \begin{figure}[H]
