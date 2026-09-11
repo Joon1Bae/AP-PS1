@@ -85,6 +85,22 @@ $a = \overline{\mathit{cf}} - \overline{p}$.
 % is not a well-defined expression (infinity minus t is not a number). A time-invariant
 % constant is needed here because it will define kappa below.
 
+\paragraph{Step 3: substituting the approximation.}
+Applying the Taylor approximation (\ref{eq:q1a_taylor}) to the right-hand side of
+(\ref{eq:q1a_rearranged}), with $x = \mathit{cf}_{t+1} - p_{t+1}$ and
+$a = \overline{\mathit{cf}} - \overline{p}$, and rearranging the terms, we obtain
+\begin{equation}
+  p_t = \kappa_0 + (1 - \kappa)\,\mathit{cf}_{t+1} - r_{t+1} + \kappa\, p_{t+1}.
+  \label{eq:q1a_price_recursion}
+\end{equation}
+% STUDENT TO ADD: the definitions of kappa and kappa_0 in terms of the expansion point a
+% (i.e., how they arise from the Taylor coefficients log(1+e^a) and e^a/(1+e^a)) are not
+% yet stated anywhere in this derivation. The problem statement defines
+%   kappa = 1/(1+e^{dp-bar}),  kappa_0 = -log(kappa) - (1-kappa) log(1/kappa - 1),
+% so the link between these and the Taylor coefficients needs to be shown here.
+% The intermediate line (after substitution, before rearranging) was also not written by
+% the student; whether to display it is the student's choice.
+
 \subsection{Variance decomposition by horizon (data)}
 % TODO (Q1b): figure H vs (b_re^(H), b_dd^(H), b_dp^(H)) + inference
 % \begin{figure}[H]
