@@ -64,10 +64,12 @@ Taking logs,
 \end{align}
 
 \paragraph{Step 2: first-order Taylor approximation of the log term.}
-% STUDENT TO CONFIRM: the rearrangement of (\ref{eq:q1a_log_return}) was sent as
-%   r_{t+1} - p_{t+1} - p_t = log(1 + e^{cf_{t+1} - p_{t+1}}),
-% but moving p_{t+1} - p_t to the left gives  r_{t+1} - p_{t+1} + p_t  on the left side.
-% Left untranscribed until the student confirms the intended form.
+Rearranging (\ref{eq:q1a_log_return}) so that the polynomial terms are on the left-hand side
+and the log term is on the right-hand side,
+\begin{equation}
+  r_{t+1} - p_{t+1} + p_t = \log\!\left(1 + e^{\,\mathit{cf}_{t+1} - p_{t+1}}\right).
+  \label{eq:q1a_rearranged}
+\end{equation}
 Let $x_{t+1} = \mathit{cf}_{t+1} - p_{t+1}$. The function $\log(1 + e^{x})$ can be
 approximated by a first-order Taylor expansion around a point $a$:
 \begin{equation}
@@ -75,7 +77,13 @@ approximated by a first-order Taylor expansion around a point $a$:
     \approx \log\!\left(1 + e^{a}\right) + \frac{e^{a}}{1 + e^{a}}\,(x - a),
   \label{eq:q1a_taylor}
 \end{equation}
-which is accurate for small enough $x - a$.
+which is accurate for small enough $x - a$. The expansion point $a$ is taken to be the
+average of $\mathit{cf}_{t+1} - p_{t+1}$ over time, denoted
+$a = \overline{\mathit{cf}} - \overline{p}$.
+% STUDENT TO DECIDE: formal definition of the average. The student's proposed notation
+%   \sum_{\tau=t}^{\infty} (cf_{\tau+1} - p_{\tau+1}) / (\infty - t)
+% is not a well-defined expression (infinity minus t is not a number). A time-invariant
+% constant is needed here because it will define kappa below.
 
 \subsection{Variance decomposition by horizon (data)}
 % TODO (Q1b): figure H vs (b_re^(H), b_dd^(H), b_dp^(H)) + inference
