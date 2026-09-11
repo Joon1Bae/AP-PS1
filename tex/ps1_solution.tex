@@ -135,6 +135,18 @@ Plugging (\ref{eq:q1a_dp_recursion_t1}) into the $\dpr_{t+1}$ term on the right-
   \label{eq:q1a_two_step}
 \end{equation}
 
+\paragraph{Step 6: substitution up to horizon $H$.}
+Continuing to substitute the future $\dpr$ terms into (\ref{eq:q1a_two_step}) up to
+horizon $H$, we get
+% STUDENT TO CONFIRM: the equation was sent as
+%   dp_t = -kappa_0 sum_{t=0}^{H} kappa^t + kappa^H dp_{t+H}
+%          + sum_{h=1}^{H} kappa^{h-1} r_{t+h} - sum_{h=1}^{h} kappa^{H-1} Delta cf_{t+h}.
+% Issues identified (see chat): (i) the constant's sum should run over h = 0, ..., H-1,
+% not up to H (check against the two-step result: -kappa_0 (1 + kappa) for H = 2);
+% (ii) the summation index on the constant should be a dummy index, not t;
+% (iii) the Delta cf sum should have upper limit H and weight kappa^{h-1}.
+% Left untranscribed until the student confirms the intended form.
+
 \subsection{Variance decomposition by horizon (data)}
 % TODO (Q1b): figure H vs (b_re^(H), b_dd^(H), b_dp^(H)) + inference
 % \begin{figure}[H]
