@@ -63,6 +63,20 @@ Taking logs,
   \label{eq:q1a_log_return}
 \end{align}
 
+\paragraph{Step 2: first-order Taylor approximation of the log term.}
+% STUDENT TO CONFIRM: the rearrangement of (\ref{eq:q1a_log_return}) was sent as
+%   r_{t+1} - p_{t+1} - p_t = log(1 + e^{cf_{t+1} - p_{t+1}}),
+% but moving p_{t+1} - p_t to the left gives  r_{t+1} - p_{t+1} + p_t  on the left side.
+% Left untranscribed until the student confirms the intended form.
+Let $x_{t+1} = \mathit{cf}_{t+1} - p_{t+1}$. The function $\log(1 + e^{x})$ can be
+approximated by a first-order Taylor expansion around a point $a$:
+\begin{equation}
+  \log\!\left(1 + e^{x}\right)
+    \approx \log\!\left(1 + e^{a}\right) + \frac{e^{a}}{1 + e^{a}}\,(x - a),
+  \label{eq:q1a_taylor}
+\end{equation}
+which is accurate for small enough $x - a$.
+
 \subsection{Variance decomposition by horizon (data)}
 % TODO (Q1b): figure H vs (b_re^(H), b_dd^(H), b_dp^(H)) + inference
 % \begin{figure}[H]
