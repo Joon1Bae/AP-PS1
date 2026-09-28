@@ -14,4 +14,6 @@ r^(H)_t = H y^(H)_{t−12} − (H−1) y^(H−1)_t, r^(1)_t = y^(1)_{t−12}
 
 xy, xf, xr = each minus its H=1 counterpart.
 
+What I mean by "full sample" is that the common sample on which xy, xf and xr are all defined
+
 Output should be the table of means for H=2..5 in %.
