@@ -196,4 +196,4 @@ I have two instrutions.
 - **Substantive mathematical / economic / empirical suggestions made:** none beyond the methodology explanation requested
 - **Type of assistance:** other (explanation of a paper's methodology); empirical implementation (spec filed, implementation pending student decisions)
 - **Grouped follow-up requests:** none
-- **Git commit after:** (filled in below)
+- **Git commit after:** 2411d1bf8d0326b4de1fd59d7b93e2c5023ad876
