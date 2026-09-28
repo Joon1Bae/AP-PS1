@@ -269,9 +269,31 @@ $R^2_{OS} = \input{../output/q2d_r2os.tex}$.
 \end{figure}
 
 \subsection{Out-of-sample estimation with steady-state restrictions}
-% TODO (Q2e): same as Q2d with a_t = G_t - 1, b_t = G_t
-% \begin{figure}[H] ... q2e_forecasts.pdf ... \end{figure}
-% \begin{figure}[H] ... q2e_r2os_rolling.pdf ... \end{figure}
+% TODO (Q2e): interpretation of the figures and of R^2_OS, and comparison with Q2d (student to write)
+% Figures and the R^2_OS number are produced by src/q2e.py from spec/q2e.md.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.95\textwidth]{q2e_forecasts.pdf}
+  \caption{Expanding-window historical mean $\overline{\xR}_{e,t}$, in-sample fitted values
+  $\hat{E}^{IS}_t[\xR_e]$ from the full-sample regression of Question~2b, and out-of-sample
+  forecasts $\hat{E}^{OS}_t[\xR_e] = (G_t - 1) + G_t\, D_t/P_t$, where $G_t$ is the expanding
+  mean of $e^{\Delta d}$ over 1927:12 to $t$, plotted against the forecast-target month $t+1$,
+  1940:12--2021:12.}
+  \label{fig:q2e_forecasts}
+\end{figure}
+
+The out-of-sample $R^2$ over the forecast-target months 1940:12--2021:12 is
+$R^2_{OS} = \input{../output/q2e_r2os.tex}$.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.95\textwidth]{q2e_r2os_rolling.pdf}
+  \caption{$R^2_{OS}$ over a rolling window of 600 forecast-target months ending at $T$, for
+  $T$ from 1990:12 to 2021:12, for the expanding-window OLS forecasts of Question~2d and the
+  restricted forecasts of Question~2e ($\hat a_t = G_t - 1$, $\hat b_t = G_t$).}
+  \label{fig:q2e_rolling}
+\end{figure}
 
 % =====================================================================
 \section{Question 3}
