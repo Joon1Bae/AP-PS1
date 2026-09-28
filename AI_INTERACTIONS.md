@@ -374,4 +374,4 @@ I'll pass my explanation for now."
 - **Substantive mathematical / economic / empirical suggestions made:** none (both sample conventions were shown without a recommendation)
 - **Type of assistance:** empirical implementation; other (spec check)
 - **Grouped follow-up requests:** none
-- **Git commit after:** <pending>
+- **Git commit after:** e8aabb22e068784303e7c381e61a4ecacefa0fa6
