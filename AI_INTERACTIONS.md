@@ -300,3 +300,18 @@ I'll pass my explanation for now."
 - **Type of assistance:** empirical implementation; other (spec re-check)
 - **Grouped follow-up requests:** none
 - **Git commit after:** af6f6d822eece5a3a3c7f13a848a6202533f74d2
+
+## Interaction 16 — Q2d — 2026-09-28 16:53
+
+- **Problem set item:** Q2d (include the figures and the R^2_OS number in the LaTeX solution)
+- **Substantive prompt (verbatim):** "1. Yes. Please insert the figure and the macro only. captions are fine, but leave every interpreation sentence blank. I will get back to this point in the future and write it down."
+- **Purpose:** Include the Q2d outputs produced in Interaction 15 in the solution document (formatting), leaving all interpretation to the student.
+- **Git commit before:** 681e3d9ba8dd45ca7539116b111de462dfb7ae1d
+- **Assistance provided:** In `tex/ps1_solution.tex`, Q2d subsection: replaced the commented placeholder with two figure environments including `output/q2d_forecasts.pdf` and `output/q2d_r2os_rolling.pdf`, each with a descriptive caption (what is plotted, sample, window convention, all taken from `spec/q2d.md`), and one sentence stating the R^2_OS value by `\input` of `output/q2d_r2os.tex`. No interpretation was written; a TODO comment marks it for the student. AI-written text in the answer body: the two captions and the one sentence introducing the R^2_OS number (methodological description, not interpretation).
+- **Files inspected:** tex/ps1_solution.tex, output/q2d_r2os.tex, spec/q2d.md
+- **Files directly modified by AI:** tex/ps1_solution.tex (Q2d subsection only)
+- **Errors, omissions, or ambiguities identified:** none. Not compiled locally (no TeX distribution on this machine).
+- **Substantive mathematical / economic / empirical suggestions made:** none
+- **Type of assistance:** formatting/translation (figure includes, captions, number include)
+- **Grouped follow-up requests:** none
+- **Git commit after:** <pending>
