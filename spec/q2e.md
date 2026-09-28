@@ -1,8 +1,8 @@
 The procedure should be the same as q2d except â_t = G_t − 1, b̂_t = G_t, where 
 
-G_t = mean of exp(Δd_m) over m = 1928:12, …, t (monthly index m = 12, …, t with 1927:12 = 0), i.e. exactly the months whose returns xR_{e,m} enter x̄R_{e,t} at origin t.
+G_t = mean of exp(Δd_m) over m = 1927:12, …, t (monthly index m = 12, …, t with 1927:12 = 0), i.e. exactly the months whose returns xR_{e,m} enter x̄R_{e,t} at origin t.
 
-The 1927:12 observation is excluded, as in q2d (apple to apple comparision). Δd_m is the dg column dated m.
+The 1927:12 observation should be included, as in q2d (apple to apple comparision). Δd_m is the dg column dated m.
 Rationale: keep everything identical to q2d so that the only difference between the 2d and 2e forecasts is the restriction â_t = G_t − 1, b̂_t = G_t; then the change in R²_OS is attributable to that restriction alone.
 
 Forecast: Ê^OS_t[xR_e] = (G_t − 1) + G_t · D_t/P_t, with the same origins, targets, evaluation period, and 600-month rolling windows as q2d.
