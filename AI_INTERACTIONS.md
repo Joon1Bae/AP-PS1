@@ -375,3 +375,18 @@ I'll pass my explanation for now."
 - **Type of assistance:** empirical implementation; other (spec check)
 - **Grouped follow-up requests:** none
 - **Git commit after:** e8aabb22e068784303e7c381e61a4ecacefa0fa6
+
+## Interaction 21 — Q4a — 2026-09-28 19:05
+
+- **Problem set item:** Q4a (include the average-spreads table in the LaTeX solution)
+- **Substantive prompt (verbatim):** "1. same treatment as before. table, caption, but no interpretation. 2. Yes please." (2 = standing permission to push to origin/revise-codes at the end of each completed /TP cycle)
+- **Purpose:** Include the Q4a table produced in Interaction 20 in the solution document (formatting), leaving interpretation to the student.
+- **Git commit before:** 52ad602243c76d6f43717706b06fddd54b67a5c6
+- **Assistance provided:** In `tex/ps1_solution.tex`, Q4a subsection: replaced the placeholder with a displayed statement of the three definitions exactly as in `spec/q4a.md` and the problem statement (log yield, forward rate, annual return, with y^(0) = 0 and t−1 = 12 months), one sentence defining the spreads, and a table environment inputting `output/q4a_averages_table.tex` with a descriptive caption (what is averaged, units, common sample 1953:06–2024:12). No interpretation written; a TODO comment marks it for the student. AI-written text in the answer body: the definitional sentences and the caption (methodological description from the spec). Pushed the branch after the record commit, under the standing permission given in this prompt.
+- **Files inspected:** tex/ps1_solution.tex, output/q4a_averages_table.tex, spec/q4a.md
+- **Files directly modified by AI:** tex/ps1_solution.tex (Q4a subsection only)
+- **Errors, omissions, or ambiguities identified:** none. Not compiled locally (no TeX distribution on this machine).
+- **Substantive mathematical / economic / empirical suggestions made:** none
+- **Type of assistance:** formatting/translation (definitions, table include, caption)
+- **Grouped follow-up requests:** none
+- **Git commit after:** <pending>
