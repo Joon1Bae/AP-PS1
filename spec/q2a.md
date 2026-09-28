@@ -17,14 +17,18 @@ Questions raised by the AI before implementing steps 4–5; answers recorded ver
 
 1. Horizon range: `range(1, 15)` gives H = 1, ..., 14, while the problem statement asks for
    H = 1, ..., 15. Which is intended?
-   - Answer: (pending)
+   - Answer (student, 2026-09-28): "H = 1, ..., 15"
+
 2. Time step of h: the data are monthly observations of annual variables. Is xR_{e,t+h}
    the observation 12*h months after month t (so H years = 12H rows)?
-   - Answer: (pending)
+   - Answer (student, 2026-09-28): "12 months per h"
+
 3. Estimation sample per H: use every month t for which t+12H is in the data (sample
    shrinks as H grows), or a common sample across all H (t restricted so that t+12*H_max
    is in the data)?
-   - Answer: (pending)
+   - Answer (student, 2026-09-28): "All available per H" (every t with t+12H in the data;
+     the sample shrinks as H grows)
+
 
 ## Outputs
 - `output/q2a_r2adj.csv` — H and R^2_adj (one row per H)
