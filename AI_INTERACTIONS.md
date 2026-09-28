@@ -174,4 +174,4 @@ xR_{e, t+1} = a + b * D_t/P_t + epsilon_t
 - **Substantive mathematical / economic / empirical suggestions made:** none
 - **Type of assistance:** other (recording student decisions in the specification)
 - **Grouped follow-up requests:** none
-- **Git commit after:** (filled in below)
+- **Git commit after:** b8a42749bb03cd1bac2fb68d9132598749e29e25
