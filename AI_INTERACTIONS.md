@@ -329,4 +329,4 @@ I'll pass my explanation for now."
 - **Substantive mathematical / economic / empirical suggestions made:** none (three readings of the G_t sample were listed without a recommendation)
 - **Type of assistance:** empirical implementation; other (spec check)
 - **Grouped follow-up requests:** none
-- **Git commit after:** <pending>
+- **Git commit after:** 8d1e8baa469873003f0ce0550864133e4273a6b3
