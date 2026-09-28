@@ -54,3 +54,26 @@ where the small letter stands for the log of capital, i.e., log(R_t+1) = r_t+1."
   - Follow-up 2.9 (2026-09-11, Step 6 confirmed; declined request). Student's prompt (verbatim): "1. confirmed 2. yes. Simple geometric series. please apply it to the first term I derived." (1) AI transcribed the confirmed H-step equation dp_t = -kappa_0 sum_{h=0}^{H-1} kappa^h + kappa^H dp_{t+H} + sum_{h=1}^{H} kappa^{h-1} r_{t+h} - sum_{h=1}^{H} kappa^{h-1} Delta cf_{t+h} into the .tex as Step 6 and removed the confirmation comment. (2) The student asked the AI to apply the finite geometric series formula to the constant term. AI DECLINED under the course AI policy (applying the formula is a step of the derivation) and asked the student to supply the closed form; a "STUDENT TO ADD" comment marks the spot in the .tex. Type: formatting/translation; other (declined a derivation request). "TP after" commit for this follow-up: 67b13dbcf8b953c3654bdd3274ef66b7b7ba0a95.
   - Follow-up 2.10 (2026-09-11, check question). Student's prompt (verbatim): "Then equation (11) is the same with equation (1) in the PS. Right?" AI confirmed that the student's H-step equation (11) equals Equation 1.1 of the problem statement, and explained the two points on which the equality rests: (a) the constant -kappa_0 sum_{h=0}^{H-1} kappa^h equals kappa_0 (kappa^H - 1)/(1 - kappa) by the finite geometric series identity, which the document still needs to display (student to write); (b) the notation r, cf corresponds to the problem's r_e, d. No files other than this log were modified. Type: math review (check). "TP after" commit for this follow-up: f8eccb0d201d81ee3f583d889bbe35cd0ac0533b.
 - **Git commit after:** 46783c59f3ce20812644614340b76876218a1585
+
+## Interaction 3 — Q2a — 2026-09-28 11:38
+
+- **Problem set item:** Q2a (adjusted R^2 of horizon-H predictive regressions, H = 1, ..., 15)
+- **Substantive prompt (verbatim):** "Okay. Let's move onto the second problem and revisit the first problem.
+
+Can you write down the codes?
+
+1. from the eq.csv dataset, construct pandas dataframe.
+2. take exponential on (1) dp, (2) re, (3) rf
+3. by substracting e^re - e^rf,, calculate xRe,t
+4. for h in range(1, 15):, regress 1/H \Sigma^H_{h=1}xR_e,t+h onto e^dp, and calculate R^2_adj.
+5. plot a graph where x axis is H and y axis is R^2_adj for each H."
+- **Purpose:** Implement the student's empirical specification for Q2a in Python (data analysis: AI implements, student designs).
+- **Git commit before:** 1208a4a83b540d6409415bbc036287214f081f16
+- **Assistance provided:** The student did not invoke `/TP`; the AI reminded them and ran the procedure. The AI filed the student's five-point specification verbatim as `spec/q2a.md` (no spec file existed; the student's chat text is the spec) and added a "Decisions" section listing the ambiguities below with answers pending. Wrote `src/q2a_r2adj.py` implementing the unambiguous steps 1–3 only: load `data/eq.csv` into a DataFrame with a month-end DatetimeIndex; DP = exp(dp), Re = exp(re), Rf = exp(rf); xR = Re - Rf. Ran it as a sanity check (1129 rows, 1927-12 to 2021-12). Steps 4–5 (regression loop, adjusted R^2, plot) were NOT implemented pending the student's decisions. Removed `spec/.gitkeep` and `src/.gitkeep`.
+- **Files inspected:** data/eq.csv, ps1.pdf (Q2a text and data description, from the earlier extraction), CLAUDE.md
+- **Files directly modified by AI:** spec/q2a.md (created; student text verbatim + pending decisions); src/q2a_r2adj.py (created, steps 1–3); spec/.gitkeep and src/.gitkeep (deleted)
+- **Errors, omissions, or ambiguities identified:** (1) Horizon range: the student's `range(1, 15)` yields H = 1, ..., 14, whereas the problem statement asks for H = 1, ..., 15. (2) Time step: the data are monthly observations of annual variables; whether xR_{e,t+h} means the observation 12h months after t (H years = 12H rows) is not stated. (3) Estimation sample per H: whether each H uses every month t with t+12H available (sample shrinks with H) or a common sample across all H is not stated. All three left for the student to decide before steps 4–5 are implemented.
+- **Substantive mathematical / economic / empirical suggestions made:** none (the three ambiguities were posed as questions with options, without a recommendation)
+- **Type of assistance:** empirical implementation (partial, steps 1–3); other (filing the student's spec verbatim)
+- **Grouped follow-up requests:** (the student's answers to the three decisions and the resulting implementation of steps 4–5 will be recorded here as a follow-up, with a new "TP after" commit)
+- **Git commit after:** <pending>
