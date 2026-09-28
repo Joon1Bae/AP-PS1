@@ -360,3 +360,18 @@ I'll pass my explanation for now."
 - **Type of assistance:** formatting/translation (figure includes, captions, number include)
 - **Grouped follow-up requests:** none
 - **Git commit after:** a2c689d8bb0a0929dc8fdad4f849c0159349b0ea
+
+## Interaction 20 — Q4a — 2026-09-28 18:54
+
+- **Problem set item:** Q4a (Fama–Bliss log yields, forward rates, annual returns; table of average spreads for H = 2, ..., 5)
+- **Substantive prompt (verbatim):** "I've write down q4a.md. Could you please check and writes some codes to execute it?" Then, after the AI paused on one ambiguity: "I added more description of full sample on the .md file."
+- **Purpose:** Check the student-authored `spec/q4a.md` and implement it (data analysis: AI implements, student designs).
+- **Git commit before:** 6f104763b3cad5bbc5a43df56eee48bb2130e471 (contains the student's original `spec/q4a.md`); the student's revision is the student's own commit c0a8c38.
+- **Assistance provided:** The student did not invoke `/TP`; the AI reminded them and ran the procedure. Check of the spec: data, filter, units and the three formulas (y = log(1 + TMYTM/100); f^(H) = H y^(H) − (H−1) y^(H−1) with f^(1) = y^(1); r^(H)_t = H y^(H)_{t−12} − (H−1) y^(H−1)_t with r^(1)_t = y^(1)_{t−12}; spreads over H = 1) are complete and match the problem statement. One ambiguity identified: which months enter the averages (each variable over all its available months, or the common sample on which xy, xf and xr are all defined, i.e. from 1953:06). The AI stopped, showed the student both candidate tables (they differ in the third decimal for xy and xf; xr identical), and asked the student to decide in the spec. The student chose the common sample (c0a8c38). Wrote `src/q4a.py`: filters the five Fama–Bliss series, pivots to a monthly wide frame, asserts a contiguous month-end index (871 months, no missing yields) so that a 12-row shift is a calendar year, constructs y, f, r and the spreads, and averages over the common sample 1953:06–2024:12. Outputs: `output/q4a_series.csv` (all constructed series), `output/q4a_averages.csv`, `output/q4a_averages_table.tex` (booktabs body, percent, three decimals). Results (percent per year, H = 2..5): xy 0.169, 0.331, 0.471, 0.568; xf 0.339, 0.654, 0.892, 0.956; xr 0.315, 0.607, 0.820, 0.872. The .tex solution was not changed (not requested); no interpretation written.
+- **Files inspected:** spec/q4a.md (both versions), data/bond.csv, ps1.pdf Q4a and footnotes 13–14 (from the earlier extraction)
+- **Files directly modified by AI:** src/q4a.py (created); output/q4a_series.csv, output/q4a_averages.csv, output/q4a_averages_table.tex (generated)
+- **Errors, omissions, or ambiguities identified:** (1) The averaging sample (resolved by the student, see above). (2) Programming choices by the AI, not decisions: percent with three decimals in the table; y^(0) = 0 used to express f^(1) and r^(1) through the general formula, which reproduces the spec's definitions exactly.
+- **Substantive mathematical / economic / empirical suggestions made:** none (both sample conventions were shown without a recommendation)
+- **Type of assistance:** empirical implementation; other (spec check)
+- **Grouped follow-up requests:** none
+- **Git commit after:** <pending>

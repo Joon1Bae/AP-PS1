@@ -15,9 +15,9 @@ OUT = ROOT / "output"
 MATURITIES = [1, 2, 3, 4, 5]
 LAG_MONTHS = 12   # t-1 in years = 12 monthly rows (spec: y_{t-12})
 
-# STUDENT DECISION PENDING (spec/q4a.md): months entering the averages -- each variable over
-# every month it is available, or a common sample across xy, xf, xr (from 1953:06).
-AVERAGING_SAMPLE = None   # "each" or "common"; set from the spec once decided
+# Student decision (spec/q4a.md): averages over the common sample on which xy, xf and xr are
+# all defined, i.e. 1953:06 to 2024:12. ("each" would use every available month per variable.)
+AVERAGING_SAMPLE = "common"
 
 
 def load_yields() -> pd.DataFrame:
@@ -84,15 +84,10 @@ def main() -> None:
     long.to_csv(OUT / "q4a_series.csv", float_format="%.8f")
     print(f"yields: {wide.index[0].date()} to {wide.index[-1].date()}, {len(wide)} months; "
           f"returns from {s['r'].dropna().index[0].date()}")
-    for sample in ("each", "common"):
-        print(f"--- averages in %, sample = {sample}")
-        print(averages(s, sample).to_string(float_format=lambda v: f"{v:.3f}"))
-    if AVERAGING_SAMPLE is None:
-        print("table not written: AVERAGING_SAMPLE pending student decision (spec/q4a.md)")
-        return
     tab = averages(s, AVERAGING_SAMPLE)
+    print(f"--- averages in %, sample = {AVERAGING_SAMPLE}")
+    print(tab.to_string(float_format=lambda v: f"{v:.3f}"))
     tab.to_csv(OUT / "q4a_averages.csv", float_format="%.6f")
-    n = len(s["xr"].dropna()) if AVERAGING_SAMPLE == "common" else None
     note = ("Common sample 1953:06--2024:12" if AVERAGING_SAMPLE == "common"
             else "Each series over all available months (yields and forwards from 1952:06, returns from 1953:06)")
     write_tex(tab, OUT / "q4a_averages_table.tex", note)
