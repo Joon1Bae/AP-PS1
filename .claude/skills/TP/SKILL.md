@@ -87,11 +87,15 @@ git commit -m "TP record: <item> - after hash"
 (Two commits after the work is acceptable; the "after" snapshot hash is what the entry cites.)
 
 ## Step 6 — Grouping follow-ups
-If, in the same session, the user asks minor follow-up debugging or formatting requests on the
-**same item** and explicitly says to group them, add them to the "Grouped follow-up requests"
-line of the current entry and make a new "TP after" commit at the end of the group. Only group
-when all three hold: same item, same session, documented together. A new item or a new
-substantive request always starts a new `/TP` cycle.
+Grouping is allowed only for **minor** debugging or formatting iterations on the **same item**
+in the **same session** that the user **explicitly asks to group in their prompt** (quote that
+instruction in the entry). Even then, **never edit an entry that has already been committed**:
+the grouped requests must be documented in the "Grouped follow-up requests" line of an entry
+*before* its "TP after" snapshot is taken, i.e. the whole group is completed and written up
+first, then Steps 4 and 5 run once for the group. If the group is already committed, any
+further request opens a new `/TP` cycle. A new item, a new derivation step, a new empirical
+step, or any substantive request always starts a new `/TP` cycle. (Tightened 2026-09-28
+after the record-form issues noted in AI_INTERACTIONS.md Interaction 13.)
 
 ## Report to the user
 Finish by telling the user: the item, `before_hash`, `after_hash`, the entry number,
