@@ -78,3 +78,18 @@ Can you write down the codes?
 - **Grouped follow-up requests:** (the student's answers to the three decisions and the resulting implementation of steps 4–5 will be recorded here as a follow-up, with a new "TP after" commit)
   - Follow-up 3.1 (2026-09-28, decisions and steps 4–5). The AI posed the three ambiguities as multiple-choice questions (no recommendation). Student's answers (verbatim): H range = "H = 1, ..., 15"; h step = "12 months per h"; sample = "All available per H". AI recorded the answers in `spec/q2a.md` and implemented steps 4–5 in `src/q2a_r2adj.py`: for each H, y_t = (1/H) sum_{h=1}^{H} xR_{t+12h} (NaN if any future observation is missing, so each H uses every t with t+12H in the data), OLS of y on a constant and DP = exp(dp) via statsmodels, adjusted R^2 from statsmodels (`rsquared_adj`); outputs `output/q2a_r2adj.csv` (H, n_obs, sample dates, slope, R^2, adjusted R^2) and `output/q2a_r2adj.pdf` / `.png` (single-series line-with-markers plot, x = H, y = adjusted R^2). Ran the script and visually checked the PNG. Pure programming choices made by the AI: month-end DatetimeIndex, `shift(-12h)` construction of leads, statsmodels OLS, figure styling, saving both PDF and PNG. No interpretation of the results was written. Type: empirical implementation. "TP after" commit for this follow-up: 01103b2f77d3d641883bd87408a76fc887a791f0.
 - **Git commit after:** 4ccbc245078a28945938d75620626807fda9d486
+
+## Interaction 4 — Q2a — 2026-09-28 11:46
+
+- **Problem set item:** Q2a (figure include in the LaTeX solution)
+- **Substantive prompt (verbatim):** "Could you please attach the result .png files(or .pdf files) into my ps1_solution.tex file?"
+- **Purpose:** Include the Q2a output figure produced in Interaction 3 in the solution document (formatting).
+- **Git commit before:** 165da9580d00e2622560bd341a335fda59ad5486
+- **Assistance provided:** In `tex/ps1_solution.tex`, Q2a subsection: replaced the commented placeholder with (i) a displayed statement of regression (2.1) as estimated, with the definitions xR_e = e^{r_e} - e^{r_f} and D/P = e^{dp} and a sentence stating the timing (t+h = 12h months) and sample convention (every t with H years of subsequent data) as decided by the student in `spec/q2a.md`; (ii) a figure environment including `output/q2a_r2adj.pdf` with a descriptive caption (what is plotted, sample period). The description/interpretation of the results was NOT written; a TODO comment marks it for the student. The PDF version of the figure was used (vector graphics); the PNG was left in `output/` for viewing.
+- **Files inspected:** tex/ps1_solution.tex, spec/q2a.md, output/q2a_r2adj.pdf
+- **Files directly modified by AI:** tex/ps1_solution.tex (Q2a subsection only)
+- **Errors, omissions, or ambiguities identified:** none
+- **Substantive mathematical / economic / empirical suggestions made:** none
+- **Type of assistance:** formatting/translation (LaTeX figure include and descriptive caption)
+- **Grouped follow-up requests:** none
+- **Git commit after:** <pending>

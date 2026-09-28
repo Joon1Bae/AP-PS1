@@ -173,8 +173,25 @@ horizon $H$, we get
 % =====================================================================
 
 \subsection{Predictive regressions by horizon}
-% TODO (Q2a): figure H vs adjusted R^2, H = 1..15 + description
-% \begin{figure}[H] ... q2a_r2adj.pdf ... \end{figure}
+% TODO (Q2a): description of the results (student to write)
+Figure~\ref{fig:q2a} plots the adjusted $R^2$ of the regression
+\begin{equation}
+  \frac{1}{H}\sum_{h=1}^{H} \xR_{e,t+h} = a^{(H)} + b^{(H)}\,\frac{D_t}{P_t} + \varepsilon^{(H)}_t,
+  \qquad H = 1, \dots, 15,
+  \label{eq:q2a_regression}
+\end{equation}
+estimated by OLS on the EQ Dataset, where $\xR_{e,t} = e^{r_{e,t}} - e^{r_{f,t}}$ and
+$D_t/P_t = e^{\dpr_t}$. The data are monthly observations of annual variables, so
+$t+h$ is $12h$ months after $t$, and each horizon uses every month $t$ for which
+$H$ years of subsequent data are available (code: \texttt{src/q2a\_r2adj.py}).
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.8\textwidth]{q2a_r2adj.pdf}
+  \caption{Adjusted $R^2$ of regression (\ref{eq:q2a_regression}) against the horizon $H$
+  (in years). Monthly observations, 1927:12--2021:12.}
+  \label{fig:q2a}
+\end{figure}
 
 \subsection{Standard errors for the one-year predictive regression}
 % TODO (Q2b): table with b-hat and t-stats under OLS / White / NW(11) / HH(11) / NW(1994)
