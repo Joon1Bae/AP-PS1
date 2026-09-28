@@ -285,3 +285,18 @@ I'll pass my explanation for now."
 - **Type of assistance:** other (review of the student's empirical specification)
 - **Grouped follow-up requests:** none
 - **Git commit after:** 9fa327b15405da22a13c58f4728a1da355ab2ed0
+
+## Interaction 15 — Q2d — 2026-09-28 16:46
+
+- **Problem set item:** Q2d (out-of-sample expanding-window estimation, R^2_OS, 50-year rolling R^2_OS)
+- **Substantive prompt (verbatim):** "can you check q2d.md and write down codes as in the q2d.md files?"
+- **Purpose:** Re-check the student's revised `spec/q2d.md` (after the points raised in Interaction 14) and implement it (data analysis: AI implements, student designs).
+- **Git commit before:** 76bb84b0673fee3219ac68fbace78edd269ece4a (contains the student's revised `spec/q2d.md`, written and edited by the student)
+- **Assistance provided:** The student did not invoke `/TP`; the AI reminded them and ran the procedure. Confirmed that the revised spec resolves all six points of Interaction 14 (cutoff rule s <= t - 12; forecast definition; historical mean including the 1927:12 return; full-sample = Q2b predictor dates 1927:12–2020:12; rolling window of 600 target months ending at T from 1990:12, first window 1941:01–1990:12; only the two sums vary within the window). Wrote `src/q2d.py`: reuses the Q2a/Q2b data and pair construction; for every forecast origin t from 1939:12 to 2020:12 estimates (a_t, b_t) by OLS on the pairs whose return is realized by t, forms E_OS = a_t + b_t D_t/P_t for the target t+12, the expanding historical mean of all returns realized by t, and the in-sample line E_IS = a + b D_t/P_t with the full-sample (Q2b) coefficients; computes R^2_OS over targets 1940:12–2021:12 and the 600-month rolling R^2_OS with the spec's window convention. Outputs: `output/q2d_forecasts.csv` (target, origin, n_est, xR, xRbar, E_IS, E_OS, a_t, b_t), `output/q2d_r2os_rolling.csv`, `output/q2d_r2os.tex` (the R^2_OS number for \input), `output/q2d_forecasts.pdf/.png` (three series vs target month, legend), `output/q2d_r2os_rolling.pdf/.png`. Ran the script and visually checked both PNGs. Results: 973 forecasts; first estimation uses 133 pairs (predictor dates 1927:12–1938:12), last 1105; full-sample a, b equal the Q2b values; R^2_OS = -0.0135; rolling R^2_OS from +0.156 (early 1990s) to -0.075 (2021:12). No interpretation written; the .tex was not changed (not requested).
+- **Files inspected:** spec/q2d.md, src/q2a.py, src/q2b.py, ps1.pdf Q2d text (from the earlier extraction)
+- **Files directly modified by AI:** src/q2d.py (created); output/q2d_* (generated, 7 files)
+- **Errors, omissions, or ambiguities identified:** (1) The spec's item 4 still writes "D_t*P_t"; implemented as D_t/P_t, consistent with the rest of the file and the problem set. (2) The spec does not restate the evaluation period for R^2_OS; the problem set fixes it as December 1940 to the end of the sample, and that was used. (3) Two facts, not decisions: the data start in 1927:12 (the spec says "maybe 1927?"); the series are plotted against the forecast-target month t+1, which is how the problem set indexes the forecasts ("xR_{e,t+1} in December/1940").
+- **Substantive mathematical / economic / empirical suggestions made:** none
+- **Type of assistance:** empirical implementation; other (spec re-check)
+- **Grouped follow-up requests:** none
+- **Git commit after:** <pending>
