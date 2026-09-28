@@ -389,4 +389,4 @@ I'll pass my explanation for now."
 - **Substantive mathematical / economic / empirical suggestions made:** none
 - **Type of assistance:** formatting/translation (definitions, table include, caption)
 - **Grouped follow-up requests:** none
-- **Git commit after:** <pending>
+- **Git commit after:** 1f845fed3bd91482e070aa678424c2b28ac89969
