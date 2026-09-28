@@ -330,3 +330,18 @@ I'll pass my explanation for now."
 - **Type of assistance:** empirical implementation; other (spec check)
 - **Grouped follow-up requests:** none
 - **Git commit after:** 8d1e8baa469873003f0ce0550864133e4273a6b3
+
+## Interaction 18 - Submission PDF - 2026-09-28 17:15
+
+- **Problem set item:** Submission PDF - compile `tex/ps1_solution.tex`
+- **Substantive prompt (verbatim):** "please help me to compile .tex file into pdf."
+- **Purpose:** Compile the complete LaTeX solution into a PDF using the build command documented in the source.
+- **Git commit before:** 928929e09f1260c45d3677e9fe03d3069099054a
+- **Assistance provided:** Checked `tex/ps1_solution.tex` and attempted to locate `latexmk`, `pdflatex`, `xelatex`, `lualatex`, and `tectonic` on Windows and in WSL. No compiler was installed, and WSL is not installed. Compilation could not be performed.
+- **Files inspected:** tex/ps1_solution.tex, AI_INTERACTIONS.md, CLAUDE.md
+- **Files directly modified by AI:** AI_INTERACTIONS.md (this entry only)
+- **Errors, omissions, or ambiguities identified:** No TeX distribution or compiler is available in the current environment, so no PDF was generated or validated.
+- **Substantive mathematical / economic / empirical suggestions made:** none
+- **Type of assistance:** formatting/translation; other (build-environment diagnosis)
+- **Grouped follow-up requests:** none
+- **Git commit after:** pending
