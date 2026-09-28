@@ -390,3 +390,18 @@ I'll pass my explanation for now."
 - **Type of assistance:** formatting/translation (definitions, table include, caption)
 - **Grouped follow-up requests:** none
 - **Git commit after:** 1f845fed3bd91482e070aa678424c2b28ac89969
+
+## Interaction 22 — Record correction (rebased commit hashes) — 2026-09-28 19:16
+
+- **Problem set item:** Record correction; concerns the commit hashes cited in Interactions 13 and 14 and the git history of branch revise-codes. No problem-set content is changed.
+- **Substantive prompt (verbatim):** "what happend? Please do not anything. I really want to know the root causes, and I don't want to mess it up. I want to solve this issues under the AI policy of the class." then "1. I did rebase. my bad. 1. 1~3 go ahead"
+- **Purpose:** Diagnose a rejected push and repair the auditability of the record without rewriting any entry.
+- **Git commit before:** a62030ca8a96136c9f8d9d5006e3dcee7ea4971d
+- **Assistance provided:** Diagnosis (read-only): the branch reflog shows the student rebased revise-codes twice on 2026-09-28, at 15:45:28 onto main's PR #3 merge commit f68fd89 and at 19:10:29 onto main's PR #4 merge commit 10228d2. A rebase re-creates commits with new hashes; file contents were identical in both cases (empty diffs). The 15:45 rebase rewrote the seven commits made between 14:55 and 15:29 (data/README rewrite, Interactions 13 and 14); the AI, unaware, then pushed the rewritten history, so the hashes cited in Interactions 13 and 14 were no longer on GitHub. The 19:10 rebase rewrote the eight commits of Interactions 15–21; it was not pushed (the push was rejected as non-fast-forward), so GitHub kept the original hashes. Repair, with the student's go-ahead: (1) the local branch was reset to the remote tip 67e4c96, discarding only the rewritten duplicates (verified byte-identical); (2) the seven original pre-rebase commits were tagged `orig-2026-09-28/*` and the tags pushed, so every hash cited in Interactions 13 and 14 is again reachable on GitHub; (3) this entry records the mapping below. Hash map, original (cited in the log, now tagged) → rewritten twin on the branch: e259e37 → 82cd6df (Interaction 13 before); b4a7a6c → 8c33449 (Interaction 13 after); bc31619 → 1718b98 (Interaction 13 record); 452934d → 08d6eba (data/README rewrite); 25a4ec5 → 3ff05cf (Interaction 14 before); 9fa327b → c4ab748 (Interaction 14 after); 7aedb43 → c6c6847 (Interaction 14 record). Each pair has identical trees (`git diff <old> <new>` is empty). The 2026-09-11 15:01 rebase noted by the self-audit predates every log entry and affected no cited hash.
+- **Files inspected:** git reflog and history of revise-codes and main, AI_INTERACTIONS.md (cited hashes), GitHub refs via ls-remote
+- **Files directly modified by AI:** AI_INTERACTIONS.md (this entry only). Git refs changed: local branch revise-codes reset to 67e4c96; seven tags created and pushed.
+- **Errors, omissions, or ambiguities identified:** The student's rebases were the cause (student's own statement). Going forward, agreed with the student: never rebase, squash or amend on revise-codes; merge pull requests with "Create a merge commit"; after a merge, bring main in with `git merge` if needed.
+- **Substantive mathematical / economic / empirical suggestions made:** none
+- **Type of assistance:** other (git diagnosis and record repair)
+- **Grouped follow-up requests:** none
+- **Git commit after:** <pending>
