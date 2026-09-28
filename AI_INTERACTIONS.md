@@ -139,4 +139,4 @@ xR_{e, t+1} = a + b * D_t/P_t + epsilon_t
 - **Substantive mathematical / economic / empirical suggestions made:** Suggested that the student (a) correct the `re` description in `data/README.md`; (b) consider whether the Q2a figure caption should state the estimation-sample dates instead of the raw data span; (c) explicitly confirm (or change) the two carried-over decisions in `spec/q2b.md`. No interpretation of the results was offered.
 - **Type of assistance:** other (code review / verification of empirical implementation)
 - **Grouped follow-up requests:** none
-- **Git commit after:** (see next line)
+- **Git commit after:** 152ee73ccfd8535ada8672dae9c4f1a9a9d2ac5f
