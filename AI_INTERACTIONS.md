@@ -269,4 +269,4 @@ I'll pass my explanation for now."
 - **Substantive mathematical / economic / empirical suggestions made:** none in this interaction (item 6 reclassifies earlier ones)
 - **Type of assistance:** other (record correction; policy self-audit; reproducibility check)
 - **Grouped follow-up requests:** none
-- **Git commit after:** <pending>
+- **Git commit after:** b4a7a6cc4768d795667b1c977843f22a1215506b
