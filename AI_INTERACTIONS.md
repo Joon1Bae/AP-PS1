@@ -159,3 +159,19 @@ xR_{e, t+1} = a + b * D_t/P_t + epsilon_t
 ## Correction to Interaction 7 — 2026-09-28 16:33
 
 - **Correction:** The header of Interaction 7 gives the time as 17:02. The correct time of that interaction is 2026-09-28 16:32 (the AI wrote the timestamp before reading the system clock). No other field of Interaction 7 is affected. Recorded as a new entry because this file is append-only.
+
+## Interaction 8 — Q2b — 2026-09-28 16:40
+
+- **Problem set item:** Q2b (student decisions in the empirical specification)
+- **Substantive prompt (verbatim):** "1. confirmed. t+1 is 12 months after t because the return is in annual scale.
+2. Yes. But, at least for the q2b, the sample population does not vary because we fixed H to be 1."
+- **Purpose:** Record the student's explicit answers to the two decisions in `spec/q2b.md` (timing and estimation sample), replacing the AI-written placeholders "(carried over from spec/q2a.md unless the student objects)" from Interaction 5.
+- **Git commit before:** 6423f3380cb2be383fc0809cacddecca9470d0a4
+- **Assistance provided:** Replaced the two placeholder "Answer" lines in `spec/q2b.md` with the student's answers, quoted verbatim and dated, in the same format as `spec/q2a.md`. Both decisions match what `src/q2b.py` already implements (t+1 = 12 monthly rows ahead; every month t with t+12 in the data), so no code, output, or LaTeX change was needed.
+- **Files inspected:** spec/q2b.md
+- **Files directly modified by AI:** spec/q2b.md (the two "Answer" lines only)
+- **Errors, omissions, or ambiguities identified:** none (this resolves the open item noted in Interactions 6 and 7)
+- **Substantive mathematical / economic / empirical suggestions made:** none
+- **Type of assistance:** other (recording student decisions in the specification)
+- **Grouped follow-up requests:** none
+- **Git commit after:** (filled in below)

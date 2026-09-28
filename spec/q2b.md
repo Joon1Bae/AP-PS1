@@ -29,10 +29,10 @@ substantive choices not covered here are decided by the student in the "Decision
    xR_{e,t} = e^{re_t} - e^{rf_t}, D_t/P_t = e^{dp_t}, and t+1 is 12 monthly rows after t
    (problem set footnote 3: "H = 12 in our case"). Carried over from the student's Q2a
    decision "12 months per h"; the student may override here.
-   - Answer: (carried over from spec/q2a.md unless the student objects)
+   - Answer (student, 2026-09-28): "confirmed. t+1 is 12 months after t because the return is in annual scale."
 2. Estimation sample: every month t with t+12 in the data (1927:12 to 2020:12), carried over
    from the student's Q2a decision "All available per H".
-   - Answer: (carried over from spec/q2a.md unless the student objects)
+   - Answer (student, 2026-09-28): "Yes. But, at least for the q2b, the sample population does not vary because we fixed H to be 1."
 
 ## Implementation notes (AI, programming choices under step 4 "use existing library")
 
