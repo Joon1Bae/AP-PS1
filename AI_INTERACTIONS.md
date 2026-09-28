@@ -284,4 +284,4 @@ I'll pass my explanation for now."
 - **Substantive mathematical / economic / empirical suggestions made:** none (the points above identify what is missing; the choices are the student's). The AI did note that either treatment of the December 1927 observation in item 3 is defensible.
 - **Type of assistance:** other (review of the student's empirical specification)
 - **Grouped follow-up requests:** none
-- **Git commit after:** <pending>
+- **Git commit after:** 9fa327b15405da22a13c58f4728a1da355ab2ed0
