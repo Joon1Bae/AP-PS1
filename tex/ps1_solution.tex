@@ -194,16 +194,53 @@ $H$ years of subsequent data are available (code: \texttt{src/q2a.py}).
 \end{figure}
 
 \subsection{Standard errors for the one-year predictive regression}
-% TODO (Q2b): table with b-hat and t-stats under OLS / White / NW(11) / HH(11) / NW(1994)
-% \begin{table}[H]
-%   \centering
-%   \input{../output/q2b_se_table.tex}
-%   \caption{}
-%   \label{tab:q2b}
-% \end{table}
+% TODO (Q2b): report / discussion of the results (student to write)
+Table~\ref{tab:q2b} reports the OLS estimates of
+\begin{equation}
+  \xR_{e,t+1} = a + b\,\frac{D_t}{P_t} + \varepsilon_t,
+  \label{eq:q2b_regression}
+\end{equation}
+together with the standard error and $t$-statistic of $\hat b$ under five
+standard-error methods. As in Question~2a, $\xR_{e,t} = e^{r_{e,t}} - e^{r_{f,t}}$ and
+$D_t/P_t = e^{\dpr_t}$; $t+1$ is 12 months after $t$, and the sample uses every month $t$
+for which the subsequent annual return is available (code: \texttt{src/q2b.py}).
+
+\begin{table}[H]
+  \centering
+  \input{../output/q2b_se_table.tex}
+  \caption{OLS estimates of regression (\ref{eq:q2b_regression}) with the standard error
+  and $t$-statistic of $\hat b$ under five standard-error methods. Predictor dates
+  1927:12--2020:12. ``Lags'' is the number of autocorrelation lags; for method (v) it is
+  selected by the Newey--West (1994) automatic bandwidth rule.}
+  \label{tab:q2b}
+\end{table}
 
 \subsection{Amihud and Hurvich (2004) bias-corrected estimate}
-% TODO (Q2c): report b-hat, contrast with Q2b, explain why they differ
+% TODO (Q2c): contrast with Q2b and explain why the two estimates differ (student to write)
+Table~\ref{tab:q2c} reports the Amihud and Hurvich (2004) estimate $\hat b^c$ of $b$ in
+regression (\ref{eq:q2b_regression}), on the same sample as Table~\ref{tab:q2b}. First,
+$D_{t+1}/P_{t+1}$ is regressed on $D_t/P_t$ by OLS, giving $\hat\theta$ and $\hat\rho$, and the
+slope is bias-corrected as
+$\hat\rho^c = \hat\rho + (1 + 3\hat\rho)/n + 3(1 + 3\hat\rho)/n^2$ with $n = 94$ years.
+Second, with $\hat u^c_{t+1} = D_{t+1}/P_{t+1} - (\hat\theta + \hat\rho^c D_t/P_t)$,
+\begin{equation}
+  \xR_{e,t+1} = a + b\,\frac{D_t}{P_t} + b_u\,\hat u^c_{t+1} + \varepsilon_t
+  \label{eq:q2c_regression}
+\end{equation}
+is estimated by OLS, and $\hat b^c$ is the coefficient on $D_t/P_t$. Its standard error follows
+Amihud and Hurvich (2004, Eq.~10),
+$\widehat{SE}^c(\hat b^c) = \sqrt{(\hat b_u)^2 \,(1 + 3/n + 9/n^2)^2\, \widehat{\Var}(\hat\rho)
++ \widehat{SE}(\hat b^c)^2}$ with $n = 94$ (code: \texttt{src/q2c.py}).
+
+\begin{table}[H]
+  \centering
+  \input{../output/q2c_ah_table.tex}
+  \caption{Amihud and Hurvich (2004) estimate of $b$ in regression (\ref{eq:q2b_regression})
+  via the augmented regression (\ref{eq:q2c_regression}). In row (i-a), $\widehat{\Var}(\hat\rho)$
+  and $\widehat{SE}(\hat b^c)$ are plain OLS estimates; in row (i-b), both are Newey--West (1987)
+  estimates with 11 lags. Predictor dates 1927:12--2020:12.}
+  \label{tab:q2c}
+\end{table}
 
 \subsection{Out-of-sample estimation (expanding window)}
 % TODO (Q2d): time-series plot of xRbar, E^IS, E^OS from 1940-12; R^2_OS; 50-year rolling R^2_OS plot
