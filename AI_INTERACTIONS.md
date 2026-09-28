@@ -140,3 +140,18 @@ xR_{e, t+1} = a + b * D_t/P_t + epsilon_t
 - **Type of assistance:** other (code review / verification of empirical implementation)
 - **Grouped follow-up requests:** none
 - **Git commit after:** 152ee73ccfd8535ada8672dae9c4f1a9a9d2ac5f
+
+## Interaction 7 — Q2b — 2026-09-28 17:02
+
+- **Problem set item:** Q2b (include the standard-error table in the LaTeX solution)
+- **Substantive prompt (verbatim):** "Could you please add the result of q2b on the ps1_solution.tex?"
+- **Purpose:** Include the Q2b output table produced in Interaction 5 in the solution document (formatting), following the same pattern used for the Q2a figure in Interaction 4.
+- **Git commit before:** c42a6d58c75f1a636ab87b8554b2b30d151215ea
+- **Assistance provided:** The student did not invoke `/TP`; the AI reminded them and ran the procedure. In `tex/ps1_solution.tex`, Q2b subsection: replaced the commented placeholder with (i) a displayed statement of regression (2.2) as estimated, with the variable definitions and a sentence stating the timing (t+1 = 12 months after t) and the sample convention as recorded in `spec/q2b.md`; (ii) a table environment that inputs `output/q2b_se_table.tex` with a descriptive caption (what is reported, predictor dates 1927:12–2020:12, meaning of the "Lags" column). The report/discussion of the results was NOT written; a TODO comment marks it for the student. To check the result, the AI installed a minimal TeX Live in the session container (environment only, not part of the repo), compiled the document with `latexmk -pdf` (no errors, no overfull boxes), and visually inspected the rendered page. The compiled PDF was deleted afterwards and was not committed.
+- **Files inspected:** tex/ps1_solution.tex, output/q2b_se_table.tex, spec/q2b.md, AI_INTERACTIONS.md (Interaction 4, for precedent)
+- **Files directly modified by AI:** tex/ps1_solution.tex (Q2b subsection only)
+- **Errors, omissions, or ambiguities identified:** The sentence on timing and sample describes the two decisions in `spec/q2b.md` that are still marked "carried over from spec/q2a.md unless the student objects"; the student has not yet explicitly confirmed them (already noted in Interaction 6).
+- **Substantive mathematical / economic / empirical suggestions made:** none
+- **Type of assistance:** formatting/translation (LaTeX table include and descriptive caption)
+- **Grouped follow-up requests:** none
+- **Git commit after:** (filled in below)

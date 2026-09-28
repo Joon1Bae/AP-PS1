@@ -194,13 +194,26 @@ $H$ years of subsequent data are available (code: \texttt{src/q2a.py}).
 \end{figure}
 
 \subsection{Standard errors for the one-year predictive regression}
-% TODO (Q2b): table with b-hat and t-stats under OLS / White / NW(11) / HH(11) / NW(1994)
-% \begin{table}[H]
-%   \centering
-%   \input{../output/q2b_se_table.tex}
-%   \caption{}
-%   \label{tab:q2b}
-% \end{table}
+% TODO (Q2b): report / discussion of the results (student to write)
+Table~\ref{tab:q2b} reports the OLS estimates of
+\begin{equation}
+  \xR_{e,t+1} = a + b\,\frac{D_t}{P_t} + \varepsilon_t,
+  \label{eq:q2b_regression}
+\end{equation}
+together with the standard error and $t$-statistic of $\hat b$ under five
+standard-error methods. As in Question~2a, $\xR_{e,t} = e^{r_{e,t}} - e^{r_{f,t}}$ and
+$D_t/P_t = e^{\dpr_t}$; $t+1$ is 12 months after $t$, and the sample uses every month $t$
+for which the subsequent annual return is available (code: \texttt{src/q2b.py}).
+
+\begin{table}[H]
+  \centering
+  \input{../output/q2b_se_table.tex}
+  \caption{OLS estimates of regression (\ref{eq:q2b_regression}) with the standard error
+  and $t$-statistic of $\hat b$ under five standard-error methods. Predictor dates
+  1927:12--2020:12. ``Lags'' is the number of autocorrelation lags; for method (v) it is
+  selected by the Newey--West (1994) automatic bandwidth rule.}
+  \label{tab:q2b}
+\end{table}
 
 \subsection{Amihud and Hurvich (2004) bias-corrected estimate}
 % TODO (Q2c): report b-hat, contrast with Q2b, explain why they differ
