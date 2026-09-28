@@ -404,4 +404,4 @@ I'll pass my explanation for now."
 - **Substantive mathematical / economic / empirical suggestions made:** none
 - **Type of assistance:** other (git diagnosis and record repair)
 - **Grouped follow-up requests:** none
-- **Git commit after:** <pending>
+- **Git commit after:** 9eccdbf1299e60d14aa021da1ae37f950f2cf702
