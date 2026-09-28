@@ -245,4 +245,4 @@ I'll pass my explanation for now."
 - **Substantive mathematical / economic / empirical suggestions made:** none
 - **Type of assistance:** formatting/translation (LaTeX table include, descriptive method text and caption)
 - **Grouped follow-up requests:** none
-- **Git commit after:** (filled in below)
+- **Git commit after:** 711e699d3e89bc0bf381036348296dac2b6b2b7c
