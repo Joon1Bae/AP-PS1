@@ -315,3 +315,18 @@ I'll pass my explanation for now."
 - **Type of assistance:** formatting/translation (figure includes, captions, number include)
 - **Grouped follow-up requests:** none
 - **Git commit after:** d05ad42d8acd6c0a0982261bd36e51ad7d98b333
+
+## Interaction 17 — Q2e — 2026-09-28 17:07
+
+- **Problem set item:** Q2e (out-of-sample forecasts with the steady-state restriction a_t = G_t - 1, b_t = G_t)
+- **Substantive prompt (verbatim):** "Can you check spec/q2e.md file? and please follow the procedure and detail on that file." Then, after the AI paused on one ambiguity: "I revised some point in q2e.md. Decision: G_t uses the same months as x̄R_{e,t} in q2d, i.e. 1927:12 through t, including the December 1927 observation. spec/q2e.md edited and committed at <hash>. Implement."
+- **Purpose:** Check the student-authored `spec/q2e.md` and implement it (data analysis: AI implements, student designs).
+- **Git commit before:** 021c8ceac23624c338c667494755510d34700a92 (contains the student's original `spec/q2e.md`); the student's revision is the student's own commit f24091f, made before any code was written.
+- **Assistance provided:** The student did not invoke `/TP`; the AI reminded them and ran the procedure. Check of the original spec: it stated three mutually inconsistent samples for G_t ("the same months as the historical mean", "1927:12 excluded, as in q2d" — whereas spec/q2d.md includes 1927:12 — and an index formula starting at 1928:12). The AI stopped, described the three readings without recommending one, and asked the student to decide and edit the file. The student chose 1927:12 through t and committed the revision (f24091f). Then wrote `src/q2e.py`: imports the Q2d expanding-forecast machinery unchanged (same origins, targets, historical mean, in-sample line, R^2_OS and 600-month rolling functions), computes G_t as the expanding mean of exp(dg) over 1927:12 ... t, sets a_t = G_t - 1, b_t = G_t, forms the forecast (G_t - 1) + G_t D_t/P_t, and re-computes the Q2d series through the same code path for the overlaid rolling plot. Outputs: `output/q2e_forecasts.csv` (incl. the Q2d forecast and G_t), `output/q2e_r2os_rolling.csv` (Q2d and Q2e columns), `output/q2e_r2os.tex`, `output/q2e_forecasts.pdf/.png`, `output/q2e_r2os_rolling.pdf/.png` (Q2d and Q2e overlaid). Ran the script and visually checked both PNGs. Results: R^2_OS(2e) = 0.0294 vs R^2_OS(2d) = -0.0135 (reproduced); rolling R^2_OS(2e) between 0.0215 and 0.0825; G_t from 1.0014 (origin 1939:12) to 1.0283 (origin 2020:12). No interpretation written; the .tex not changed (not requested).
+- **Files inspected:** spec/q2e.md (both versions), spec/q2d.md, src/q2d.py, ps1.pdf Q2e text and footnote 5 (from the earlier extraction)
+- **Files directly modified by AI:** src/q2e.py (created); output/q2e_* (generated, 7 files)
+- **Errors, omissions, or ambiguities identified:** (1) The G_t sample inconsistency described above (resolved by the student in f24091f). (2) Residual in the revised spec: the parenthetical "monthly index m = 12, ..., t with 1927:12 = 0" was not updated and contradicts the words "1927:12 through t"; the words were implemented (m = 0, ..., t). (3) The student's message cites the commit as "<hash>"; the actual commit is f24091f.
+- **Substantive mathematical / economic / empirical suggestions made:** none (three readings of the G_t sample were listed without a recommendation)
+- **Type of assistance:** empirical implementation; other (spec check)
+- **Grouped follow-up requests:** none
+- **Git commit after:** <pending>
