@@ -197,3 +197,18 @@ I have two instrutions.
 - **Type of assistance:** other (explanation of a paper's methodology); empirical implementation (spec filed, implementation pending student decisions)
 - **Grouped follow-up requests:** none
 - **Git commit after:** 2411d1bf8d0326b4de1fd59d7b93e2c5023ad876
+
+## Interaction 10 — Q2c — 2026-09-28 17:04
+
+- **Problem set item:** Q2c (Amihud and Hurvich (2004) methodology)
+- **Substantive prompt (verbatim):** "Here is the paper. Read the paper and please let me know if you understand in a wrong way." (with the paper PDF attached: Amihud-PredictiveRegressionsReducedBias-2004.pdf)
+- **Purpose:** Check the AI's methodology explanation from Interaction 9 (written without access to the paper) against the paper itself.
+- **Git commit before:** d7a1ca6f33a6cb9beb35b540d40584a22d845bf8
+- **Assistance provided:** Read the student-provided PDF: text extracted with pymupdf; pp. 816–820 (Sections II–III) rendered as images to read the equations; the rest of the text searched for any cap or truncation of the corrected AR coefficient. The PDF was kept in the session upload folder and was NOT added to the repository. Result reported to the student: the Interaction 9 explanation matches the paper. Model (1)–(2); Stambaugh bias (3); Kendall bias -(1+3 rho)/n; decomposition u_t = phi v_t + e_t (5); proxy v^c (6); second-order corrected rho^c (7); two-step procedure (p. 819); Theorem 2 (bias of beta^c = phi E[rho^c - rho]); Lemma 1 (phi^c unbiased); SE formula (10) with Var(rho^c) = (1 + 3/n + 9/n^2)^2 Var(rho-hat) — all confirmed. Refinements reported: (a) the paper allows any estimator theta^c in (6) and shows its choice does not affect beta^c (p. 818), so footnote 4's use of the OLS theta-hat is one valid choice; (b) resolving the item flagged as uncertain in Interaction 9: the paper does not cap or truncate rho^c in the single-predictor case — the only nonstationarity safeguard is in the iterative multiple-predictor (non-diagonal VAR) procedure of Section IV (pp. 824–825); (c) Theorem 3: with the first-order correction, beta^c equals the Stambaugh plug-in estimator beta^s; (d) in the paper, n is the number of observations of a model whose errors are serially independent (i.i.d.), whereas the problem set's data are overlapping monthly observations of annual returns and footnote 4 specifies T as the number of years. This is stated as a fact relevant to the pending spec decision 2, not as a recommendation.
+- **Files inspected:** Amihud and Hurvich (2004) PDF (student upload, outside the repository), spec/q2c.md, ps1.pdf footnote 4 (from the earlier reading)
+- **Files directly modified by AI:** none (AI_INTERACTIONS.md entry only)
+- **Errors, omissions, or ambiguities identified:** Interaction 9 had no substantive errors. Its uncertain item (cap on rho^c) is resolved as "no cap in the single-predictor case". The four spec/q2c.md decisions are still pending.
+- **Substantive mathematical / economic / empirical suggestions made:** none
+- **Type of assistance:** other (explanation of a paper's methodology / check of an earlier explanation against the source)
+- **Grouped follow-up requests:** none
+- **Git commit after:** (filled in below)
