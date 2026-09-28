@@ -155,3 +155,7 @@ xR_{e, t+1} = a + b * D_t/P_t + epsilon_t
 - **Type of assistance:** formatting/translation (LaTeX table include and descriptive caption)
 - **Grouped follow-up requests:** none
 - **Git commit after:** 9eb1331fd1797944f281f7f0f3f32e3ebefb9fd4
+
+## Correction to Interaction 7 — 2026-09-28 16:33
+
+- **Correction:** The header of Interaction 7 gives the time as 17:02. The correct time of that interaction is 2026-09-28 16:32 (the AI wrote the timestamp before reading the system clock). No other field of Interaction 7 is affected. Recorded as a new entry because this file is append-only.
