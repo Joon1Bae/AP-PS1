@@ -1,8 +1,9 @@
-# PS1 데이터
+# Data
 
-이 폴더의 CSV는 git에 커밋하지 않음 (`.gitignore`). 강의 사이트에서 받아서 여기 두면 됨.
+Both CSV files are provided by the course and are committed to this repository so that the
+results can be reproduced from the repository alone.
 
-| 파일 | 원본 이름 | 내용 |
+| File | Original name | Contents |
 |---|---|---|
-| `eq.csv` | EQ Dataset.csv | 월별 (1927.12~): `dp` (log dividend-price), `dg` (dividend growth), `rf`, `re` (excess return) |
-| `bond.csv` | Bond Dataset.csv | CRSP Treasury 시계열: `KYTREASNOX`, `TTERMTYPE`, `MCALDT`, `TMNOMPRC`, `TMYTM` 등 |
+| `eq.csv` | EQ Dataset.csv | Monthly observations (1927:12 to 2021:12) of annual variables: `dp` (log dividend-price ratio), `dg` (log annual dividend growth), `rf` (log annual deflated risk-free return), `re` (log annual deflated equity market return). Excess returns are constructed in the code as e^re - e^rf. See `ps1.pdf` for the definitions. |
+| `bond.csv` | Bond Dataset.csv | CRSP Treasury series; the Fama-Bliss discount bond yields (1- to 5-year, `TTERMTYPE` 5001 to 5005, 1952:06 to 2024:12) are the ones used in Question 4. |
