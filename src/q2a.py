@@ -1,6 +1,6 @@
 """Q2a: adjusted R^2 of (1/H) sum_{h=1}^H xR_{e,t+h} = a + b * D_t/P_t for H = 1, ..., H_max.
 
-Implements spec/q2a.md. Run from the repo root:  uv run python src/q2a_r2adj.py
+Implements spec/q2a.md. Run from the repo root:  uv run python src/q2a.py
 """
 from pathlib import Path
 
