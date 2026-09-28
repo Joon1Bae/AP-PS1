@@ -270,3 +270,18 @@ I'll pass my explanation for now."
 - **Type of assistance:** other (record correction; policy self-audit; reproducibility check)
 - **Grouped follow-up requests:** none
 - **Git commit after:** b4a7a6cc4768d795667b1c977843f22a1215506b
+
+## Interaction 14 — Q2d — 2026-09-28 15:29
+
+- **Problem set item:** Q2d (out-of-sample expanding-window estimation; check of the student-written specification)
+- **Substantive prompt (verbatim):** "Can you check the q2d.md for now?" (preceded in this session by the student's chat description of the design and answers to the AI's clarifying questions, which the student then wrote into `spec/q2d.md` themselves)
+- **Purpose:** Review the student-authored `spec/q2d.md` for ambiguities, omissions and typos before implementation. No code written.
+- **Git commit before:** 25a4ec5c4ed26eba375e0f388a93a4aaf353c2ff (this snapshot contains `spec/q2d.md` exactly as written by the student)
+- **Assistance provided:** The student did not invoke `/TP`; the AI reminded them and ran the procedure. Read `spec/q2d.md` and reported the points below. The AI did not edit the spec. Administrative clarification given earlier in the session (before this entry): what "the same information cutoff" means for the historical mean (returns whose 12-month window has ended by t, i.e. xR_{e,s} for s <= t).
+- **Files inspected:** spec/q2d.md, ps1.pdf Q2d text (from the earlier extraction), spec/q2b.md
+- **Files directly modified by AI:** AI_INTERACTIONS.md (this entry only)
+- **Errors, omissions, or ambiguities identified:** (1) Item 1 states the cutoff by example only ("t = Dec 1939, ... xR_e,t+1 is available until Dec 1939"); the general rule is not written. In chat the student chose: at forecast origin t, use pairs (D_s/P_s, xR_{e,s+1}) whose return is realized by t, i.e. s <= t - 12 months; the file should state this rule. (2) Item 2 has a typo ("E_t[x+re]"), does not say that E_t is the out-of-sample forecast a_t + b_t D_t/P_t, and does not state the evaluation period over which the two sums run (the problem set says December 1940 to the end of the sample). (3) Item 3: whether the historical mean at t includes the December 1927 return, which has no D/P twelve months earlier and therefore never enters the regression, is not stated. (4) Item 4 has a typo ("D_t*P_t" for D_t/P_t); "full sample" is taken to mean the Q2b sample (predictor dates 1927:12 to 2020:12) and should be stated. (5) Item 5: the rolling R^2_OS needs the window length in months (600), the statement that the sums in the R^2_OS formula run over the window while a_t, b_t and the historical mean are unchanged (as the problem set says), and the date convention for each window (the problem set implies window end dates from December 1990). (6) "start point (maybe 1927?)": the data begin in December 1927. In chat the student also decided to report R^2_OS only, without the degrees-of-freedom-adjusted version; the file is consistent with that.
+- **Substantive mathematical / economic / empirical suggestions made:** none (the points above identify what is missing; the choices are the student's). The AI did note that either treatment of the December 1927 observation in item 3 is defensible.
+- **Type of assistance:** other (review of the student's empirical specification)
+- **Grouped follow-up requests:** none
+- **Git commit after:** <pending>
