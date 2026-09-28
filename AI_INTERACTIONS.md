@@ -228,4 +228,4 @@ I have two instrutions.
 - **Substantive mathematical / economic / empirical suggestions made:** Presented options without recommending one: (a) overlapping monthly vs (b) non-overlapping annual sample for the AR(1); candidate counts for T (93, 94, about 93.1); SE options (i) Eq. (10), (ii) plain OLS SE of the augmented regression, (iii) Q2b-style HAC; and, within (i), the variants (i-a) OLS ingredients and (i-b) overlap-robust ingredients (flagged as not from the paper). The AI stated factually that the paper's derivations assume serially independent errors and that overlapping observations make plain OLS standard errors understate uncertainty (as seen in Q2b). The student chose among the options.
 - **Type of assistance:** empirical implementation
 - **Grouped follow-up requests:** none
-- **Git commit after:** (filled in below)
+- **Git commit after:** d3a44fd2959345f27cb270dafdfa84d12d280ddc
