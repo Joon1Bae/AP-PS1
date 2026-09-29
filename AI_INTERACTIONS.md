@@ -494,4 +494,4 @@ I'll pass my explanation for now."
 - **Substantive mathematical / economic / empirical suggestions made:** none
 - **Type of assistance:** formatting/translation (equation statement, table include, caption); other (methodological description drafted from the spec; PDF compilation)
 - **Grouped follow-up requests:** none
-- **Git commit after:** AFTER_HASH_PLACEHOLDER_28
+- **Git commit after:** 86e88467fdd220d38dbd1fadcc4a04e66446e9f9
