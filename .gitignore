@@ -28,3 +28,6 @@ data/*
 
 # NBER recession indicator (FRED USREC) used by src/q4d.py; small, kept tracked
 !data/USREC.csv
+
+# macOS Finder metadata
+.DS_Store
