@@ -559,7 +559,60 @@ difference in percent per month between the highest and the lowest quantile
 \end{table}
 
 \subsection{Portfolio-level multivariate regressions}
-% TODO (Q3e): table, specifications (i)--(vii), VW and EW portfolios, Driscoll--Kraay t-stats
+% TODO (Q3e): interpretation of the results (student to write)
+% Table produced by src/q3e.py (portfolio rules in src/q3c.py, common rules in
+% src/q3_common.py) from spec/q3e.md, spec/q3c.md and spec/q3_common.md.
+The portfolios are decile portfolios sorted on $\BM^{CZ}$, on $\GP^{CZ}$ and on $\Dur$,
+rebalanced annually with NYSE breakpoints, value-weighted or equal-weighted. For $\BM^{CZ}$
+and $\GP^{CZ}$ they are the portfolios of types (i) and (ii) of Question~3c; the $\Dur$
+portfolios are built with the same rules, sorted at the end of June of year $t$ on the
+duration with \texttt{FF.YEAR} $= t$. The signals and their validity are those of
+Questions~3c and~3d.
+
+For each signal $X$, the decile of a stock in $X$ is its decile in the annual NYSE sort on
+$X$ at the end of June of year $t$, fixed for the return months from July of year $t$ to June
+of year $t+1$. For portfolio $p$ and return month $\tau+1$, the regressor
+$\mathit{Dec}^{X}_{p,\tau}$ is the average of the deciles in $X$ over the members used for
+the return of $\tau+1$ that have a decile in $X$, with the weights of the portfolio return
+(market equity at the end of $\tau$ for the value-weighted portfolios, equal weights for the
+equal-weighted portfolios) renormalized over those members. For the signal on which the
+portfolio is sorted, $\mathit{Dec}^{X}_{p,\tau}$ is the decile of the portfolio.
+
+The following regressions of the portfolio excess return $\xR_{p,\tau+1}$, in percent per
+month, are estimated by pooled OLS:
+\begin{align}
+  \text{(i)}\quad   & \xR_{p,\tau+1} = a + b_{\BM}\, \mathit{Dec}^{\BM}_{p,\tau} + \varepsilon_{p,\tau+1}, \notag\\
+  \text{(ii)}\quad  & \xR_{p,\tau+1} = a + b_{\GP}\, \mathit{Dec}^{\GP}_{p,\tau} + \varepsilon_{p,\tau+1}, \notag\\
+  \text{(iii)}\quad & \xR_{p,\tau+1} = a + b_{\Dur}\, \mathit{Dec}^{\Dur}_{p,\tau} + \varepsilon_{p,\tau+1}, \notag\\
+  \text{(iv)}\quad  & \xR_{p,\tau+1} = a + b_{\BM}\, \mathit{Dec}^{\BM}_{p,\tau}
+                      + b_{\GP}\, \mathit{Dec}^{\GP}_{p,\tau} + \varepsilon_{p,\tau+1}, \label{eq:q3e_regressions}\\
+  \text{(v)}\quad   & \xR_{p,\tau+1} = a + b_{\Dur}\, \mathit{Dec}^{\Dur}_{p,\tau}
+                      + b_{\BM}\, \mathit{Dec}^{\BM}_{p,\tau} + \varepsilon_{p,\tau+1}, \notag\\
+  \text{(vi)}\quad  & \xR_{p,\tau+1} = a + b_{\Dur}\, \mathit{Dec}^{\Dur}_{p,\tau}
+                      + b_{\GP}\, \mathit{Dec}^{\GP}_{p,\tau} + \varepsilon_{p,\tau+1}, \notag\\
+  \text{(vii)}\quad & \xR_{p,\tau+1} = a + b_{\Dur}\, \mathit{Dec}^{\Dur}_{p,\tau}
+                      + b_{\GP}\, \mathit{Dec}^{\GP}_{p,\tau} + b_{\BM}\, \mathit{Dec}^{\BM}_{p,\tau}
+                      + \varepsilon_{p,\tau+1}. \notag
+\end{align}
+Each specification stacks the portfolios sorted on the signals that appear in it: 10
+portfolios for (i)--(iii), 20 for (iv)--(vi) and 30 for (vii). The return months are
+1963:07--2025:01 for specifications (i), (ii) and (iv), and 1973:07--2025:01 for
+specifications (iii), (v), (vi) and (vii), because $\Dur$ starts in 1973. The standard errors
+are those of Driscoll and Kraay (1998) with the Bartlett kernel, with the lag length selected
+by the Newey--West (1994) automatic bandwidth rule of method (v) of Question~2b, applied to
+the moments summed across portfolios within each month. Since $\xR$ is in percent per month,
+a coefficient is in percent per month per decile (code: \texttt{src/q3e.py},
+\texttt{src/q3c.py}, \texttt{src/q3\_common.py}).
+
+\begin{table}[H]
+  \centering
+  \input{../output/q3e_table.tex}
+  \caption{Pooled OLS estimates of regressions (\ref{eq:q3e_regressions}) for value-weighted
+  and equal-weighted decile portfolios (annual rebalancing, NYSE breakpoints), in percent per
+  month per decile, with Driscoll--Kraay (1998) $t$-statistics in brackets (Bartlett kernel,
+  between 1 and 11 lags).}
+  \label{tab:q3e}
+\end{table}
 
 % =====================================================================
 \section{Question 4}
