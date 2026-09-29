@@ -719,4 +719,4 @@ I'll pass my explanation for now."
 - **Substantive mathematical / economic / empirical suggestions made:** none
 - **Type of assistance:** formatting/translation (LaTeX exposition of the student's specification and of existing outputs)
 - **Grouped follow-up requests:** none
-- **Git commit after:** PENDING_AFTER_HASH
+- **Git commit after:** 23dc73e4b704f8e96a8883f07f1a229ff1561e5c
