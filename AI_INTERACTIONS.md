@@ -449,4 +449,4 @@ I'll pass my explanation for now."
 - **Substantive mathematical / economic / empirical suggestions made:** none (both sample conventions were shown without a recommendation)
 - **Type of assistance:** empirical implementation; other (spec check)
 - **Grouped follow-up requests:** none
-- **Git commit after:** AFTER_HASH_PLACEHOLDER_25
+- **Git commit after:** f20fd1c43ae7e8c9290725edb8a63c2d939549af
