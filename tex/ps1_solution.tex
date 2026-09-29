@@ -28,6 +28,7 @@
 \newcommand{\xr}{\mathit{xr}}
 \newcommand{\xy}{\mathit{xy}}
 \newcommand{\xf}{\mathit{xf}}
+\newcommand{\MOM}{\mathit{MOM}}
 
 % ---------- Title ----------
 \title{BUSFIN 8200: Asset Pricing Foundations\\Problem Set 1}
@@ -300,7 +301,76 @@ $R^2_{OS} = \input{../output/q2e_r2os.tex}$.
 % =====================================================================
 
 \subsection{Momentum signal construction and validation}
-% TODO (Q3a): three time-series plots (intercept, slope, R^2) of MOM_CZ on MOM
+% TODO (Q3a): interpretation of the results (student to write)
+% Figures and table produced by src/q3a.py (common rules in src/q3_common.py)
+% from spec/q3a.md and spec/q3_common.md.
+The momentum signal of stock $j$ at the end of month $\tau$ is
+\begin{equation}
+  \MOM_{j,\tau} = \prod_{m=\tau-11}^{\tau-1} \left(1 + R_{j,m}\right) - 1,
+  \label{eq:q3a_mom}
+\end{equation}
+the cumulative return from the end of month $\tau-12$ to the end of month $\tau-1$, where
+$R_{j,m}$ is the CRSP monthly return (\texttt{MthRet}, which includes delisting returns). The
+returns are taken from every month of the CRSP file for the same PERMNO, whether or not the
+stock is in the universe in those months, and $\MOM_{j,\tau}$ is missing when any of the 11
+months has a missing return or no observation.
+
+The signal months are 1963:06--2024:12. The universe at $\tau$ consists of common stocks of
+firms incorporated in the United States (CRSP fields \texttt{ShareType = NS},
+\texttt{SecurityType = EQTY}, \texttt{SecuritySubType = COM}, \texttt{USIncFlg = Y},
+\texttt{IssuerType} $\in$ \{\texttt{ACOR}, \texttt{CORP}\}, the equivalent of share codes 10
+and 11) trading on NYSE, Amex or Nasdaq (\texttt{PrimaryExch} $\in$ \{\texttt{N}, \texttt{A},
+\texttt{Q}\}, \texttt{ConditionalType = RW}, \texttt{TradingStatusFlg = A}), excluding
+utilities ($4900 \le \mathit{SIC} \le 4949$) and financials ($6000 \le \mathit{SIC} \le 6999$)
+and requiring non-missing market equity at $\tau$. The SIC code is the CRSP \texttt{SICCD} at
+$\tau$; a code of zero is treated as missing and replaced by the most recent earlier non-zero
+code of the same PERMNO or, if there is none, by its next later one, and a stock that never
+has a non-zero code is kept.
+
+For each month $\tau$, the cross-firm regression
+\begin{equation}
+  \MOM^{CZ}_{j,\tau} = a_\tau + b_\tau\, \MOM_{j,\tau} + \varepsilon_{j,\tau}
+  \label{eq:q3a_regression}
+\end{equation}
+is estimated by OLS, where $\MOM^{CZ}$ is \texttt{Mom12m} from the CZ Dataset, merged on the
+stock identifier and the month $\tau$, using the stocks in the universe at $\tau$ for which
+both signals are non-missing (2{,}428{,}767 stock-month observations in 739 months).
+Figures~\ref{fig:q3a_intercept}--\ref{fig:q3a_r2} plot $\hat a_\tau$, $\hat b_\tau$ and the
+$R^2$ of these regressions, and Table~\ref{tab:q3a} summarizes them (code:
+\texttt{src/q3a.py}, \texttt{src/q3\_common.py}).
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.8\textwidth]{q3a_intercept.pdf}
+  \caption{Intercept $\hat a_\tau$ of the monthly cross-firm regression
+  (\ref{eq:q3a_regression}), 1963:06--2024:12. The grey line marks 0.}
+  \label{fig:q3a_intercept}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.8\textwidth]{q3a_slope.pdf}
+  \caption{Slope $\hat b_\tau$ of the monthly cross-firm regression
+  (\ref{eq:q3a_regression}), 1963:06--2024:12. The grey line marks 1.}
+  \label{fig:q3a_slope}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.8\textwidth]{q3a_r2.pdf}
+  \caption{$R^2$ of the monthly cross-firm regression (\ref{eq:q3a_regression}),
+  1963:06--2024:12. The grey line marks 1.}
+  \label{fig:q3a_r2}
+\end{figure}
+
+\begin{table}[H]
+  \centering
+  \input{../output/q3a_table.tex}
+  \caption{Time-series mean, minimum and maximum of the intercept, slope, $R^2$ and number
+  of stocks $N$ of the monthly cross-firm regressions (\ref{eq:q3a_regression}) of
+  $\MOM^{CZ}$ on $\MOM$, 739 signal months from 1963:06 to 2024:12.}
+  \label{tab:q3a}
+\end{table}
 
 \subsection{Book-to-market signal construction and validation}
 % TODO (Q3b): three time-series plots (intercept, slope, R^2) of BM_CZ on BM
