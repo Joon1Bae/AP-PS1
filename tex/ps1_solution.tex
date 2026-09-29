@@ -346,10 +346,60 @@ $\xf^{(H)} = f^{(H)} - f^{(1)}$ and $\xr^{(H)} = r^{(H)} - r^{(1)}$
 \end{table}
 
 \subsection{Hold-to-maturity excess return regressions}
-% TODO (Q4b): table analogous to slide 5.5, first table, first panel; Hansen--Hodrick t-stats
+% TODO (Q4b): discussion of the results (student to write)
+% Table produced by src/q4b.py from spec/q4b.md.
+Table~\ref{tab:q4b} reports OLS estimates of
+\begin{equation}
+  \frac{1}{H}\,\xr^{(H)}_{b,t\to t+H} = a^{(H)} + b^{(H)}\,\xy^{(H)}_{b,t} + \varepsilon^{(H)}_t,
+  \qquad H = 2, \dots, 5,
+  \label{eq:q4b_regression}
+\end{equation}
+where the hold-to-maturity excess return is
+\begin{equation}
+  \xr^{(H)}_{b,t\to t+H} = \sum_{h=1}^{H} \xr^{(H-h+1)}_{b,t+h}
+  = \sum_{h=1}^{H} \left( r^{(H-h+1)}_{b,t+h} - r^{(1)}_{b,t+h} \right),
+  \label{eq:q4b_htm}
+\end{equation}
+with $r$ and $\xr$ as in (\ref{eq:q4a_defs}), $t+h$ being $12h$ months after $t$, and the
+$h = H$ term identically zero because $\xr^{(1)}_{b,t} = 0$. Each regression uses every month
+$t$ for which all non-zero terms of (\ref{eq:q4b_htm}) are observed, i.e.\ $t + 12(H-1) \le$
+2024:12. The $t$-statistics use Hansen--Hodrick (1980) standard errors with $L = 12H - 1$
+lags (code: \texttt{src/q4b.py}).
+
+\begin{table}[H]
+  \centering
+  \input{../output/q4b_table.tex}
+  \caption{OLS estimates of $b^{(H)}$ in regression (\ref{eq:q4b_regression}), with
+  Hansen--Hodrick (1980) $t$-statistics ($12H-1$ lags) in brackets and $R^2$ in percent.
+  Monthly observations from 1952:06; the last predictor month is 2023:12, 2022:12, 2021:12
+  and 2020:12 for $H = 2, 3, 4, 5$ (859, 847, 835 and 823 observations).}
+  \label{tab:q4b}
+\end{table}
 
 \subsection{One-year excess return regressions on forward spreads}
-% TODO (Q4c): table analogous to slide 5.5, first table, second panel; NW(1994) t-stats
+% TODO (Q4c): discussion of the results (student to write)
+% Table produced by src/q4c.py from spec/q4c.md.
+Table~\ref{tab:q4c} reports OLS estimates of
+\begin{equation}
+  \xr^{(H)}_{b,t+1} = a^{(H)} + b^{(H)}\,\xf^{(H)}_{b,t} + \varepsilon^{(H)}_t,
+  \qquad H = 2, \dots, 5,
+  \label{eq:q4c_regression}
+\end{equation}
+with $\xr$ and $\xf$ as in (\ref{eq:q4a_defs}) and $t+1$ being 12 months after $t$. Each
+regression uses every month $t$ for which $\xr^{(H)}_{b,t+1}$ is observed, i.e.\ $t + 12 \le$
+2024:12, so all four samples are 1952:06--2023:12. The $t$-statistics use Newey--West (1987)
+standard errors with the lag length selected by the Newey--West (1994) automatic bandwidth
+rule, as in method (v) of Question~2b (code: \texttt{src/q4c.py}).
+
+\begin{table}[H]
+  \centering
+  \input{../output/q4c_table.tex}
+  \caption{OLS estimates of $b^{(H)}$ in regression (\ref{eq:q4c_regression}), with
+  Newey--West (1987, 1994) $t$-statistics in brackets (selected lags 23, 23, 24 and 23 for
+  $H = 2, 3, 4, 5$) and $R^2$ in percent. Monthly observations, predictor months
+  1952:06--2023:12 (859 observations for each $H$).}
+  \label{tab:q4c}
+\end{table}
 
 \subsection{Cochrane--Piazzesi factor}
 % TODO (Q4d): time-series plot of cp_t with NBER recession shading

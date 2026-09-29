@@ -25,3 +25,6 @@ data/*
 !data/README.md
 !data/eq.csv
 !data/bond.csv
+
+# NBER recession indicator (FRED USREC) used by src/q4d.py; small, kept tracked
+!data/USREC.csv
