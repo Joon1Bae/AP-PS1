@@ -31,6 +31,7 @@
 \newcommand{\MOM}{\mathit{MOM}}
 \newcommand{\BM}{\mathit{BM}}
 \newcommand{\GP}{\mathit{GP}}
+\newcommand{\Dur}{\mathit{Dur}}
 
 % ---------- Title ----------
 \title{BUSFIN 8200: Asset Pricing Foundations\\Problem Set 1}
@@ -503,7 +504,59 @@ portfolio, defined as decile 10 minus decile 1.
 \end{table}
 
 \subsection{Fama--MacBeth regressions}
-% TODO (Q3d): table, specifications (i)--(vii), OLS and WLS (ME weights), with t-stats
+% TODO (Q3d): interpretation of the results (student to write)
+% Table produced by src/q3d.py (common rules in src/q3_common.py)
+% from spec/q3d.md and spec/q3_common.md.
+The signals at month $\tau$ are $\BM^{CZ} = \texttt{BMdec}$ and $\GP^{CZ} = \texttt{GP}$ from
+the CZ Dataset, as in Question~3c, and the equity duration $\Dur$ from the Dur Dataset, where
+the value with \texttt{FF.YEAR} $= t$ is the signal for the months from June of year $t$ to
+May of year $t+1$, the timing of $\BM$. A signal is valid if it is non-missing and finite;
+for $\BM^{CZ}$, stocks with $\texttt{BMdec} \le 0$ are excluded. The quantile of signal $X$ is
+\begin{equation}
+  Q^{X}_{j,\tau} = \frac{\mathrm{rank}\left(X_{j,\tau}\right)}{N^{X}_{\tau}},
+  \qquad X \in \{\BM^{CZ}, \GP^{CZ}, \Dur\},
+  \label{eq:q3d_quantile}
+\end{equation}
+where the rank (1 for the lowest value, the average rank for ties) and the number of stocks
+$N^{X}_{\tau}$ are taken over all stocks in the universe at $\tau$ with a valid $X$, whether
+or not they enter a regression.
+
+For each month $\tau$, the following cross-firm regressions of the excess return
+$\xR_{j,\tau+1} = R_{j,\tau+1} - R_{f,\tau+1}$, in percent per month, are estimated by OLS and
+by WLS with weights equal to the market equity $\mathit{ME}_{j,\tau}$:
+\begin{align}
+  \text{(i)}\quad   & \xR_{j,\tau+1} = a + b_{\BM}\, Q^{\BM}_{j,\tau} + \varepsilon_{j,\tau+1}, \notag\\
+  \text{(ii)}\quad  & \xR_{j,\tau+1} = a + b_{\GP}\, Q^{\GP}_{j,\tau} + \varepsilon_{j,\tau+1}, \notag\\
+  \text{(iii)}\quad & \xR_{j,\tau+1} = a + b_{\Dur}\, Q^{\Dur}_{j,\tau} + \varepsilon_{j,\tau+1}, \notag\\
+  \text{(iv)}\quad  & \xR_{j,\tau+1} = a + b_{\BM}\, Q^{\BM}_{j,\tau} + b_{\GP}\, Q^{\GP}_{j,\tau}
+                      + \varepsilon_{j,\tau+1}, \label{eq:q3d_regressions}\\
+  \text{(v)}\quad   & \xR_{j,\tau+1} = a + b_{\Dur}\, Q^{\Dur}_{j,\tau} + b_{\BM}\, Q^{\BM}_{j,\tau}
+                      + \varepsilon_{j,\tau+1}, \notag\\
+  \text{(vi)}\quad  & \xR_{j,\tau+1} = a + b_{\Dur}\, Q^{\Dur}_{j,\tau} + b_{\GP}\, Q^{\GP}_{j,\tau}
+                      + \varepsilon_{j,\tau+1}, \notag\\
+  \text{(vii)}\quad & \xR_{j,\tau+1} = a + b_{\Dur}\, Q^{\Dur}_{j,\tau} + b_{\GP}\, Q^{\GP}_{j,\tau}
+                      + b_{\BM}\, Q^{\BM}_{j,\tau} + \varepsilon_{j,\tau+1}. \notag
+\end{align}
+Each regression uses the stocks in the universe at $\tau$ for which all regressors of the
+specification are valid and $\xR_{j,\tau+1}$ is non-missing. The signal months are
+1963:06--2024:12 for specifications (i), (ii) and (iv), and 1973:06--2024:12 for
+specifications (iii), (v), (vi) and (vii), because $\Dur$ starts in 1973. The Fama--MacBeth
+estimate is the time-series mean of the monthly coefficient estimates, and its $t$-statistic
+comes from a regression of the monthly coefficient series on a constant with Newey--West
+(1987, 1994) standard errors, with the lag length selected by the automatic bandwidth rule
+as in method (v) of Question~2b. Since $\xR$ is in percent per month, a coefficient is the
+difference in percent per month between the highest and the lowest quantile
+(code: \texttt{src/q3d.py}, \texttt{src/q3\_common.py}).
+
+\begin{table}[H]
+  \centering
+  \input{../output/q3d_table.tex}
+  \caption{Fama--MacBeth estimates of regressions (\ref{eq:q3d_regressions}), in percent per
+  month, with Newey--West (1987, 1994) $t$-statistics in brackets (between 2 and 16 lags).
+  OLS and WLS refer to the monthly cross-firm regressions; the WLS weights are the market
+  equity at $\tau$. Avg.\ $N$ is the average number of stocks in the monthly regressions.}
+  \label{tab:q3d}
+\end{table}
 
 \subsection{Portfolio-level multivariate regressions}
 % TODO (Q3e): table, specifications (i)--(vii), VW and EW portfolios, Driscoll--Kraay t-stats
