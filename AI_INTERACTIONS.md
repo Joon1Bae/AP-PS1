@@ -539,4 +539,4 @@ I'll pass my explanation for now."
 - **Substantive mathematical / economic / empirical suggestions made:** none (data facts and the list of decisions only)
 - **Type of assistance:** other (spec check; data inspection)
 - **Grouped follow-up requests:** none
-- **Git commit after:** AFTER_HASH_PLACEHOLDER_31
+- **Git commit after:** 3d806265987b7304a0cd22d51034e77d4527651b
