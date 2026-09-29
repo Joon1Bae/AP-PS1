@@ -32,3 +32,8 @@ Row selection: crsp_msf has several rows per PERMNO-month. First drop the Dis* c
 Security info (all universe fields and SICCD) at month τ: use the row with SecInfoStartDt ≤ MthCalDt ≤ SecInfoEndDt. If a PERMNO-month has two rows, keep the one satisfying this condition. If no row satisfies it (delisting months that carry only post-delisting security info), the PERMNO fails the universe in that month.
 
 Return and price data (MthRet, MthPrc, ShrOut) are identical across the rows of a PERMNO-month and are taken from the PERMNO-month regardless of the condition above, so the return in τ+1 is kept when τ+1 is the delisting month.
+
+The search for the earlier or later non-zero SICCD uses all rows of the same PERMNO with valid
+security info over the whole file (1960:01–2025:12), regardless of the universe screens and the
+sample window. A code filled from a later month is dated after τ. This could be accepted because SIC
+only defines the sample and is not a signal.
