@@ -764,4 +764,4 @@ I'll pass my explanation for now."
 - **Substantive mathematical / economic / empirical suggestions made:** none
 - **Type of assistance:** formatting/translation (insertion of the student's placeholder text); other (repository housekeeping)
 - **Grouped follow-up requests:** none
-- **Git commit after:** PENDING_AFTER_HASH
+- **Git commit after:** 796f978cb58355e1abdcbb70691b07900a3b00cf
