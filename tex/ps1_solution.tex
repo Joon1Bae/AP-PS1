@@ -253,6 +253,26 @@ $\widehat{SE}^c(\hat b^c) = \sqrt{(\hat b_u)^2 \,(1 + 3/n + 9/n^2)^2\, \widehat{
 \subsection{Out-of-sample estimation (expanding window)}
 % TODO (Q2d): interpretation of the figures and of R^2_OS (student to write)
 % Figures and the R^2_OS number are produced by src/q2d.py from spec/q2d.md.
+At each forecast origin $t$, only the information available at $t$ is used. Regression
+(\ref{eq:q2b_regression}) is estimated by OLS on the pairs
+$\left(D_s/P_s,\ \xR_{e,s+1}\right)$ whose return is realized by $t$, i.e.\ with $s$ at
+least 12 months before $t$, starting with the predictor of 1927:12. This gives the
+time-varying estimates $\hat a_t$ and $\hat b_t$ and the out-of-sample forecast
+\begin{equation}
+  \hat{E}^{OS}_t[\xR_{e,t+1}] = \hat a_t + \hat b_t\, \frac{D_t}{P_t}.
+  \label{eq:q2d_forecast}
+\end{equation}
+The benchmark forecast is the historical mean of all annual excess returns realized by $t$,
+\begin{equation}
+  \overline{\xR}_{e,t} = \frac{1}{n_t} \sum_{m \le t} \xR_{e,m},
+  \label{eq:q2d_mean}
+\end{equation}
+where $m$ runs over the $n_t$ months from 1927:12 to $t$; the return dated 1927:12 is
+included in the mean although it never enters the regression, because no $D/P$ is observed
+12 months before it. The in-sample fitted value is
+$\hat{E}^{IS}_t[\xR_{e,t+1}] = \hat a + \hat b\, D_t/P_t$, with $\hat a$ and $\hat b$ from the
+full sample of Question~2b. The forecast origins are $t = $ 1939:12, \dots, 2020:12, so the
+forecast targets $t+1$ are the 973 months 1940:12--2021:12 (code: \texttt{src/q2d.py}).
 
 \begin{figure}[H]
   \centering
@@ -264,8 +284,21 @@ $\widehat{SE}^c(\hat b^c) = \sqrt{(\hat b_u)^2 \,(1 + 3/n + 9/n^2)^2\, \widehat{
   \label{fig:q2d_forecasts}
 \end{figure}
 
-The out-of-sample $R^2$ over the forecast-target months 1940:12--2021:12 is
+The out-of-sample $R^2$ compares the squared forecast errors of
+(\ref{eq:q2d_forecast}) with those of the historical mean (\ref{eq:q2d_mean}),
+\begin{equation}
+  R^2_{OS} = 1 - \frac{\sum_{t \in \mathcal{T}} \left( \xR_{e,t+1} - \hat{E}^{OS}_t[\xR_{e,t+1}] \right)^2}
+                      {\sum_{t \in \mathcal{T}} \left( \xR_{e,t+1} - \overline{\xR}_{e,t} \right)^2},
+  \label{eq:q2d_r2os}
+\end{equation}
+where $\mathcal{T}$ is the set of forecast origins. Over all origins, i.e.\ over the
+forecast-target months 1940:12--2021:12,
 $R^2_{OS} = \input{../output/q2d_r2os.tex}$.
+
+For the rolling version, $\hat a_t$, $\hat b_t$ and $\overline{\xR}_{e,t}$ are unchanged
+and only the two sums in (\ref{eq:q2d_r2os}) are restricted to a window: $R^2_{OS}(T)$ uses
+the 600 consecutive forecast-target months ending at $T$, for $T = $ 1990:12, \dots, 2021:12
+(the first window is 1941:01--1990:12).
 
 \begin{figure}[H]
   \centering
@@ -279,6 +312,22 @@ $R^2_{OS} = \input{../output/q2d_r2os.tex}$.
 \subsection{Out-of-sample estimation with steady-state restrictions}
 % TODO (Q2e): interpretation of the figures and of R^2_OS, and comparison with Q2d (student to write)
 % Figures and the R^2_OS number are produced by src/q2e.py from spec/q2e.md.
+The procedure is that of Question~2d except for the coefficients, which are restricted to
+$\hat a_t = G_t - 1$ and $\hat b_t = G_t$, where
+\begin{equation}
+  G_t = \frac{1}{n_t} \sum_{m \le t} e^{\Delta d_m}
+  \label{eq:q2e_G}
+\end{equation}
+is the mean of the gross dividend growth over the $n_t$ months $m$ from 1927:12 to $t$, the
+same months whose returns enter $\overline{\xR}_{e,t}$ in (\ref{eq:q2d_mean}). The
+out-of-sample forecast is
+\begin{equation}
+  \hat{E}^{OS}_t[\xR_{e,t+1}] = (G_t - 1) + G_t\, \frac{D_t}{P_t},
+  \label{eq:q2e_forecast}
+\end{equation}
+and $R^2_{OS}$ is computed from (\ref{eq:q2d_r2os}) with this forecast, with the same
+historical mean, forecast origins, forecast targets and 600-month rolling windows as in
+Question~2d (code: \texttt{src/q2e.py}).
 
 \begin{figure}[H]
   \centering
