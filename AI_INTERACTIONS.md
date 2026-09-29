@@ -554,4 +554,4 @@ I'll pass my explanation for now."
 - **Substantive mathematical / economic / empirical suggestions made:** none. Data facts, two statements about CRSP documentation flagged as unverified recollection, and the list of decisions; no recommendation on any choice.
 - **Type of assistance:** other (data inspection; restatement of open specification decisions)
 - **Grouped follow-up requests:** none
-- **Git commit after:** PENDING_AFTER_HASH
+- **Git commit after:** 536301eda5078dc66e913f39c705ed1c30c2c9dc
