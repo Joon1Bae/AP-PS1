@@ -480,3 +480,18 @@ I'll pass my explanation for now."
 - **Type of assistance:** empirical implementation; other (spec check)
 - **Grouped follow-up requests:** none
 - **Git commit after:** 314a4c71e9205fcfb5053dc87263b40401bc571c
+
+## Interaction 28 — Q4c — 2026-09-28 23:30
+
+- **Problem set item:** Q4c (include the forward-spread regression table and its definitions in the LaTeX solution)
+- **Substantive prompt (verbatim):** "Could you update .tex file so that the results from Q4C are reflected?"
+- **Purpose:** Include the Q4c outputs produced in Interaction 27 in the solution document (formatting), leaving interpretation to the student, with the same treatment as Q4b (Interaction 26).
+- **Git commit before:** 6bd44b667abe2583a458c3d20003e1c33e1b069f
+- **Assistance provided:** In `tex/ps1_solution.tex`, Q4c subsection: replaced the placeholder with a displayed statement of regression (4.2) exactly as in the problem statement and `spec/q4c.md`; two descriptive sentences (variables as in the Q4a definitions, 12-month year step; the student's sample rule t + 12 ≤ 2024:12, so all samples are 1952:06–2023:12; Newey–West (1987) standard errors with the Newey–West (1994) automatic lag length as in method (v) of Question 2b); and a table environment inputting `output/q4c_table.tex` with a caption stating what is reported, the selected lag lengths per horizon, the predictor months and the number of observations. No interpretation or discussion written; a TODO comment marks it for the student. AI-written text in the answer body: the descriptive sentences and the caption (methodological description drafted from the spec). Compiled with tectonic (8 pages, no errors, no undefined references; only the pre-existing 3.85pt overfull line at .tex line 332 in the Q4a equation) and inspected pages 7–8 as PNG: equation (18), the text and Table 5 render correctly. `tex/ps1_solution.pdf` recompiled and committed with the source.
+- **Files inspected:** tex/ps1_solution.tex (Q4b–Q4c region), output/q4c_table.tex, output/q4c_regressions.csv, spec/q4c.md, tex/ps1_solution.log, rendered pages 7–8
+- **Files directly modified by AI:** tex/ps1_solution.tex (Q4c subsection only); tex/ps1_solution.pdf (recompiled)
+- **Errors, omissions, or ambiguities identified:** none
+- **Substantive mathematical / economic / empirical suggestions made:** none
+- **Type of assistance:** formatting/translation (equation statement, table include, caption); other (methodological description drafted from the spec; PDF compilation)
+- **Grouped follow-up requests:** none
+- **Git commit after:** AFTER_HASH_PLACEHOLDER_28

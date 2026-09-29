@@ -377,7 +377,29 @@ lags (code: \texttt{src/q4b.py}).
 \end{table}
 
 \subsection{One-year excess return regressions on forward spreads}
-% TODO (Q4c): table analogous to slide 5.5, first table, second panel; NW(1994) t-stats
+% TODO (Q4c): discussion of the results (student to write)
+% Table produced by src/q4c.py from spec/q4c.md.
+Table~\ref{tab:q4c} reports OLS estimates of
+\begin{equation}
+  \xr^{(H)}_{b,t+1} = a^{(H)} + b^{(H)}\,\xf^{(H)}_{b,t} + \varepsilon^{(H)}_t,
+  \qquad H = 2, \dots, 5,
+  \label{eq:q4c_regression}
+\end{equation}
+with $\xr$ and $\xf$ as in (\ref{eq:q4a_defs}) and $t+1$ being 12 months after $t$. Each
+regression uses every month $t$ for which $\xr^{(H)}_{b,t+1}$ is observed, i.e.\ $t + 12 \le$
+2024:12, so all four samples are 1952:06--2023:12. The $t$-statistics use Newey--West (1987)
+standard errors with the lag length selected by the Newey--West (1994) automatic bandwidth
+rule, as in method (v) of Question~2b (code: \texttt{src/q4c.py}).
+
+\begin{table}[H]
+  \centering
+  \input{../output/q4c_table.tex}
+  \caption{OLS estimates of $b^{(H)}$ in regression (\ref{eq:q4c_regression}), with
+  Newey--West (1987, 1994) $t$-statistics in brackets (selected lags 23, 23, 24 and 23 for
+  $H = 2, 3, 4, 5$) and $R^2$ in percent. Monthly observations, predictor months
+  1952:06--2023:12 (859 observations for each $H$).}
+  \label{tab:q4c}
+\end{table}
 
 \subsection{Cochrane--Piazzesi factor}
 % TODO (Q4d): time-series plot of cp_t with NBER recession shading
