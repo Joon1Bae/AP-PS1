@@ -28,6 +28,10 @@
 \newcommand{\xr}{\mathit{xr}}
 \newcommand{\xy}{\mathit{xy}}
 \newcommand{\xf}{\mathit{xf}}
+\newcommand{\MOM}{\mathit{MOM}}
+\newcommand{\BM}{\mathit{BM}}
+\newcommand{\GP}{\mathit{GP}}
+\newcommand{\Dur}{\mathit{Dur}}
 
 % ---------- Title ----------
 \title{BUSFIN 8200: Asset Pricing Foundations\\Problem Set 1}
@@ -193,6 +197,8 @@ $H$ years of subsequent data are available (code: \texttt{src/q2a.py}).
   \label{fig:q2a}
 \end{figure}
 
+[Describe the results you observe]
+
 \subsection{Standard errors for the one-year predictive regression}
 % TODO (Q2b): report / discussion of the results (student to write)
 Table~\ref{tab:q2b} reports the OLS estimates of
@@ -242,9 +248,31 @@ $\widehat{SE}^c(\hat b^c) = \sqrt{(\hat b_u)^2 \,(1 + 3/n + 9/n^2)^2\, \widehat{
   \label{tab:q2c}
 \end{table}
 
+[Explanation of reason why it is natural for the two estimates to differ]
+
 \subsection{Out-of-sample estimation (expanding window)}
 % TODO (Q2d): interpretation of the figures and of R^2_OS (student to write)
 % Figures and the R^2_OS number are produced by src/q2d.py from spec/q2d.md.
+At each forecast origin $t$, only the information available at $t$ is used. Regression
+(\ref{eq:q2b_regression}) is estimated by OLS on the pairs
+$\left(D_s/P_s,\ \xR_{e,s+1}\right)$ whose return is realized by $t$, i.e.\ with $s$ at
+least 12 months before $t$, starting with the predictor of 1927:12. This gives the
+time-varying estimates $\hat a_t$ and $\hat b_t$ and the out-of-sample forecast
+\begin{equation}
+  \hat{E}^{OS}_t[\xR_{e,t+1}] = \hat a_t + \hat b_t\, \frac{D_t}{P_t}.
+  \label{eq:q2d_forecast}
+\end{equation}
+The benchmark forecast is the historical mean of all annual excess returns realized by $t$,
+\begin{equation}
+  \overline{\xR}_{e,t} = \frac{1}{n_t} \sum_{m \le t} \xR_{e,m},
+  \label{eq:q2d_mean}
+\end{equation}
+where $m$ runs over the $n_t$ months from 1927:12 to $t$; the return dated 1927:12 is
+included in the mean although it never enters the regression, because no $D/P$ is observed
+12 months before it. The in-sample fitted value is
+$\hat{E}^{IS}_t[\xR_{e,t+1}] = \hat a + \hat b\, D_t/P_t$, with $\hat a$ and $\hat b$ from the
+full sample of Question~2b. The forecast origins are $t = $ 1939:12, \dots, 2020:12, so the
+forecast targets $t+1$ are the 973 months 1940:12--2021:12 (code: \texttt{src/q2d.py}).
 
 \begin{figure}[H]
   \centering
@@ -256,8 +284,21 @@ $\widehat{SE}^c(\hat b^c) = \sqrt{(\hat b_u)^2 \,(1 + 3/n + 9/n^2)^2\, \widehat{
   \label{fig:q2d_forecasts}
 \end{figure}
 
-The out-of-sample $R^2$ over the forecast-target months 1940:12--2021:12 is
+The out-of-sample $R^2$ compares the squared forecast errors of
+(\ref{eq:q2d_forecast}) with those of the historical mean (\ref{eq:q2d_mean}),
+\begin{equation}
+  R^2_{OS} = 1 - \frac{\sum_{t \in \mathcal{T}} \left( \xR_{e,t+1} - \hat{E}^{OS}_t[\xR_{e,t+1}] \right)^2}
+                      {\sum_{t \in \mathcal{T}} \left( \xR_{e,t+1} - \overline{\xR}_{e,t} \right)^2},
+  \label{eq:q2d_r2os}
+\end{equation}
+where $\mathcal{T}$ is the set of forecast origins. Over all origins, i.e.\ over the
+forecast-target months 1940:12--2021:12,
 $R^2_{OS} = \input{../output/q2d_r2os.tex}$.
+
+For the rolling version, $\hat a_t$, $\hat b_t$ and $\overline{\xR}_{e,t}$ are unchanged
+and only the two sums in (\ref{eq:q2d_r2os}) are restricted to a window: $R^2_{OS}(T)$ uses
+the 600 consecutive forecast-target months ending at $T$, for $T = $ 1990:12, \dots, 2021:12
+(the first window is 1941:01--1990:12).
 
 \begin{figure}[H]
   \centering
@@ -271,6 +312,22 @@ $R^2_{OS} = \input{../output/q2d_r2os.tex}$.
 \subsection{Out-of-sample estimation with steady-state restrictions}
 % TODO (Q2e): interpretation of the figures and of R^2_OS, and comparison with Q2d (student to write)
 % Figures and the R^2_OS number are produced by src/q2e.py from spec/q2e.md.
+The procedure is that of Question~2d except for the coefficients, which are restricted to
+$\hat a_t = G_t - 1$ and $\hat b_t = G_t$, where
+\begin{equation}
+  G_t = \frac{1}{n_t} \sum_{m \le t} e^{\Delta d_m}
+  \label{eq:q2e_G}
+\end{equation}
+is the mean of the gross dividend growth over the $n_t$ months $m$ from 1927:12 to $t$, the
+same months whose returns enter $\overline{\xR}_{e,t}$ in (\ref{eq:q2d_mean}). The
+out-of-sample forecast is
+\begin{equation}
+  \hat{E}^{OS}_t[\xR_{e,t+1}] = (G_t - 1) + G_t\, \frac{D_t}{P_t},
+  \label{eq:q2e_forecast}
+\end{equation}
+and $R^2_{OS}$ is computed from (\ref{eq:q2d_r2os}) with this forecast, with the same
+historical mean, forecast origins, forecast targets and 600-month rolling windows as in
+Question~2d (code: \texttt{src/q2e.py}).
 
 \begin{figure}[H]
   \centering
@@ -300,20 +357,315 @@ $R^2_{OS} = \input{../output/q2e_r2os.tex}$.
 % =====================================================================
 
 \subsection{Momentum signal construction and validation}
-% TODO (Q3a): three time-series plots (intercept, slope, R^2) of MOM_CZ on MOM
+% TODO (Q3a): interpretation of the results (student to write)
+% Figures and table produced by src/q3a.py (common rules in src/q3_common.py)
+% from spec/q3a.md and spec/q3_common.md.
+The momentum signal of stock $j$ at the end of month $\tau$ is
+\begin{equation}
+  \MOM_{j,\tau} = \prod_{m=\tau-11}^{\tau-1} \left(1 + R_{j,m}\right) - 1,
+  \label{eq:q3a_mom}
+\end{equation}
+the cumulative return from the end of month $\tau-12$ to the end of month $\tau-1$, where
+$R_{j,m}$ is the CRSP monthly return (\texttt{MthRet}, which includes delisting returns). The
+returns are taken from every month of the CRSP file for the same PERMNO, whether or not the
+stock is in the universe in those months, and $\MOM_{j,\tau}$ is missing when any of the 11
+months has a missing return or no observation.
+
+The signal months are 1963:06--2024:12. The universe at $\tau$ consists of common stocks of
+firms incorporated in the United States (CRSP fields \texttt{ShareType = NS},
+\texttt{SecurityType = EQTY}, \texttt{SecuritySubType = COM}, \texttt{USIncFlg = Y},
+\texttt{IssuerType} $\in$ \{\texttt{ACOR}, \texttt{CORP}\}, the equivalent of share codes 10
+and 11) trading on NYSE, Amex or Nasdaq (\texttt{PrimaryExch} $\in$ \{\texttt{N}, \texttt{A},
+\texttt{Q}\}, \texttt{ConditionalType = RW}, \texttt{TradingStatusFlg = A}), excluding
+utilities ($4900 \le \mathit{SIC} \le 4949$) and financials ($6000 \le \mathit{SIC} \le 6999$)
+and requiring non-missing market equity at $\tau$. The SIC code is the CRSP \texttt{SICCD} at
+$\tau$; a code of zero is treated as missing and replaced by the most recent earlier non-zero
+code of the same PERMNO or, if there is none, by its next later one, and a stock that never
+has a non-zero code is kept.
+
+For each month $\tau$, the cross-firm regression
+\begin{equation}
+  \MOM^{CZ}_{j,\tau} = a_\tau + b_\tau\, \MOM_{j,\tau} + \varepsilon_{j,\tau}
+  \label{eq:q3a_regression}
+\end{equation}
+is estimated by OLS, where $\MOM^{CZ}$ is \texttt{Mom12m} from the CZ Dataset, merged on the
+stock identifier and the month $\tau$, using the stocks in the universe at $\tau$ for which
+both signals are non-missing (2{,}428{,}767 stock-month observations in 739 months).
+Figures~\ref{fig:q3a_intercept}--\ref{fig:q3a_r2} plot $\hat a_\tau$, $\hat b_\tau$ and the
+$R^2$ of these regressions, and Table~\ref{tab:q3a} summarizes them (code:
+\texttt{src/q3a.py}, \texttt{src/q3\_common.py}).
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.8\textwidth]{q3a_intercept.pdf}
+  \caption{Intercept $\hat a_\tau$ of the monthly cross-firm regression
+  (\ref{eq:q3a_regression}), 1963:06--2024:12. The grey line marks 0.}
+  \label{fig:q3a_intercept}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.8\textwidth]{q3a_slope.pdf}
+  \caption{Slope $\hat b_\tau$ of the monthly cross-firm regression
+  (\ref{eq:q3a_regression}), 1963:06--2024:12. The grey line marks 1.}
+  \label{fig:q3a_slope}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.8\textwidth]{q3a_r2.pdf}
+  \caption{$R^2$ of the monthly cross-firm regression (\ref{eq:q3a_regression}),
+  1963:06--2024:12. The grey line marks 1.}
+  \label{fig:q3a_r2}
+\end{figure}
+
+\begin{table}[H]
+  \centering
+  \input{../output/q3a_table.tex}
+  \caption{Time-series mean, minimum and maximum of the intercept, slope, $R^2$ and number
+  of stocks $N$ of the monthly cross-firm regressions (\ref{eq:q3a_regression}) of
+  $\MOM^{CZ}$ on $\MOM$, 739 signal months from 1963:06 to 2024:12.}
+  \label{tab:q3a}
+\end{table}
 
 \subsection{Book-to-market signal construction and validation}
-% TODO (Q3b): three time-series plots (intercept, slope, R^2) of BM_CZ on BM
+% TODO (Q3b): interpretation of the results (student to write)
+% Figures produced by src/q3b.py (common rules in src/q3_common.py)
+% from spec/q3b.md and spec/q3_common.md.
+The book-to-market signal of stock $j$ for year $t$ is
+\begin{equation}
+  \BM_{j,t} = \frac{\mathit{BE}_{j,t-1}}{\mathit{ME}_{j,t-1}},
+  \label{eq:q3b_bm}
+\end{equation}
+where $\mathit{BE}_{j,t-1}$ is the book equity from the COMPUSTAT record whose fiscal year
+ends in calendar year $t-1$ and $\mathit{ME}_{j,t-1} = |\mathit{PRC}| \times \mathit{SHROUT}$
+is the CRSP market equity of the stock in December of year $t-1$ (book equity is in millions
+and market equity in thousands of dollars, so the ratio is multiplied by 1000).
+$\BM_{j,t}$ is assigned to the months $\tau$ from June of year $t$ to May of year $t+1$, for
+$t = 1963, \dots, 2024$, so the signal months are 1963:06--2024:12; the universe at $\tau$ is
+the one of Question~3a. $\BM_{j,t}$ is missing when the stock has no CRSP observation or no
+market equity in December of $t-1$.
+
+Book equity is $\mathit{BE} = \mathit{SE} + \mathit{TXDITC} - \mathit{BVPS}$, where
+$\mathit{SE}$ is \texttt{SEQ}, else \texttt{CEQ} $+$ \texttt{PSTK}, else \texttt{AT} $-$
+\texttt{LT}; $\mathit{TXDITC}$ is \texttt{TXDITC}, or 0 when it is missing; and
+$\mathit{BVPS}$ is \texttt{PSTKRV}, else \texttt{PSTKL}, else \texttt{PSTK}, else 0.
+Observations with unavailable $\mathit{SE}$ or with $\mathit{BE} \le 0$ are excluded.
+
+The accounting data come from the CRSP/COMPUSTAT Merged file, with link types \texttt{LC}
+and \texttt{LU}, primary links (\texttt{LINKPRIM} \texttt{P} or \texttt{C}), the fiscal
+year-end date inside the link window, and records reported in US dollars. When a stock has
+several records with a fiscal year-end in the same calendar year, a \texttt{P} link is
+preferred to a \texttt{C} link, and then the latest fiscal year-end date is used. To avoid
+backfilling bias, the record used must be preceded by at least two earlier records
+(distinct fiscal year-end dates) of the same firm in the file.
+
+In the release of the CZ Dataset used here (2025.10), \texttt{BMdec} is the book-to-market
+ratio in levels and not its logarithm, so $\BM^{CZ} = \texttt{BMdec}$ is used instead of
+$\exp(\texttt{BMdec})$. For each month $\tau$, the cross-firm regression
+\begin{equation}
+  \BM^{CZ}_{j,\tau} = a_\tau + b_\tau\, \BM_{j,\tau} + \varepsilon_{j,\tau}
+  \label{eq:q3b_regression}
+\end{equation}
+is estimated by OLS, with $\BM^{CZ}$ merged on the stock identifier and the month $\tau$,
+using the stocks in the universe at $\tau$ for which both signals are non-missing
+(1{,}803{,}835 stock-month observations in 739 months; between 454 and 3{,}914 stocks per
+month). Figures~\ref{fig:q3b_intercept}--\ref{fig:q3b_r2} plot $\hat a_\tau$, $\hat b_\tau$
+and the $R^2$ of these regressions (code: \texttt{src/q3b.py}, \texttt{src/q3\_common.py}).
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.8\textwidth]{q3b_intercept.pdf}
+  \caption{Intercept $\hat a_\tau$ of the monthly cross-firm regression
+  (\ref{eq:q3b_regression}), 1963:06--2024:12. The grey line marks 0.}
+  \label{fig:q3b_intercept}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.8\textwidth]{q3b_slope.pdf}
+  \caption{Slope $\hat b_\tau$ of the monthly cross-firm regression
+  (\ref{eq:q3b_regression}), 1963:06--2024:12. The grey line marks 1.}
+  \label{fig:q3b_slope}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.8\textwidth]{q3b_r2.pdf}
+  \caption{$R^2$ of the monthly cross-firm regression (\ref{eq:q3b_regression}),
+  1963:06--2024:12. The grey line marks 1.}
+  \label{fig:q3b_r2}
+\end{figure}
 
 \subsection{Decile portfolios}
-% TODO (Q3c): five scatterplots (decile vs. avg excess return; blue = BM, red = MOM, green = GP)
-%             + table of 15 HML average returns with NW(1994) t-stats
+% TODO (Q3c): interpretation of the results (student to write)
+% Figures and table produced by src/q3c.py (common rules in src/q3_common.py)
+% from spec/q3c.md and spec/q3_common.md.
+Decile portfolios are formed on each of the three signals of the CZ Dataset,
+$\BM^{CZ} = \texttt{BMdec}$ (in levels, as in Question~3b), $\MOM^{CZ} = \texttt{Mom12m}$ and
+$\GP^{CZ} = \texttt{GP}$, dated $\tau$. A stock enters a sort if it is in the universe at the
+formation date and its signal is non-missing and finite; for $\BM^{CZ}$, stocks with
+$\texttt{BMdec} \le 0$ are excluded.
+
+With annual rebalancing, the portfolios are formed at the end of June of year $t$ with the
+signal and the universe of June $t$ and are held for the return months from July of year $t$
+to June of year $t+1$; a stock without a signal in June $t$ is left out until the next June.
+With monthly rebalancing, the portfolios are formed at the end of month $\tau$ with the signal
+and the universe of $\tau$ and are held for the return month $\tau+1$. The breakpoints are the
+10th, 20th, \dots, 90th percentiles of the signal at the formation date, computed among the
+NYSE stocks in the sort (NYSE breakpoints) or among all stocks in the sort (general
+breakpoints); a stock is in decile $d$ if its signal is above the $(d-1)$-th breakpoint and
+at or below the $d$-th, so that decile 1 has the lowest and decile 10 the highest signal.
+
+The portfolio return of month $\tau+1$ uses the members with a non-missing return in
+$\tau+1$, with equal weights (EW) or with weights proportional to the market equity at the
+end of month $\tau$ (VW), which are updated every month, also within the annual holding
+period; a member with missing market equity at $\tau$ is excluded from the VW return of
+$\tau+1$. Excess returns are $\xR_{p,\tau+1} = R_{p,\tau+1} - R_{f,\tau+1}$, with the
+risk-free return from the Ken French data library. The five types of portfolios are:
+(i) VW, annual rebalancing, NYSE breakpoints; (ii) EW, annual rebalancing, NYSE breakpoints;
+(iii) VW, monthly rebalancing, NYSE breakpoints; (iv) VW, annual rebalancing, general
+breakpoints; (v) EW, monthly rebalancing, general breakpoints. The return months are
+1963:07--2025:01 (739 months) for all five types; the last annual formation is June 2024
+(code: \texttt{src/q3c.py}, \texttt{src/q3\_common.py}).
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.49\textwidth]{q3c_deciles_i.pdf}\hfill
+  \includegraphics[width=0.49\textwidth]{q3c_deciles_ii.pdf}\\[1ex]
+  \includegraphics[width=0.49\textwidth]{q3c_deciles_iii.pdf}\hfill
+  \includegraphics[width=0.49\textwidth]{q3c_deciles_iv.pdf}\\[1ex]
+  \includegraphics[width=0.49\textwidth]{q3c_deciles_v.pdf}
+  \caption{Average monthly excess return (in percent) of the decile portfolios against the
+  decile, for the five types of portfolios; blue: $\BM^{CZ}$, red: $\MOM^{CZ}$, green:
+  $\GP^{CZ}$. Return months 1963:07--2025:01.}
+  \label{fig:q3c_deciles}
+\end{figure}
+
+Table~\ref{tab:q3c_hml} reports, for each type and signal, the average return of the HML
+portfolio, defined as decile 10 minus decile 1.
+
+\begin{table}[H]
+  \centering
+  \input{../output/q3c_hml_table.tex}
+  \caption{Average returns of the HML portfolios (decile 10 minus decile 1), in percent per
+  month, with $t$-statistics in brackets. The $t$-statistics come from a regression of the HML
+  return on a constant with Newey--West (1987, 1994) standard errors, with the lag length
+  selected by the automatic bandwidth rule as in method (v) of Question~2b (between 2 and 15
+  lags). Return months 1963:07--2025:01 (739 observations for each portfolio).}
+  \label{tab:q3c_hml}
+\end{table}
 
 \subsection{Fama--MacBeth regressions}
-% TODO (Q3d): table, specifications (i)--(vii), OLS and WLS (ME weights), with t-stats
+% TODO (Q3d): interpretation of the results (student to write)
+% Table produced by src/q3d.py (common rules in src/q3_common.py)
+% from spec/q3d.md and spec/q3_common.md.
+The signals at month $\tau$ are $\BM^{CZ} = \texttt{BMdec}$ and $\GP^{CZ} = \texttt{GP}$ from
+the CZ Dataset, as in Question~3c, and the equity duration $\Dur$ from the Dur Dataset, where
+the value with \texttt{FF.YEAR} $= t$ is the signal for the months from June of year $t$ to
+May of year $t+1$, the timing of $\BM$. A signal is valid if it is non-missing and finite;
+for $\BM^{CZ}$, stocks with $\texttt{BMdec} \le 0$ are excluded. The quantile of signal $X$ is
+\begin{equation}
+  Q^{X}_{j,\tau} = \frac{\mathrm{rank}\left(X_{j,\tau}\right)}{N^{X}_{\tau}},
+  \qquad X \in \{\BM^{CZ}, \GP^{CZ}, \Dur\},
+  \label{eq:q3d_quantile}
+\end{equation}
+where the rank (1 for the lowest value, the average rank for ties) and the number of stocks
+$N^{X}_{\tau}$ are taken over all stocks in the universe at $\tau$ with a valid $X$, whether
+or not they enter a regression.
+
+For each month $\tau$, the following cross-firm regressions of the excess return
+$\xR_{j,\tau+1} = R_{j,\tau+1} - R_{f,\tau+1}$, in percent per month, are estimated by OLS and
+by WLS with weights equal to the market equity $\mathit{ME}_{j,\tau}$:
+\begin{align}
+  \text{(i)}\quad   & \xR_{j,\tau+1} = a + b_{\BM}\, Q^{\BM}_{j,\tau} + \varepsilon_{j,\tau+1}, \notag\\
+  \text{(ii)}\quad  & \xR_{j,\tau+1} = a + b_{\GP}\, Q^{\GP}_{j,\tau} + \varepsilon_{j,\tau+1}, \notag\\
+  \text{(iii)}\quad & \xR_{j,\tau+1} = a + b_{\Dur}\, Q^{\Dur}_{j,\tau} + \varepsilon_{j,\tau+1}, \notag\\
+  \text{(iv)}\quad  & \xR_{j,\tau+1} = a + b_{\BM}\, Q^{\BM}_{j,\tau} + b_{\GP}\, Q^{\GP}_{j,\tau}
+                      + \varepsilon_{j,\tau+1}, \label{eq:q3d_regressions}\\
+  \text{(v)}\quad   & \xR_{j,\tau+1} = a + b_{\Dur}\, Q^{\Dur}_{j,\tau} + b_{\BM}\, Q^{\BM}_{j,\tau}
+                      + \varepsilon_{j,\tau+1}, \notag\\
+  \text{(vi)}\quad  & \xR_{j,\tau+1} = a + b_{\Dur}\, Q^{\Dur}_{j,\tau} + b_{\GP}\, Q^{\GP}_{j,\tau}
+                      + \varepsilon_{j,\tau+1}, \notag\\
+  \text{(vii)}\quad & \xR_{j,\tau+1} = a + b_{\Dur}\, Q^{\Dur}_{j,\tau} + b_{\GP}\, Q^{\GP}_{j,\tau}
+                      + b_{\BM}\, Q^{\BM}_{j,\tau} + \varepsilon_{j,\tau+1}. \notag
+\end{align}
+Each regression uses the stocks in the universe at $\tau$ for which all regressors of the
+specification are valid and $\xR_{j,\tau+1}$ is non-missing. The signal months are
+1963:06--2024:12 for specifications (i), (ii) and (iv), and 1973:06--2024:12 for
+specifications (iii), (v), (vi) and (vii), because $\Dur$ starts in 1973. The Fama--MacBeth
+estimate is the time-series mean of the monthly coefficient estimates, and its $t$-statistic
+comes from a regression of the monthly coefficient series on a constant with Newey--West
+(1987, 1994) standard errors, with the lag length selected by the automatic bandwidth rule
+as in method (v) of Question~2b. Since $\xR$ is in percent per month, a coefficient is the
+difference in percent per month between the highest and the lowest quantile
+(code: \texttt{src/q3d.py}, \texttt{src/q3\_common.py}).
+
+\begin{table}[H]
+  \centering
+  \input{../output/q3d_table.tex}
+  \caption{Fama--MacBeth estimates of regressions (\ref{eq:q3d_regressions}), in percent per
+  month, with Newey--West (1987, 1994) $t$-statistics in brackets (between 2 and 16 lags).
+  OLS and WLS refer to the monthly cross-firm regressions; the WLS weights are the market
+  equity at $\tau$. Avg.\ $N$ is the average number of stocks in the monthly regressions.}
+  \label{tab:q3d}
+\end{table}
 
 \subsection{Portfolio-level multivariate regressions}
-% TODO (Q3e): table, specifications (i)--(vii), VW and EW portfolios, Driscoll--Kraay t-stats
+% TODO (Q3e): interpretation of the results (student to write)
+% Table produced by src/q3e.py (portfolio rules in src/q3c.py, common rules in
+% src/q3_common.py) from spec/q3e.md, spec/q3c.md and spec/q3_common.md.
+The portfolios are decile portfolios sorted on $\BM^{CZ}$, on $\GP^{CZ}$ and on $\Dur$,
+rebalanced annually with NYSE breakpoints, value-weighted or equal-weighted. For $\BM^{CZ}$
+and $\GP^{CZ}$ they are the portfolios of types (i) and (ii) of Question~3c; the $\Dur$
+portfolios are built with the same rules, sorted at the end of June of year $t$ on the
+duration with \texttt{FF.YEAR} $= t$. The signals and their validity are those of
+Questions~3c and~3d.
+
+For each signal $X$, the decile of a stock in $X$ is its decile in the annual NYSE sort on
+$X$ at the end of June of year $t$, fixed for the return months from July of year $t$ to June
+of year $t+1$. For portfolio $p$ and return month $\tau+1$, the regressor
+$\mathit{Dec}^{X}_{p,\tau}$ is the average of the deciles in $X$ over the members used for
+the return of $\tau+1$ that have a decile in $X$, with the weights of the portfolio return
+(market equity at the end of $\tau$ for the value-weighted portfolios, equal weights for the
+equal-weighted portfolios) renormalized over those members. For the signal on which the
+portfolio is sorted, $\mathit{Dec}^{X}_{p,\tau}$ is the decile of the portfolio.
+
+The following regressions of the portfolio excess return $\xR_{p,\tau+1}$, in percent per
+month, are estimated by pooled OLS:
+\begin{align}
+  \text{(i)}\quad   & \xR_{p,\tau+1} = a + b_{\BM}\, \mathit{Dec}^{\BM}_{p,\tau} + \varepsilon_{p,\tau+1}, \notag\\
+  \text{(ii)}\quad  & \xR_{p,\tau+1} = a + b_{\GP}\, \mathit{Dec}^{\GP}_{p,\tau} + \varepsilon_{p,\tau+1}, \notag\\
+  \text{(iii)}\quad & \xR_{p,\tau+1} = a + b_{\Dur}\, \mathit{Dec}^{\Dur}_{p,\tau} + \varepsilon_{p,\tau+1}, \notag\\
+  \text{(iv)}\quad  & \xR_{p,\tau+1} = a + b_{\BM}\, \mathit{Dec}^{\BM}_{p,\tau}
+                      + b_{\GP}\, \mathit{Dec}^{\GP}_{p,\tau} + \varepsilon_{p,\tau+1}, \label{eq:q3e_regressions}\\
+  \text{(v)}\quad   & \xR_{p,\tau+1} = a + b_{\Dur}\, \mathit{Dec}^{\Dur}_{p,\tau}
+                      + b_{\BM}\, \mathit{Dec}^{\BM}_{p,\tau} + \varepsilon_{p,\tau+1}, \notag\\
+  \text{(vi)}\quad  & \xR_{p,\tau+1} = a + b_{\Dur}\, \mathit{Dec}^{\Dur}_{p,\tau}
+                      + b_{\GP}\, \mathit{Dec}^{\GP}_{p,\tau} + \varepsilon_{p,\tau+1}, \notag\\
+  \text{(vii)}\quad & \xR_{p,\tau+1} = a + b_{\Dur}\, \mathit{Dec}^{\Dur}_{p,\tau}
+                      + b_{\GP}\, \mathit{Dec}^{\GP}_{p,\tau} + b_{\BM}\, \mathit{Dec}^{\BM}_{p,\tau}
+                      + \varepsilon_{p,\tau+1}. \notag
+\end{align}
+Each specification stacks the portfolios sorted on the signals that appear in it: 10
+portfolios for (i)--(iii), 20 for (iv)--(vi) and 30 for (vii). The return months are
+1963:07--2025:01 for specifications (i), (ii) and (iv), and 1973:07--2025:01 for
+specifications (iii), (v), (vi) and (vii), because $\Dur$ starts in 1973. The standard errors
+are those of Driscoll and Kraay (1998) with the Bartlett kernel, with the lag length selected
+by the Newey--West (1994) automatic bandwidth rule of method (v) of Question~2b, applied to
+the moments summed across portfolios within each month. Since $\xR$ is in percent per month,
+a coefficient is in percent per month per decile (code: \texttt{src/q3e.py},
+\texttt{src/q3c.py}, \texttt{src/q3\_common.py}).
+
+\begin{table}[H]
+  \centering
+  \input{../output/q3e_table.tex}
+  \caption{Pooled OLS estimates of regressions (\ref{eq:q3e_regressions}) for value-weighted
+  and equal-weighted decile portfolios (annual rebalancing, NYSE breakpoints), in percent per
+  month per decile, with Driscoll--Kraay (1998) $t$-statistics in brackets (Bartlett kernel,
+  between 1 and 11 lags).}
+  \label{tab:q3e}
+\end{table}
 
 % =====================================================================
 \section{Question 4}
