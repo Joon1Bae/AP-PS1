@@ -28,3 +28,6 @@ month τ, cross-firm OLS of BMCZ on a constant and my BM, in levels, using firms
 at τ with both non-missing; record intercept, slope, R² (unadjusted), N.
 
 Output: three time-series figures (intercept, slope, R²).
+
+
+Please use only Compustat records with curcd = USD
