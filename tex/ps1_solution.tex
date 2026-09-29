@@ -320,7 +320,30 @@ $R^2_{OS} = \input{../output/q2e_r2os.tex}$.
 % =====================================================================
 
 \subsection{Yields, forward rates, and returns}
-% TODO (Q4a): table of average xy^(H), xf^(H), xr^(H) for H = 2..5
+% TODO (Q4a): discussion of the averages (student to write)
+% Table produced by src/q4a.py from spec/q4a.md.
+From the Fama--Bliss yields $Y^{(H)}_{b,t}$ (in percent) for $H = 1, \dots, 5$, the log yields,
+log forward rates and log annual returns are
+\begin{equation}
+  y^{(H)}_{b,t} = \log\!\left(1 + Y^{(H)}_{b,t}/100\right), \qquad
+  f^{(H)}_{b,t} = H\, y^{(H)}_{b,t} - (H-1)\, y^{(H-1)}_{b,t}, \qquad
+  r^{(H)}_{b,t} = H\, y^{(H)}_{b,t-1} - (H-1)\, y^{(H-1)}_{b,t},
+  \label{eq:q4a_defs}
+\end{equation}
+with $y^{(0)} = 0$, so that $f^{(1)}_{b,t} = y^{(1)}_{b,t}$ and $r^{(1)}_{b,t} = y^{(1)}_{b,t-1}$;
+$t-1$ is 12 months before $t$. The spreads are $\xy^{(H)} = y^{(H)} - y^{(1)}$,
+$\xf^{(H)} = f^{(H)} - f^{(1)}$ and $\xr^{(H)} = r^{(H)} - r^{(1)}$
+(code: \texttt{src/q4a.py}).
+
+\begin{table}[H]
+  \centering
+  \input{../output/q4a_averages_table.tex}
+  \caption{Average yield spreads, forward spreads and excess log returns of $H$-year
+  Fama--Bliss discount bonds over the 1-year bond, $H = 2, \dots, 5$, in percent per year.
+  Monthly observations over the common sample on which all three series are defined,
+  1953:06--2024:12.}
+  \label{tab:q4a}
+\end{table}
 
 \subsection{Hold-to-maturity excess return regressions}
 % TODO (Q4b): table analogous to slide 5.5, first table, first panel; Hansen--Hodrick t-stats
