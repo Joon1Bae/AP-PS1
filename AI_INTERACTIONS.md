@@ -509,4 +509,4 @@ I'll pass my explanation for now."
 - **Substantive mathematical / economic / empirical suggestions made:** none
 - **Type of assistance:** empirical implementation; other (spec check; repository fix for reproducibility)
 - **Grouped follow-up requests:** none
-- **Git commit after:** AFTER_HASH_PLACEHOLDER_29
+- **Git commit after:** e614018c8203d143db8121421146e37c4451b6cf
