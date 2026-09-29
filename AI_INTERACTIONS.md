@@ -374,4 +374,4 @@ I'll pass my explanation for now."
 - **Substantive mathematical / economic / empirical suggestions made:** none
 - **Type of assistance:** other (repository survey; reproducibility check; PDF compilation and visual check; build documentation)
 - **Grouped follow-up requests:** none
-- **Git commit after:** AFTER_HASH_PLACEHOLDER_20
+- **Git commit after:** 64c433de29f14cb5eb33e8ade97d28cd80482daf
