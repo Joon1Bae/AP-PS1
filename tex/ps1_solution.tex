@@ -29,6 +29,8 @@
 \newcommand{\xy}{\mathit{xy}}
 \newcommand{\xf}{\mathit{xf}}
 \newcommand{\MOM}{\mathit{MOM}}
+\newcommand{\BM}{\mathit{BM}}
+\newcommand{\GP}{\mathit{GP}}
 
 % ---------- Title ----------
 \title{BUSFIN 8200: Asset Pricing Foundations\\Problem Set 1}
@@ -373,11 +375,132 @@ $R^2$ of these regressions, and Table~\ref{tab:q3a} summarizes them (code:
 \end{table}
 
 \subsection{Book-to-market signal construction and validation}
-% TODO (Q3b): three time-series plots (intercept, slope, R^2) of BM_CZ on BM
+% TODO (Q3b): interpretation of the results (student to write)
+% Figures produced by src/q3b.py (common rules in src/q3_common.py)
+% from spec/q3b.md and spec/q3_common.md.
+The book-to-market signal of stock $j$ for year $t$ is
+\begin{equation}
+  \BM_{j,t} = \frac{\mathit{BE}_{j,t-1}}{\mathit{ME}_{j,t-1}},
+  \label{eq:q3b_bm}
+\end{equation}
+where $\mathit{BE}_{j,t-1}$ is the book equity from the COMPUSTAT record whose fiscal year
+ends in calendar year $t-1$ and $\mathit{ME}_{j,t-1} = |\mathit{PRC}| \times \mathit{SHROUT}$
+is the CRSP market equity of the stock in December of year $t-1$ (book equity is in millions
+and market equity in thousands of dollars, so the ratio is multiplied by 1000).
+$\BM_{j,t}$ is assigned to the months $\tau$ from June of year $t$ to May of year $t+1$, for
+$t = 1963, \dots, 2024$, so the signal months are 1963:06--2024:12; the universe at $\tau$ is
+the one of Question~3a. $\BM_{j,t}$ is missing when the stock has no CRSP observation or no
+market equity in December of $t-1$.
+
+Book equity is $\mathit{BE} = \mathit{SE} + \mathit{TXDITC} - \mathit{BVPS}$, where
+$\mathit{SE}$ is \texttt{SEQ}, else \texttt{CEQ} $+$ \texttt{PSTK}, else \texttt{AT} $-$
+\texttt{LT}; $\mathit{TXDITC}$ is \texttt{TXDITC}, or 0 when it is missing; and
+$\mathit{BVPS}$ is \texttt{PSTKRV}, else \texttt{PSTKL}, else \texttt{PSTK}, else 0.
+Observations with unavailable $\mathit{SE}$ or with $\mathit{BE} \le 0$ are excluded.
+
+The accounting data come from the CRSP/COMPUSTAT Merged file, with link types \texttt{LC}
+and \texttt{LU}, primary links (\texttt{LINKPRIM} \texttt{P} or \texttt{C}), the fiscal
+year-end date inside the link window, and records reported in US dollars. When a stock has
+several records with a fiscal year-end in the same calendar year, a \texttt{P} link is
+preferred to a \texttt{C} link, and then the latest fiscal year-end date is used. To avoid
+backfilling bias, the record used must be preceded by at least two earlier records
+(distinct fiscal year-end dates) of the same firm in the file.
+
+In the release of the CZ Dataset used here (2025.10), \texttt{BMdec} is the book-to-market
+ratio in levels and not its logarithm, so $\BM^{CZ} = \texttt{BMdec}$ is used instead of
+$\exp(\texttt{BMdec})$. For each month $\tau$, the cross-firm regression
+\begin{equation}
+  \BM^{CZ}_{j,\tau} = a_\tau + b_\tau\, \BM_{j,\tau} + \varepsilon_{j,\tau}
+  \label{eq:q3b_regression}
+\end{equation}
+is estimated by OLS, with $\BM^{CZ}$ merged on the stock identifier and the month $\tau$,
+using the stocks in the universe at $\tau$ for which both signals are non-missing
+(1{,}803{,}835 stock-month observations in 739 months; between 454 and 3{,}914 stocks per
+month). Figures~\ref{fig:q3b_intercept}--\ref{fig:q3b_r2} plot $\hat a_\tau$, $\hat b_\tau$
+and the $R^2$ of these regressions (code: \texttt{src/q3b.py}, \texttt{src/q3\_common.py}).
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.8\textwidth]{q3b_intercept.pdf}
+  \caption{Intercept $\hat a_\tau$ of the monthly cross-firm regression
+  (\ref{eq:q3b_regression}), 1963:06--2024:12. The grey line marks 0.}
+  \label{fig:q3b_intercept}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.8\textwidth]{q3b_slope.pdf}
+  \caption{Slope $\hat b_\tau$ of the monthly cross-firm regression
+  (\ref{eq:q3b_regression}), 1963:06--2024:12. The grey line marks 1.}
+  \label{fig:q3b_slope}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.8\textwidth]{q3b_r2.pdf}
+  \caption{$R^2$ of the monthly cross-firm regression (\ref{eq:q3b_regression}),
+  1963:06--2024:12. The grey line marks 1.}
+  \label{fig:q3b_r2}
+\end{figure}
 
 \subsection{Decile portfolios}
-% TODO (Q3c): five scatterplots (decile vs. avg excess return; blue = BM, red = MOM, green = GP)
-%             + table of 15 HML average returns with NW(1994) t-stats
+% TODO (Q3c): interpretation of the results (student to write)
+% Figures and table produced by src/q3c.py (common rules in src/q3_common.py)
+% from spec/q3c.md and spec/q3_common.md.
+Decile portfolios are formed on each of the three signals of the CZ Dataset,
+$\BM^{CZ} = \texttt{BMdec}$ (in levels, as in Question~3b), $\MOM^{CZ} = \texttt{Mom12m}$ and
+$\GP^{CZ} = \texttt{GP}$, dated $\tau$. A stock enters a sort if it is in the universe at the
+formation date and its signal is non-missing and finite; for $\BM^{CZ}$, stocks with
+$\texttt{BMdec} \le 0$ are excluded.
+
+With annual rebalancing, the portfolios are formed at the end of June of year $t$ with the
+signal and the universe of June $t$ and are held for the return months from July of year $t$
+to June of year $t+1$; a stock without a signal in June $t$ is left out until the next June.
+With monthly rebalancing, the portfolios are formed at the end of month $\tau$ with the signal
+and the universe of $\tau$ and are held for the return month $\tau+1$. The breakpoints are the
+10th, 20th, \dots, 90th percentiles of the signal at the formation date, computed among the
+NYSE stocks in the sort (NYSE breakpoints) or among all stocks in the sort (general
+breakpoints); a stock is in decile $d$ if its signal is above the $(d-1)$-th breakpoint and
+at or below the $d$-th, so that decile 1 has the lowest and decile 10 the highest signal.
+
+The portfolio return of month $\tau+1$ uses the members with a non-missing return in
+$\tau+1$, with equal weights (EW) or with weights proportional to the market equity at the
+end of month $\tau$ (VW), which are updated every month, also within the annual holding
+period; a member with missing market equity at $\tau$ is excluded from the VW return of
+$\tau+1$. Excess returns are $\xR_{p,\tau+1} = R_{p,\tau+1} - R_{f,\tau+1}$, with the
+risk-free return from the Ken French data library. The five types of portfolios are:
+(i) VW, annual rebalancing, NYSE breakpoints; (ii) EW, annual rebalancing, NYSE breakpoints;
+(iii) VW, monthly rebalancing, NYSE breakpoints; (iv) VW, annual rebalancing, general
+breakpoints; (v) EW, monthly rebalancing, general breakpoints. The return months are
+1963:07--2025:01 (739 months) for all five types; the last annual formation is June 2024
+(code: \texttt{src/q3c.py}, \texttt{src/q3\_common.py}).
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.49\textwidth]{q3c_deciles_i.pdf}\hfill
+  \includegraphics[width=0.49\textwidth]{q3c_deciles_ii.pdf}\\[1ex]
+  \includegraphics[width=0.49\textwidth]{q3c_deciles_iii.pdf}\hfill
+  \includegraphics[width=0.49\textwidth]{q3c_deciles_iv.pdf}\\[1ex]
+  \includegraphics[width=0.49\textwidth]{q3c_deciles_v.pdf}
+  \caption{Average monthly excess return (in percent) of the decile portfolios against the
+  decile, for the five types of portfolios; blue: $\BM^{CZ}$, red: $\MOM^{CZ}$, green:
+  $\GP^{CZ}$. Return months 1963:07--2025:01.}
+  \label{fig:q3c_deciles}
+\end{figure}
+
+Table~\ref{tab:q3c_hml} reports, for each type and signal, the average return of the HML
+portfolio, defined as decile 10 minus decile 1.
+
+\begin{table}[H]
+  \centering
+  \input{../output/q3c_hml_table.tex}
+  \caption{Average returns of the HML portfolios (decile 10 minus decile 1), in percent per
+  month, with $t$-statistics in brackets. The $t$-statistics come from a regression of the HML
+  return on a constant with Newey--West (1987, 1994) standard errors, with the lag length
+  selected by the automatic bandwidth rule as in method (v) of Question~2b (between 2 and 15
+  lags). Return months 1963:07--2025:01 (739 observations for each portfolio).}
+  \label{tab:q3c_hml}
+\end{table}
 
 \subsection{Fama--MacBeth regressions}
 % TODO (Q3d): table, specifications (i)--(vii), OLS and WLS (ME weights), with t-stats
