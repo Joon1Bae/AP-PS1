@@ -794,4 +794,4 @@ I'll pass my explanation for now."
 - **Substantive mathematical / economic / empirical suggestions made:** none. The equations restate the student's specifications; the rationale paragraph of `spec/q2e.md` and any reading of the numbers were not written into the text.
 - **Type of assistance:** formatting/translation (LaTeX exposition of the student's specifications)
 - **Grouped follow-up requests:** none
-- **Git commit after:** PENDING_AFTER_HASH
+- **Git commit after:** 6f1bbe7fa9070c270c88c9bdbd944a185a6783c3
