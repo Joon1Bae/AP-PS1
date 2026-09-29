@@ -614,4 +614,4 @@ I'll pass my explanation for now."
 - **Substantive mathematical / economic / empirical suggestions made:** none. Data facts and the list of decisions; no recommendation on any choice.
 - **Type of assistance:** other (spec check; data inspection)
 - **Grouped follow-up requests:** none
-- **Git commit after:** PENDING_AFTER_HASH
+- **Git commit after:** b7955aa83d04ee71d614072b7f133f7f7a079e32
