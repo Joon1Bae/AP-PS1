@@ -14,11 +14,12 @@ ties) and N are taken over all firms in the universe at τ with a valid X, wheth
 enter the regression. X isin {BMCZ, GPCZ, Dur}.
 
 Each month τ esimates the following regression models (use both OLS and WLS):
+For WLS, weights should be ME_{j,τ}./
 
 (i) xR_{j, τ+1} = a + b_{BM}Q^BM_{j, τ} + epsilon_{j, τ+1}
 (ii) xR_{j, τ+1} = a + b_{GP}Q^GP_{j, τ} + epsilon_{j, τ+1}
 (iii) xR_{j, τ+1} = a + b_{Dur}Q^Dur_{j, τ} + epsilon_{j, τ+1}
-(iv) xR_{j, τ+1} = a + b_{BM}Q^BM_{j, τ} + b_{GP}Q^Dur_{j, τ} + epsilon_{j, τ+1}
+(iv) xR_{j, τ+1} = a + b_{BM}Q^BM_{j, τ} + b_{GP}Q^GP_{j, τ} + epsilon_{j, τ+1}
 (v) xR_{j, τ+1} = a + b_{Dur}Q^Dur_{j, τ} + b_{BM}Q^BM_{j, τ} + epsilon_{j, τ+1}
 (vi) xR_{j, τ+1} = a + b_{Dur}Q^Dur_{j, τ} + b_{GP}Q^GP_{j, τ} + epsilon_{j, τ+1}
 (vii) xR_{j, τ+1} = a + b_{Dur}Q^Dur_{j, τ} + b_{GP}Q^GP_{j, τ} + b_{BM}Q^BM_{j, τ} + epsilon_{j, τ+1}
