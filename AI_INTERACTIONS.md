@@ -434,4 +434,4 @@ I'll pass my explanation for now."
 - **Substantive mathematical / economic / empirical suggestions made:** none
 - **Type of assistance:** other (git status diagnosis; merge and conflict resolution; record correction; PDF compilation)
 - **Grouped follow-up requests:** none
-- **Git commit after:** AFTER_HASH_PLACEHOLDER_24
+- **Git commit after:** 1436c48a0e15ada4a4af8f3c89f278992a0903d4
