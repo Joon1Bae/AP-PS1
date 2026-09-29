@@ -7,7 +7,7 @@ Author: Joon1Bae
 ```
 uv sync                         # creates .venv with pinned dependencies (uv.lock)
 uv run python src/<script>.py   # regenerates output/ from data/
-cd tex && latexmk -pdf ps1_solution.tex
+cd tex && latexmk -pdf ps1_solution.tex   # or: cd tex && tectonic ps1_solution.tex
 ```
 
 ## Contents
