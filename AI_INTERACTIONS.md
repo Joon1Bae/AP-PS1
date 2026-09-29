@@ -689,4 +689,4 @@ I'll pass my explanation for now."
 - **Substantive mathematical / economic / empirical suggestions made:** none. The AI pointed to the wording of the problem statement for both points; the decisions are the student's.
 - **Type of assistance:** other (spec check)
 - **Grouped follow-up requests:** none
-- **Git commit after:** PENDING_AFTER_HASH
+- **Git commit after:** 2dae5bc6f2a1c14f174746855a199d5ba7100df9
