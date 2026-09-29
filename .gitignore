@@ -17,3 +17,11 @@ tex/*.synctex.gz
 
 # Claude Code local settings
 .claude/settings.local.json
+
+# Data: the external and WRDS files for Question 3 are too large for GitHub
+# (crsp_msf.csv.gz is 349MB) and WRDS data may not be redistributed.
+# Only the course-provided files and the data README stay tracked.
+data/*
+!data/README.md
+!data/eq.csv
+!data/bond.csv
