@@ -674,4 +674,4 @@ I'll pass my explanation for now."
 - **Substantive mathematical / economic / empirical suggestions made:** none. The AI reported the discrepancy with the problem statement and the data facts; the correction of the list and the weights are the student's to write.
 - **Type of assistance:** other (spec check; data inspection)
 - **Grouped follow-up requests:** none
-- **Git commit after:** PENDING_AFTER_HASH
+- **Git commit after:** 61ac933986a1073fcbf52fcff88ddfc758dbf211
