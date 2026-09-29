@@ -18,6 +18,7 @@ CACHE = DATA / "cache"
 CRSP = DATA / "crsp_msf.csv.gz"
 CZ = DATA / "cz_signals.csv.gz"
 FF3 = DATA / "ff3_monthly.csv"
+DUR = DATA / "dur_firmlevel_updated2025.csv"
 
 FIRST_SIGNAL, LAST_SIGNAL = 196306, 202412     # signal months tau
 FIRST_RETURN, LAST_RETURN = 196307, 202501     # return months tau + 1
@@ -114,6 +115,18 @@ def load_cz(columns: list[str]) -> pd.DataFrame:
     cz = pd.read_csv(CZ, usecols=["permno", "yyyymm"] + columns)
     assert not cz.duplicated(["permno", "yyyymm"]).any()
     return cz
+
+
+def load_dur() -> pd.DataFrame:
+    """Goncalves equity duration, keyed (permno, t): FF.YEAR = t is the signal from June t to May t+1."""
+    dur = pd.read_csv(DUR).rename(columns={"PERMNO": "permno", "FF.YEAR": "t"})
+    assert not dur.duplicated(["permno", "t"]).any()
+    return dur
+
+
+def formation_year(yyyymm):
+    """Year t whose annual signal applies in month tau: June t to May t+1."""
+    return np.where(yyyymm % 100 >= 6, yyyymm // 100, yyyymm // 100 - 1)
 
 
 def load_rf() -> pd.Series:
