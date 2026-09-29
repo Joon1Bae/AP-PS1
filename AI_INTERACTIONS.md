@@ -569,4 +569,4 @@ I'll pass my explanation for now."
 - **Substantive mathematical / economic / empirical suggestions made:** none. The correction of the AI's own earlier statement about the `exchcd` mapping and the look-ahead fact in item (2) are reported as facts, without a recommendation.
 - **Type of assistance:** other (spec check; data inspection; verification of data documentation)
 - **Grouped follow-up requests:** none
-- **Git commit after:** PENDING_AFTER_HASH
+- **Git commit after:** 7b3953c470a421b917d3955dc1bdad5bbbe95733
