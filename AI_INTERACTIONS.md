@@ -930,3 +930,18 @@ I'll pass my explanation for now."
 - **Type of assistance:** formatting/translation
 - **Grouped follow-up requests:** none
 - **Git commit after:** 6aecbf2197a631a714cad54111b5f68a39847a93
+
+## Interaction 58 — Document convention (Task blocks); Q1a — 2026-09-29 23:19
+
+- **Problem set item:** Document-wide convention for the LaTeX solution (a "Task" block at the start of every subsection quoting the problem's instructions verbatim), set up now and applied to Section 1.1 (Q1a). No answer content is changed.
+- **Substantive prompt (verbatim):** "And the following instruction should be applied to all problems including q1a. I want each subsection of the solution to state "explicitly" which instruction of the problem it answers. Set this up as a document-wide convention and apply it to Section q1a now. At the start of each subsection, add a short "Task" block that quotes the problem's instructions verbatim, split into numbered items where the problem gives more than one instruction. For 1.1: Task. (1) Starting from R_{e,t+1} = (P_{t+1} + D_{t+1})/P_t, derive the (approximate) Equations 1.1, 1.2, and 1.3. (2) Explain and justify any assumptions you make."
+- **Purpose:** Implement the student's formatting convention and apply it to Section 1.1 with the text the student supplied.
+- **Git commit before:** a3df88dfa0af26825a936c41b59162b29c9b12e5
+- **Assistance provided:** The student did not invoke `/TP`; the AI reminded them and ran the procedure. Added to the preamble of `tex/ps1_solution.tex` a command `\task{...}` that typesets a bold "Task." label followed by the quoted instructions, with a comment stating the convention (quote verbatim, numbered items where the problem gives more than one instruction). Inserted at the start of Section 1.1, after the LaTeX comments and before the notation sentence, the block `\task{(1) Starting from $R_{e,t+1} = (P_{t+1} + D_{t+1})/P_t$, derive the (approximate) Equations 1.1, 1.2, and 1.3. (2) Explain and justify any assumptions you make.}`, i.e. the student's text with the formula set in mathematics mode; the AI checked that it quotes the instruction of Question 1a of the problem statement. The other subsections were not changed; per the student's instruction, the convention is to be applied to them as their content is written. Recompiled with `tectonic` (18 pages) and checked the rendered page 1.
+- **Files inspected:** tex/ps1_solution.tex (preamble, Question 1a), ps1.pdf Question 1a (extraction of Interaction 32), the compiled PDF (page 1)
+- **Files directly modified by AI:** tex/ps1_solution.tex (preamble macro, Section 1.1 Task block), tex/ps1_solution.pdf (recompiled), AI_INTERACTIONS.md (this entry)
+- **Errors, omissions, or ambiguities identified:** none. The convention is not yet applied to Sections 1.2–1.5, 2.1–2.5, 3.1–3.5 and 4.1–4.5; the AI will add their Task blocks when asked, quoting the problem statement verbatim.
+- **Substantive mathematical / economic / empirical suggestions made:** none
+- **Type of assistance:** formatting/translation
+- **Grouped follow-up requests:** none
+- **Git commit after:** PENDING_AFTER_HASH
