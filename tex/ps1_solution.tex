@@ -149,9 +149,63 @@ horizon $H$, we get
            - \sum_{h=1}^{H} \kappa^{h-1}\, \Delta \mathit{cf}_{t+h}.
   \label{eq:q1a_H_step}
 \end{equation}
-% STUDENT TO ADD: closed form of the constant term via the finite geometric series, so
-% that (\ref{eq:q1a_H_step}) matches Equation 1.1 of the problem statement, whose constant
-% is kappa_0 (kappa^H - 1) / (1 - kappa).
+% Steps 7 and 8 below are transcribed from the student's derivation (AI_INTERACTIONS.md,
+% Interactions 49-52), in the notation of Steps 4-6. The realized-value form of Equation 1.1
+% (before taking expectations) is not displayed; the student did not write it separately.
+
+\paragraph{Step 7: closed form of the constant and conditional expectation.}
+The constant term in (\ref{eq:q1a_H_step}) is a finite geometric sum,
+\begin{equation}
+  \sum_{h=0}^{H-1} \kappa^{h} = \frac{1 - \kappa^{H}}{1 - \kappa},
+  \label{eq:q1a_geometric}
+\end{equation}
+where $0 < \kappa < 1$ because $\kappa = 1/(1 + e^{a})$ and $e^{a} > 0$. Taking the
+expectation conditional on the information available at time $t$, denoted $\E_t[\cdot]$,
+on both sides of (\ref{eq:q1a_H_step}), and using (\ref{eq:q1a_geometric}), we get
+\begin{equation}
+  \dpr_t = -\kappa_0\, \frac{1 - \kappa^{H}}{1 - \kappa}
+           + \kappa^{H}\, \E_t[\dpr_{t+H}]
+           + \sum_{h=1}^{H} \kappa^{h-1}\, \E_t[r_{t+h}]
+           - \sum_{h=1}^{H} \kappa^{h-1}\, \E_t[\Delta \mathit{cf}_{t+h}],
+  \label{eq:q1a_expectation}
+\end{equation}
+which is Equation 1.2 of the problem statement, since
+$-\kappa_0 (1 - \kappa^{H})/(1 - \kappa) = \kappa_0 (\kappa^{H} - 1)/(1 - \kappa)$.
+
+\paragraph{Step 8: the limit $H \to \infty$.}
+Letting $H \to \infty$ in (\ref{eq:q1a_expectation}) requires the following assumptions.
+\begin{enumerate}[label=(\roman*)]
+  \item $0 < \kappa < 1$, shown in Step 7, so that $\kappa^{H} \to 0$ and the constant
+    converges to $-\kappa_0/(1 - \kappa)$.
+  \item The no-bubble condition
+    \begin{equation}
+      \lim_{H \to \infty} \kappa^{H}\, \E_t[\dpr_{t+H}] = 0.
+      \label{eq:q1a_no_bubble}
+    \end{equation}
+  \item The two infinite sums converge. Let $x \in \{r, \Delta \mathit{cf}\}$ be stationary
+    with $\E|x_t| < \infty$. By the conditional Jensen inequality,
+    $|\E_t[x_{t+h}]| \le \E_t|x_{t+h}|$, which is a two-sided bound. By monotone
+    convergence and iterated expectations,
+    \begin{equation}
+      \E\!\left[\sum_{h=1}^{\infty} \kappa^{h-1}\, \E_t|x_{t+h}|\right]
+        = \sum_{h=1}^{\infty} \kappa^{h-1}\, \E|x_{t+h}|
+        \le \frac{C}{1 - \kappa} < \infty,
+      \label{eq:q1a_convergence}
+    \end{equation}
+    where stationarity enters only through $\E|x_{t+h}| \le C$ for all $h$. A
+    non-negative random variable with finite mean is almost surely finite, so
+    $\sum_{h=1}^{\infty} \kappa^{h-1}\, \E_t[x_{t+h}]$ converges absolutely almost surely.
+\end{enumerate}
+Under (i)--(iii), the limit of (\ref{eq:q1a_expectation}) is
+\begin{equation}
+  \dpr_t = -\frac{\kappa_0}{1 - \kappa}
+           + \sum_{h=1}^{\infty} \kappa^{h-1}\, \E_t[r_{t+h}]
+           - \sum_{h=1}^{\infty} \kappa^{h-1}\, \E_t[\Delta \mathit{cf}_{t+h}].
+  \label{eq:q1a_infinite}
+\end{equation}
+This equation holds for any asset class. For equity, the cash flow is the dividend, so
+$\Delta \mathit{cf}_{t+h}$ becomes $\Delta d_{t+h}$ and $r_{t+h}$ becomes the equity
+return $r_{e,t+h}$, and (\ref{eq:q1a_infinite}) is Equation 1.3 of the problem statement.
 
 [Explain and justify the assumptions made in the derivation]
 
