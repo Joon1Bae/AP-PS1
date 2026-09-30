@@ -47,78 +47,73 @@
 
 \subsection{Derivation of Equations 1.1--1.3}
 % TODO (Q1a): derivation starting from R_{e,t+1} = (P_{t+1} + D_{t+1}) / P_t
-% Restructured (Interaction 55) around the three target equations; the mathematical
-% content of the former Steps 1-8 is unchanged. Equations 1.2 and 1.3 are transcribed from
-% the student's derivation (AI_INTERACTIONS.md, Interactions 49-52). The realized-value form
-% of Equation 1.1 (before taking expectations) is not displayed; the student did not write
-% it separately.
+% Restructured (Interaction 55) around the three target equations and written in the
+% equity notation of the problem statement (Interaction 56); the mathematical content of
+% the former Steps 1-8 is unchanged except for the expansion point, which the student set
+% to dp-bar = E[dp_t]. Equations 1.2 and 1.3 are transcribed from the student's derivation
+% (AI_INTERACTIONS.md, Interactions 49-52). The realized-value form of Equation 1.1 (before
+% taking expectations) is not displayed; the student did not write it separately.
 
 Throughout, a lowercase letter denotes the log of the corresponding uppercase variable,
-e.g.\ $r_{t+1} = \log(R_{t+1})$, $p_t = \log(P_t)$, and $\mathit{cf}_{t+1} = \log(\mathit{CF}_{t+1})$.
+e.g.\ $r_{e,t+1} = \log(R_{e,t+1})$, $p_t = \log(P_t)$ and $d_t = \log(D_t)$. The log
+dividend--price ratio and the log dividend growth are
+$\dpr_t := d_t - p_t$ and $\Delta d_{t+1} := d_{t+1} - d_t$.
 
 \paragraph{Equation 1.1.}
-Start from the definition of the gross return,
+Start from the definition of the gross equity return,
 \begin{equation}
-  R_{t+1} = \frac{P_{t+1} + \mathit{CF}_{t+1}}{P_t}.
+  R_{e,t+1} = \frac{P_{t+1} + D_{t+1}}{P_t}.
   \label{eq:q1a_gross_return}
 \end{equation}
 Taking logs of (\ref{eq:q1a_gross_return}),
 \begin{align}
-  \log(R_{t+1})
-    &= \log(P_{t+1}) - \log(P_t) + \log\!\left(1 + \frac{\mathit{CF}_{t+1}}{P_{t+1}}\right) \nonumber \\
+  \log(R_{e,t+1})
+    &= \log(P_{t+1}) - \log(P_t) + \log\!\left(1 + \frac{D_{t+1}}{P_{t+1}}\right) \nonumber \\
   \Longleftrightarrow \quad
-  r_{t+1}
-    &= p_{t+1} - p_t + \log\!\left(1 + e^{\,\mathit{cf}_{t+1} - p_{t+1}}\right).
+  r_{e,t+1}
+    &= p_{t+1} - p_t + \log\!\left(1 + e^{\,\dpr_{t+1}}\right).
   \label{eq:q1a_log_return}
 \end{align}
 Rearranging (\ref{eq:q1a_log_return}) so that the polynomial terms are on the left-hand side
 and the log term is on the right-hand side,
 \begin{equation}
-  r_{t+1} - p_{t+1} + p_t = \log\!\left(1 + e^{\,\mathit{cf}_{t+1} - p_{t+1}}\right).
+  r_{e,t+1} - p_{t+1} + p_t = \log\!\left(1 + e^{\,\dpr_{t+1}}\right).
   \label{eq:q1a_rearranged}
 \end{equation}
-Let $x_{t+1} = \mathit{cf}_{t+1} - p_{t+1}$. The function $\log(1 + e^{x})$ can be
-approximated by a first-order Taylor expansion around a point $a$:
+The function $\log(1 + e^{x})$ can be approximated by a first-order Taylor expansion around
+a point $\overline{\dpr}$:
 \begin{equation}
   \log\!\left(1 + e^{x}\right)
-    \approx \log\!\left(1 + e^{a}\right) + \frac{e^{a}}{1 + e^{a}}\,(x - a),
+    \approx \log\!\left(1 + e^{\overline{\dpr}}\right)
+      + \frac{e^{\overline{\dpr}}}{1 + e^{\overline{\dpr}}}\,\left(x - \overline{\dpr}\right),
   \label{eq:q1a_taylor}
 \end{equation}
-which is accurate for small enough $x - a$. The expansion point $a$ is taken to be the
-time average of $\mathit{cf}_{t+1} - p_{t+1}$, which is assumed to converge to a constant,
-denoted $a = \overline{\mathit{cf}} - \overline{p}$ (the problem statement writes this
-average as $\overline{\dpr}$).
+which is accurate for small enough $x - \overline{\dpr}$. The expansion point is taken to be
+$\overline{\dpr} = \E[\dpr_t]$.
 Substituting (\ref{eq:q1a_taylor}) into the right-hand side of (\ref{eq:q1a_rearranged}),
-with $x = \mathit{cf}_{t+1} - p_{t+1}$ and $a = \overline{\mathit{cf}} - \overline{p}$, and
-rearranging the terms, we obtain
+with $x = \dpr_{t+1}$, and rearranging the terms, we obtain
 \begin{equation}
-  p_t = \kappa_0 + (1 - \kappa)\,\mathit{cf}_{t+1} - r_{t+1} + \kappa\, p_{t+1},
+  p_t = \kappa_0 + (1 - \kappa)\,d_{t+1} - r_{e,t+1} + \kappa\, p_{t+1},
   \label{eq:q1a_price_recursion}
 \end{equation}
 where, as in the problem statement,
 \begin{equation}
-  \kappa = \frac{1}{1 + e^{\,a}}
+  \kappa = \frac{1}{1 + e^{\,\overline{\dpr}}}
   \qquad \text{and} \qquad
   \kappa_0 = -\log(\kappa) - (1 - \kappa)\,\log\!\left(\frac{1}{\kappa} - 1\right).
   \label{eq:q1a_kappa_def}
 \end{equation}
-% NOTE: the two definitions above are copied from the problem statement (with dp-bar
-% written as a). What is still missing is the derivation-side link: showing that the
-% Taylor coefficients log(1+e^a) and e^a/(1+e^a) from (\ref{eq:q1a_taylor}) reduce to
+% NOTE: the two definitions above are copied from the problem statement. What is still
+% missing is the derivation-side link: showing that the Taylor coefficients
+% log(1+e^{dp-bar}) and e^{dp-bar}/(1+e^{dp-bar}) from (\ref{eq:q1a_taylor}) reduce to
 % these kappa_0 and (1-kappa) after the rearrangement. STUDENT TO ADD.
 % The intermediate line (after substitution, before rearranging) was also not written by
 % the student; whether to display it is the student's choice.
-Subtracting $\mathit{cf}_t$ from both sides of (\ref{eq:q1a_price_recursion}), multiplying
-both sides by $-1$, and defining
+Subtracting $d_t$ from both sides of (\ref{eq:q1a_price_recursion}), multiplying both sides
+by $-1$, and using the definitions of $\dpr_t$ and $\Delta d_{t+1}$, we obtain the
+one-period identity
 \begin{equation}
-  \dpr_t := \mathit{cf}_t - p_t
-  \qquad \text{and} \qquad
-  \Delta \mathit{cf}_{t+1} := \mathit{cf}_{t+1} - \mathit{cf}_t,
-  \label{eq:q1a_dp_def}
-\end{equation}
-we obtain the one-period identity
-\begin{equation}
-  \dpr_t = -\kappa_0 + \kappa\, \dpr_{t+1} + r_{t+1} - \Delta \mathit{cf}_{t+1}.
+  \dpr_t = -\kappa_0 + \kappa\, \dpr_{t+1} + r_{e,t+1} - \Delta d_{t+1}.
   \label{eq:q1a_dp_recursion}
 \end{equation}
 Equation (\ref{eq:q1a_dp_recursion}) holds at every date. Iterating
@@ -127,8 +122,8 @@ up to horizon $H$, we get
 \begin{equation}
   \dpr_t = -\kappa_0 \sum_{h=0}^{H-1} \kappa^{h}
            + \kappa^{H}\, \dpr_{t+H}
-           + \sum_{h=1}^{H} \kappa^{h-1}\, r_{t+h}
-           - \sum_{h=1}^{H} \kappa^{h-1}\, \Delta \mathit{cf}_{t+h},
+           + \sum_{h=1}^{H} \kappa^{h-1}\, r_{e,t+h}
+           - \sum_{h=1}^{H} \kappa^{h-1}\, \Delta d_{t+h},
   \label{eq:q1a_H_step}
 \end{equation}
 where the constant term is a finite geometric sum,
@@ -136,9 +131,9 @@ where the constant term is a finite geometric sum,
   \sum_{h=0}^{H-1} \kappa^{h} = \frac{1 - \kappa^{H}}{1 - \kappa},
   \label{eq:q1a_geometric}
 \end{equation}
-with $0 < \kappa < 1$ because $\kappa = 1/(1 + e^{a})$ and $e^{a} > 0$. Equation
-(\ref{eq:q1a_H_step}) with the constant written as in (\ref{eq:q1a_geometric}) is
-Equation 1.1 of the problem statement, since
+with $0 < \kappa < 1$ because $\kappa = 1/(1 + e^{\overline{\dpr}})$ and
+$e^{\overline{\dpr}} > 0$. Equation (\ref{eq:q1a_H_step}) with the constant written as in
+(\ref{eq:q1a_geometric}) is Equation 1.1 of the problem statement, since
 $-\kappa_0 (1 - \kappa^{H})/(1 - \kappa) = \kappa_0 (\kappa^{H} - 1)/(1 - \kappa)$.
 
 \paragraph{Equation 1.2.}
@@ -148,8 +143,8 @@ expectation and $\E_t[\dpr_t] = \dpr_t$, and using (\ref{eq:q1a_geometric}), we 
 \begin{equation}
   \dpr_t = -\kappa_0\, \frac{1 - \kappa^{H}}{1 - \kappa}
            + \kappa^{H}\, \E_t[\dpr_{t+H}]
-           + \sum_{h=1}^{H} \kappa^{h-1}\, \E_t[r_{t+h}]
-           - \sum_{h=1}^{H} \kappa^{h-1}\, \E_t[\Delta \mathit{cf}_{t+h}],
+           + \sum_{h=1}^{H} \kappa^{h-1}\, \E_t[r_{e,t+h}]
+           - \sum_{h=1}^{H} \kappa^{h-1}\, \E_t[\Delta d_{t+h}],
   \label{eq:q1a_expectation}
 \end{equation}
 which is Equation 1.2 of the problem statement.
@@ -162,7 +157,7 @@ Letting $H \to \infty$ in (\ref{eq:q1a_expectation}) requires the following assu
       \lim_{H \to \infty} \kappa^{H}\, \E_t[\dpr_{t+H}] = 0.
       \label{eq:q1a_no_bubble}
     \end{equation}
-  \item The two infinite sums converge. Let $x \in \{r, \Delta \mathit{cf}\}$ be stationary
+  \item The two infinite sums converge. Let $x \in \{r_e, \Delta d\}$ be stationary
     with $\E|x_t| < \infty$. By the conditional Jensen inequality,
     $|\E_t[x_{t+h}]| \le \E_t|x_{t+h}|$, which is a two-sided bound. By monotone
     convergence and iterated expectations,
@@ -179,13 +174,12 @@ Letting $H \to \infty$ in (\ref{eq:q1a_expectation}) requires the following assu
 Under (i)--(ii), the limit of (\ref{eq:q1a_expectation}) is
 \begin{equation}
   \dpr_t = -\frac{\kappa_0}{1 - \kappa}
-           + \sum_{h=1}^{\infty} \kappa^{h-1}\, \E_t[r_{t+h}]
-           - \sum_{h=1}^{\infty} \kappa^{h-1}\, \E_t[\Delta \mathit{cf}_{t+h}].
+           + \sum_{h=1}^{\infty} \kappa^{h-1}\, \E_t[r_{e,t+h}]
+           - \sum_{h=1}^{\infty} \kappa^{h-1}\, \E_t[\Delta d_{t+h}],
   \label{eq:q1a_infinite}
 \end{equation}
-This equation holds for any asset class. For equity, the cash flow is the dividend, so
-$\Delta \mathit{cf}_{t+h}$ becomes $\Delta d_{t+h}$ and $r_{t+h}$ becomes the equity
-return $r_{e,t+h}$, and (\ref{eq:q1a_infinite}) is Equation 1.3 of the problem statement.
+which is Equation 1.3 of the problem statement. Nothing in the derivation uses that the
+cash flow is a dividend.
 
 \paragraph{Assumptions.}
 [Explain and justify the assumptions made in the derivation]
