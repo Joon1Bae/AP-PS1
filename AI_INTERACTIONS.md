@@ -989,4 +989,4 @@ I'll pass my explanation for now."
 - **Substantive mathematical / economic / empirical suggestions made:** none; the two points are critique, without proposed wording.
 - **Type of assistance:** formatting/translation (transcription); math review (two critique points)
 - **Grouped follow-up requests:** none
-- **Git commit after:** PENDING_AFTER_HASH
+- **Git commit after:** 988690673a0eb48b20de7929fa5d02fff9677f26
