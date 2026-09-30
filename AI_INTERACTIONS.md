@@ -1019,4 +1019,4 @@ I'll pass my explanation for now."
 - **Substantive mathematical / economic / empirical suggestions made:** none
 - **Type of assistance:** formatting/translation (transcription); math review (check of the transcribed footnote)
 - **Grouped follow-up requests:** none
-- **Git commit after:** PENDING_AFTER_HASH
+- **Git commit after:** de01006261c6e09ee865591f9f01846787dc4fbe
