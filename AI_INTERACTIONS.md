@@ -1034,4 +1034,4 @@ I'll pass my explanation for now."
 - **Substantive mathematical / economic / empirical suggestions made:** none; critique only.
 - **Type of assistance:** math review
 - **Grouped follow-up requests:** none
-- **Git commit after:** PENDING_AFTER_HASH
+- **Git commit after:** 6c5597454ad8d87bf40a9308577242819562fec4
