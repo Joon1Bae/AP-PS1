@@ -1244,4 +1244,4 @@ I'll pass my explanation for now."
 - **Substantive mathematical / economic / empirical suggestions made:** none; check and transcription only.
 - **Type of assistance:** math review; formatting/translation (transcription into LaTeX)
 - **Grouped follow-up requests:** none (the six messages form a single request, sent in parts)
-- **Git commit after:** AFTER_HASH
+- **Git commit after:** ca3b29c718aea2da3a43a8258a63877dfe826fbc
