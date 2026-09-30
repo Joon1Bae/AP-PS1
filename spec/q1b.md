@@ -19,3 +19,8 @@ compute the following variables
 and the OLS slopes of A, B, C onto dp_t.
 
 Output should be figure (H on x-axis, three terms should have different colors on it), table (for each H terms, coefficients, their summation, and Num. of Obs.)
+
+Your questions have been answered
+- "The spec says 'OLS slopes of A, B, C onto dp_t' but not whether the regressions include a constant. With a constant, the slope equals Cov(dp, ·)/Var(dp) on the sample, the form of Equation 1.4; without one it does not. Which regression do you want?"="With a constant"
+
+- "The spec doesn't state the estimation sample for each H. Which months t should enter?"="All t with t+12H in data"
