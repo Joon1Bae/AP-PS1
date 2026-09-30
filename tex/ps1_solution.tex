@@ -14,6 +14,7 @@
 \usepackage{subcaption}
 \usepackage{float}
 \usepackage{enumitem}
+\usepackage{needspace}
 \usepackage[colorlinks=true, linkcolor=blue, citecolor=blue, urlcolor=blue]{hyperref}
 
 \graphicspath{{../output/}}
@@ -33,9 +34,23 @@
 \newcommand{\GP}{\mathit{GP}}
 \newcommand{\Dur}{\mathit{Dur}}
 
+% ---------- Task blocks ----------
+% Convention (student's instructions, AI_INTERACTIONS.md Interactions 58-59): every
+% subsection states which instruction of the problem it answers with "Task" blocks that
+% quote the problem's instructions verbatim, numbered (1), (2), ... where the problem gives
+% more than one instruction. Each quoted instruction is placed directly above the part of
+% the answer that addresses it, not collected at the top of the subsection.
+% ---------- Numbers produced by src/*.py ----------
+\input{../output/q1d_values.tex}
+
+\makeatletter
+\newcommand{\task}[1]{\par\if@nobreak\else\needspace{5\baselineskip}\fi\medskip\noindent\textbf{Task.} #1\par
+  \nopagebreak\medskip\@afterheading}   % like a heading: no page break right after it
+\makeatother
+
 % ---------- Title ----------
 \title{BUSFIN 8200: Asset Pricing Foundations\\Problem Set 1}
-\author{Joon Bae}
+\author{Dustin Bae}
 \date{\today}
 
 \begin{document}
@@ -47,130 +62,436 @@
 
 \subsection{Derivation of Equations 1.1--1.3}
 % TODO (Q1a): derivation starting from R_{e,t+1} = (P_{t+1} + D_{t+1}) / P_t
+% Restructured (Interaction 55) around the three target equations and written in the
+% equity notation of the problem statement (Interaction 56); the mathematical content of
+% the former Steps 1-8 is unchanged except for the expansion point, which the student set
+% to dp-bar = E[dp_t]. Equations 1.2 and 1.3 are transcribed from the student's derivation
+% (AI_INTERACTIONS.md, Interactions 49-52). The realized-value form of Equation 1.1 (before
+% taking expectations) is not displayed; the student did not write it separately.
+
+\task{(1) Starting from $R_{e,t+1} = (P_{t+1} + D_{t+1})/P_t$, derive the (approximate)
+Equations 1.1, 1.2, and 1.3.}
 
 Throughout, a lowercase letter denotes the log of the corresponding uppercase variable,
-e.g.\ $r_{t+1} = \log(R_{t+1})$, $p_t = \log(P_t)$, and $\mathit{cf}_{t+1} = \log(\mathit{CF}_{t+1})$.
+e.g.\ $r_{e,t+1} = \log(R_{e,t+1})$, $p_t = \log(P_t)$ and $d_t = \log(D_t)$. The log
+dividend--price ratio and the log dividend growth are
+$\dpr_t := d_t - p_t$ and $\Delta d_{t+1} := d_{t+1} - d_t$.
 
-\paragraph{Step 1: log return.}
-Start from the definition of the gross return,
+\paragraph{Equation 1.1.}
+Start from the definition of the gross equity return,
 \begin{equation}
-  R_{t+1} = \frac{P_{t+1} + \mathit{CF}_{t+1}}{P_t}.
+  R_{e,t+1} = \frac{P_{t+1} + D_{t+1}}{P_t}.
   \label{eq:q1a_gross_return}
 \end{equation}
-Taking logs,
+Taking logs of (\ref{eq:q1a_gross_return}),
 \begin{align}
-  \log(R_{t+1})
-    &= \log(P_{t+1}) - \log(P_t) + \log\!\left(1 + \frac{\mathit{CF}_{t+1}}{P_{t+1}}\right) \nonumber \\
+  \log(R_{e,t+1})
+    &= \log(P_{t+1}) - \log(P_t) + \log\!\left(1 + \frac{D_{t+1}}{P_{t+1}}\right) \nonumber \\
   \Longleftrightarrow \quad
-  r_{t+1}
-    &= p_{t+1} - p_t + \log\!\left(1 + e^{\,\mathit{cf}_{t+1} - p_{t+1}}\right).
+  r_{e,t+1}
+    &= p_{t+1} - p_t + \log\!\left(1 + e^{\,\dpr_{t+1}}\right).
   \label{eq:q1a_log_return}
 \end{align}
-
-\paragraph{Step 2: first-order Taylor approximation of the log term.}
-Rearranging (\ref{eq:q1a_log_return}) so that the polynomial terms are on the left-hand side
+Rearranging (\ref{eq:q1a_log_return}) so that the linear terms are on the left-hand side
 and the log term is on the right-hand side,
 \begin{equation}
-  r_{t+1} - p_{t+1} + p_t = \log\!\left(1 + e^{\,\mathit{cf}_{t+1} - p_{t+1}}\right).
+  r_{e,t+1} - p_{t+1} + p_t = \log\!\left(1 + e^{\,\dpr_{t+1}}\right).
   \label{eq:q1a_rearranged}
 \end{equation}
-Let $x_{t+1} = \mathit{cf}_{t+1} - p_{t+1}$. The function $\log(1 + e^{x})$ can be
-approximated by a first-order Taylor expansion around a point $a$:
+The function $\log(1 + e^{x})$ can be approximated by a first-order Taylor expansion around
+a point $\overline{\dpr}$:
 \begin{equation}
   \log\!\left(1 + e^{x}\right)
-    \approx \log\!\left(1 + e^{a}\right) + \frac{e^{a}}{1 + e^{a}}\,(x - a),
+    \approx \log\!\left(1 + e^{\overline{\dpr}}\right)
+      + \frac{e^{\overline{\dpr}}}{1 + e^{\overline{\dpr}}}\,\left(x - \overline{\dpr}\right),
   \label{eq:q1a_taylor}
 \end{equation}
-which is accurate for small enough $x - a$. The expansion point $a$ is taken to be the
-time average of $\mathit{cf}_{t+1} - p_{t+1}$, which is assumed to converge to a constant,
-denoted $a = \overline{\mathit{cf}} - \overline{p}$.
-
-\paragraph{Step 3: substituting the approximation.}
-Applying the Taylor approximation (\ref{eq:q1a_taylor}) to the right-hand side of
-(\ref{eq:q1a_rearranged}), with $x = \mathit{cf}_{t+1} - p_{t+1}$ and
-$a = \overline{\mathit{cf}} - \overline{p}$, and rearranging the terms, we obtain
+which is accurate for small enough $x - \overline{\dpr}$. The expansion point is taken to be
+$\overline{\dpr} = \E[\dpr_t]$.
+Substituting (\ref{eq:q1a_taylor}) into the right-hand side of (\ref{eq:q1a_rearranged}),
+with $x = \dpr_{t+1}$, and rearranging the terms, we obtain
 \begin{equation}
-  p_t = \kappa_0 + (1 - \kappa)\,\mathit{cf}_{t+1} - r_{t+1} + \kappa\, p_{t+1},
+  p_t = \kappa_0 + (1 - \kappa)\,d_{t+1} - r_{e,t+1} + \kappa\, p_{t+1},
   \label{eq:q1a_price_recursion}
 \end{equation}
 where, as in the problem statement,
 \begin{equation}
-  \kappa = \frac{1}{1 + e^{\,a}}
+  \kappa = \frac{1}{1 + e^{\,\overline{\dpr}}}
   \qquad \text{and} \qquad
-  \kappa_0 = -\log(\kappa) - (1 - \kappa)\,\log\!\left(\frac{1}{\kappa} - 1\right),
+  \kappa_0 = -\log(\kappa) - (1 - \kappa)\,\log\!\left(\frac{1}{\kappa} - 1\right).
   \label{eq:q1a_kappa_def}
 \end{equation}
-with $a = \overline{\mathit{cf}} - \overline{p}$ the expansion point of Step 2
-(the problem statement writes this average as $\overline{\dpr}$).
-% NOTE: the two definitions above are copied from the problem statement (with dp-bar
-% written as a). What is still missing is the derivation-side link: showing that the
-% Taylor coefficients log(1+e^a) and e^a/(1+e^a) from Step 2 reduce to these kappa_0 and
-% (1-kappa) after the rearrangement. STUDENT TO ADD.
+% NOTE: the two definitions above are copied from the problem statement. What is still
+% missing is the derivation-side link: showing that the Taylor coefficients
+% log(1+e^{dp-bar}) and e^{dp-bar}/(1+e^{dp-bar}) from (\ref{eq:q1a_taylor}) reduce to
+% these kappa_0 and (1-kappa) after the rearrangement. STUDENT TO ADD.
 % The intermediate line (after substitution, before rearranging) was also not written by
 % the student; whether to display it is the student's choice.
-
-\paragraph{Step 4: rewriting in terms of the log cash-flow--price ratio.}
-Subtracting $\mathit{cf}_t$ from both sides of (\ref{eq:q1a_price_recursion}) and multiplying
-both sides by $-1$, and defining
+Subtracting $d_t$ from both sides of (\ref{eq:q1a_price_recursion}), multiplying both sides
+by $-1$, and using the definitions of $\dpr_t$ and $\Delta d_{t+1}$, we obtain the
+one-period identity
 \begin{equation}
-  \dpr_t := \mathit{cf}_t - p_t
-  \qquad \text{and} \qquad
-  \Delta \mathit{cf}_{t+1} := \mathit{cf}_{t+1} - \mathit{cf}_t,
-  \label{eq:q1a_dp_def}
-\end{equation}
-we obtain
-\begin{equation}
-  \dpr_t = -\kappa_0 + \kappa\, \dpr_{t+1} + r_{t+1} - \Delta \mathit{cf}_{t+1}.
+  \dpr_t = -\kappa_0 + \kappa\, \dpr_{t+1} + r_{e,t+1} - \Delta d_{t+1}.
   \label{eq:q1a_dp_recursion}
 \end{equation}
-
-\paragraph{Step 5: forward substitution.}
-Equation (\ref{eq:q1a_dp_recursion}) holds at every date, so shifting it one period forward,
-\begin{equation}
-  \dpr_{t+1} = -\kappa_0 + \kappa\, \dpr_{t+2} + r_{t+2} - \Delta \mathit{cf}_{t+2}.
-  \label{eq:q1a_dp_recursion_t1}
-\end{equation}
-Plugging (\ref{eq:q1a_dp_recursion_t1}) into the $\dpr_{t+1}$ term on the right-hand side of
-(\ref{eq:q1a_dp_recursion}) gives
-\begin{equation}
-  \dpr_t = -\kappa_0 - \kappa\,\kappa_0 + \kappa^{2}\, \dpr_{t+2}
-           + r_{t+1} + \kappa\, r_{t+2}
-           - \Delta \mathit{cf}_{t+1} - \kappa\, \Delta \mathit{cf}_{t+2}.
-  \label{eq:q1a_two_step}
-\end{equation}
-
-\paragraph{Step 6: substitution up to horizon $H$.}
-Continuing to substitute the future $\dpr$ terms into (\ref{eq:q1a_two_step}) up to
-horizon $H$, we get
+Equation (\ref{eq:q1a_dp_recursion}) holds at every date. Iterating
+(\ref{eq:q1a_dp_recursion}) forward $H$ times, i.e.\ substituting the future $\dpr$ terms
+up to horizon $H$, we get
 \begin{equation}
   \dpr_t = -\kappa_0 \sum_{h=0}^{H-1} \kappa^{h}
            + \kappa^{H}\, \dpr_{t+H}
-           + \sum_{h=1}^{H} \kappa^{h-1}\, r_{t+h}
-           - \sum_{h=1}^{H} \kappa^{h-1}\, \Delta \mathit{cf}_{t+h}.
+           + \sum_{h=1}^{H} \kappa^{h-1}\, r_{e,t+h}
+           - \sum_{h=1}^{H} \kappa^{h-1}\, \Delta d_{t+h},
   \label{eq:q1a_H_step}
 \end{equation}
-% STUDENT TO ADD: closed form of the constant term via the finite geometric series, so
-% that (\ref{eq:q1a_H_step}) matches Equation 1.1 of the problem statement, whose constant
-% is kappa_0 (kappa^H - 1) / (1 - kappa).
+where the constant term is a finite geometric sum,
+\begin{equation}
+  \sum_{h=0}^{H-1} \kappa^{h} = \frac{1 - \kappa^{H}}{1 - \kappa},
+  \label{eq:q1a_geometric}
+\end{equation}
+with $0 < \kappa < 1$ because $\kappa = 1/(1 + e^{\overline{\dpr}})$ and
+$e^{\overline{\dpr}} > 0$. Equation (\ref{eq:q1a_H_step}) with the constant written as in
+(\ref{eq:q1a_geometric}) is Equation 1.1 of the problem statement, since
+$-\kappa_0 (1 - \kappa^{H})/(1 - \kappa) = \kappa_0 (\kappa^{H} - 1)/(1 - \kappa)$.
+
+\paragraph{Equation 1.2.}
+Taking the expectation conditional on the information available at time $t$, denoted
+$\E_t[\cdot]$, on both sides of (\ref{eq:q1a_H_step}), using the linearity of the
+expectation and $\E_t[\dpr_t] = \dpr_t$, and using (\ref{eq:q1a_geometric}), we get
+\begin{equation}
+  \dpr_t = -\kappa_0\, \frac{1 - \kappa^{H}}{1 - \kappa}
+           + \kappa^{H}\, \E_t[\dpr_{t+H}]
+           + \sum_{h=1}^{H} \kappa^{h-1}\, \E_t[r_{e,t+h}]
+           - \sum_{h=1}^{H} \kappa^{h-1}\, \E_t[\Delta d_{t+h}],
+  \label{eq:q1a_expectation}
+\end{equation}
+which is Equation 1.2 of the problem statement.
+
+\paragraph{Equation 1.3.}
+Letting $H \to \infty$ in (\ref{eq:q1a_expectation}) requires the following assumptions.
+\begin{enumerate}[label=(\roman*)]
+  \item The no-bubble condition
+    \begin{equation}
+      \lim_{H \to \infty} \kappa^{H}\, \E_t[\dpr_{t+H}] = 0.
+      \label{eq:q1a_no_bubble}
+    \end{equation}
+  \item $r_e$ and $\Delta d$ are covariance stationary with finite second moments, which
+    implies that the two infinite sums in (\ref{eq:q1a_expectation}) converge absolutely
+    almost surely.\footnote{\label{fn:q1a_convergence}For $x \in \{r_e, \Delta d\}$:
+    $\E|x_{t+h}| \le (\E x^2)^{1/2} =: C$ by covariance stationarity, and
+    $|\E_t[x_{t+h}]| \le \E_t|x_{t+h}|$ by conditional Jensen. Hence
+    $\E\bigl[\sum_{h\ge1} \kappa^{h-1}\, \E_t|x_{t+h}|\bigr]
+      = \sum_{h\ge1} \kappa^{h-1}\, \E|x_{t+h}| \le C/(1-\kappa) < \infty$
+    (monotone convergence, iterated expectations), so the sum is a.s.\ finite and
+    $\sum_{h\ge1} \kappa^{h-1}\, \E_t[x_{t+h}]$ converges absolutely a.s.}
+\end{enumerate}
+Under (i)--(ii), the limit of (\ref{eq:q1a_expectation}) is
+\begin{equation}
+  \dpr_t = -\frac{\kappa_0}{1 - \kappa}
+           + \sum_{h=1}^{\infty} \kappa^{h-1}\, \E_t[r_{e,t+h}]
+           - \sum_{h=1}^{\infty} \kappa^{h-1}\, \E_t[\Delta d_{t+h}],
+  \label{eq:q1a_infinite}
+\end{equation}
+which is Equation 1.3 of the problem statement.
+
+\task{(2) Explain and justify any assumptions you make.}
+
+\noindent Three assumptions enter the derivation.
+\begin{description}[leftmargin=1.5em, labelindent=0em, itemsep=0.4em]
+  \item[Log-linearization.] The only approximation is (\ref{eq:q1a_taylor}), whose error is
+    of second order in $\dpr_{t+1} - \overline{\dpr}$. The approximation is accurate when
+    $\dpr$ is close to its mean and less accurate far from it.
+  \item[No bubble (i).] Condition (\ref{eq:q1a_no_bubble}) rules out rational bubbles,
+    i.e.\ paths on which $P/D$ grows explosively and becomes detached from expected
+    dividends and returns.
+  \item[Stationarity (ii).] Covariance stationarity of $r_e$ and $\Delta d$ ensures that
+    the infinite sums converge (footnote~\ref{fn:q1a_convergence}). The assumption is mild
+    for these variables, which have no trend and are much less persistent than $\dpr$.
+\end{description}
 
 \subsection{Variance decomposition by horizon (data)}
-% TODO (Q1b): figure H vs (b_re^(H), b_dd^(H), b_dp^(H)) + inference
-% \begin{figure}[H]
-%   \centering
-%   \includegraphics[width=0.8\textwidth]{q1b_decomposition.pdf}
-%   \caption{}
-%   \label{fig:q1b}
-% \end{figure}
+% Figure and table produced by src/q1b.py from spec/q1b.md.
+
+\task{(1) Applying Equation 1.4 to the EQ Dataset, reproduce the figure provided on slide 1.8
+of the Module 1 lecture notes. This figure has $H$ in the x-axis and
+$(b^{(H)}_{r_e}, b^{(H)}_{\Delta d}, b^{(H)}_{dp})$ in the y-axis.}
+
+Equation 1.4 of the problem statement splits the variance of $\dpr_t$ into three parts,
+\begin{equation}
+  1 = \underbrace{\frac{\Cov\!\left[\dpr_t,\ \sum_{h=1}^{H} \kappa^{h-1} r_{e,t+h}\right]}{\Var[\dpr]}}_{b^{(H)}_{r_e}}
+    + \underbrace{\frac{\Cov\!\left[\dpr_t,\ -\sum_{h=1}^{H} \kappa^{h-1} \Delta d_{t+h}\right]}{\Var[\dpr]}}_{b^{(H)}_{\Delta d}}
+    + \underbrace{\frac{\Cov\!\left[\dpr_t,\ \kappa^{H} \dpr_{t+H}\right]}{\Var[\dpr]}}_{b^{(H)}_{dp}}.
+  \label{eq:q1b_decomposition}
+\end{equation}
+The coefficients are estimated on the EQ Dataset as follows.
+\begin{itemize}[leftmargin=1.5em, itemsep=0.2em]
+  \item \textit{Discount coefficient.} $\kappa = 1/(1 + e^{\overline{\dpr}})$, where
+    $\overline{\dpr}$ is the full-sample mean of $\dpr_t$ (1927:12--2021:12). This gives
+    $\kappa = 0.9642$, which is used for every $H$.
+  \item \textit{Timing.} The data are monthly observations of annual variables, so $t+h$ is
+    $12h$ months after $t$.
+  \item \textit{Estimation.} For each $H = 1, \dots, 15$, each of the three terms is
+    regressed by OLS on a constant and $\dpr_t$. With a constant, the OLS slope equals the
+    sample covariance divided by the sample variance of $\dpr_t$, i.e.\ the corresponding
+    coefficient in (\ref{eq:q1b_decomposition}).
+  \item \textit{Sample.} Each regression uses every month $t$ for which $t + 12H$ is in the
+    data, so the three terms share one sample for each $H$ (949 to 1{,}117 observations).
+\end{itemize}
+Figure~\ref{fig:q1b} plots the three coefficients against $H$, and Table~\ref{tab:q1b}
+reports them with their sum (code: \texttt{src/q1b.py}).
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.8\textwidth]{q1b_decomposition.pdf}
+  \caption{Coefficients $b^{(H)}_{r_e}$, $b^{(H)}_{\Delta d}$ and $b^{(H)}_{dp}$ of the
+  decomposition (\ref{eq:q1b_decomposition}) against the horizon $H$ (in years), estimated on
+  the EQ Dataset with $\kappa = 0.9642$. Monthly observations, 1927:12--2021:12.}
+  \label{fig:q1b}
+\end{figure}
+
+\begin{table}[H]
+  \centering
+  \input{../output/q1b_table.tex}
+  \caption{Coefficients of the decomposition (\ref{eq:q1b_decomposition}) by horizon $H$, their
+  sum, and the number of monthly observations $N$ (predictor months from 1927:12 to $12H$
+  months before 2021:12).}
+  \label{tab:q1b}
+\end{table}
+
+\task{(2) Explain what the inference from this figure is.}
+
+\begin{description}[leftmargin=1.5em, labelindent=0em, itemsep=0.4em]
+  \item[Observation.] As $H$ increases, the share of future $\dpr$ falls, while the share
+    of returns rises (to about 0.77 at H = 15, against about 0.28 for dividend growth).
+  \item[Inference.] This implies that most of the variation in $\dpr$ reflects changes in
+    expected future returns rather than in expected dividend growth.
+\end{description}
 
 \subsection{Variance decomposition by horizon (VAR-implied)}
-% TODO (Q1c): VAR z_{t+1} = Gamma_0 + Gamma z_t + e_{t+1}, z_t = [dd_t, r_{e,t}, dp_t]
-% \begin{figure}[H] ... q1c_decomposition_var.pdf ... \end{figure}
+% Figure and table produced by src/q1c.py from spec/q1c.md; the derivation below is
+% transcribed from the student's spec (conclusions only, as the spec asks).
+
+\task{Now, use Equation 1.4 and the EQ Dataset to reproduce a figure analogous to the one in
+Question (1b) but with the terms from Equation 1.4 implied by the VAR (estimated by OLS)
+$z_{t+1} = \Gamma_0 + \Gamma z_t + \tilde z_{t+1}$ where $\tilde z_{t+1} \sim IID(0, \Sigma)$
+(1.5) where $z_t = [\Delta d_t \ r_{e,t} \ \dpr_t]$.}
+
+With $\mu = (I - \Gamma)^{-1} \Gamma_0$, iterating (1.5) forward $h$ times gives
+\begin{equation}
+  z_{t+h} - \mu = \Gamma^{h} (z_t - \mu) + \sum_{j=1}^{h} \Gamma^{h-j} \tilde z_{t+j},
+  \qquad \text{so} \qquad
+  \E_t[z_{t+h}] - \mu = \Gamma^{h} (z_t - \mu).
+  \label{eq:q1c_iterate}
+\end{equation}
+Since future shocks are uncorrelated with $z_t$,
+\begin{equation}
+  \Cov[z_{t+h}, \dpr_t] = \Gamma^{h} \Sigma_z e_{dp},
+  \qquad \text{where} \qquad
+  \Sigma_z = \Gamma \Sigma_z \Gamma' + \Sigma,
+  \label{eq:q1c_cov}
+\end{equation}
+and $e_{\Delta d}$, $e_{r}$, $e_{dp}$ select the elements of $z$. Substituting into
+Equation 1.4 gives
+\begin{equation}
+  b^{(H)}_{r_e} = \frac{\sum_{h=1}^{H} \kappa^{h-1} e_{r}' \Gamma^{h} \Sigma_z e_{dp}}{\Var[\dpr]},
+  \qquad
+  b^{(H)}_{\Delta d} = -\frac{\sum_{h=1}^{H} \kappa^{h-1} e_{\Delta d}' \Gamma^{h} \Sigma_z e_{dp}}{\Var[\dpr]},
+  \qquad
+  b^{(H)}_{dp} = \frac{\kappa^{H} e_{dp}' \Gamma^{H} \Sigma_z e_{dp}}{\Var[\dpr]},
+  \label{eq:q1c_terms}
+\end{equation}
+with the VAR-implied variance $\Var[\dpr] = e_{dp}' \Sigma_z e_{dp}$.
+
+The VAR is estimated on the EQ Dataset as follows.
+\begin{itemize}[leftmargin=1.5em, itemsep=0.2em]
+  \item \textit{Timing.} One step of the VAR is 12 months, as one year $h$ in Question~1b:
+    $z$ at month $t+12$ is regressed on $z$ at month $t$.
+  \item \textit{Estimation.} OLS equation by equation, with a constant, on every month $t$
+    for which $t + 12$ is in the data (1{,}117 observations, 1927:12--2020:12).
+    $\Sigma$ is the covariance matrix of the residuals, and $\Sigma_z$ solves
+    (\ref{eq:q1c_cov}).
+  \item \textit{Stationarity.} The largest eigenvalue of $\Gamma$ has modulus 0.869, so the
+    VAR is stationary and (\ref{eq:q1c_cov}) has a unique solution.
+  \item \textit{Terms.} The same $\kappa = 0.9642$ and $H = 1, \dots, 15$ as in
+    Question~1b, in (\ref{eq:q1c_terms}).
+\end{itemize}
+Figure~\ref{fig:q1c} plots the three coefficients against $H$ on the same vertical scale as
+Figure~\ref{fig:q1b}, and Table~\ref{tab:q1c} reports them with their sum (code:
+\texttt{src/q1c.py}).
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.8\textwidth]{q1c_decomposition_var.pdf}
+  \caption{VAR-implied coefficients $b^{(H)}_{r_e}$, $b^{(H)}_{\Delta d}$ and $b^{(H)}_{dp}$ of
+  (\ref{eq:q1c_terms}) against the horizon $H$ (in years), with $\kappa = 0.9642$. VAR
+  (1.5) with a 12-month step, estimated by OLS on monthly
+  observations, 1927:12--2021:12.}
+  \label{fig:q1c}
+\end{figure}
+
+\begin{table}[H]
+  \centering
+  \input{../output/q1c_table.tex}
+  \caption{VAR-implied coefficients of (\ref{eq:q1c_terms}) by horizon $H$ and their sum.
+  $N$ is the number of monthly observations used to estimate the VAR, the same for every $H$.}
+  \label{tab:q1c}
+\end{table}
 
 \subsection{Infinite-horizon decomposition}
-% TODO (Q1d): b_re^(inf), b_dd^(inf) from the VAR + interpretation
+% Numbers produced by src/q1d.py from spec/q1d.md (macros in output/q1d_values.tex).
+
+\task{(1) Using the VAR in Equation 1.5, calculate the values for $b^{(\infty)}_{r_e}$ and
+$b^{(\infty)}_{\Delta d}$.}
+
+Taking $H \to \infty$, Equation 1.4 becomes Equation 1.6 of the problem statement,
+\begin{equation}
+  1 = \underbrace{\frac{\Cov\!\left[\dpr_t,\ \sum_{h=1}^{\infty} \kappa^{h-1} r_{e,t+h}\right]}{\Var[\dpr]}}_{b^{(\infty)}_{r_e}}
+    + \underbrace{\frac{\Cov\!\left[\dpr_t,\ -\sum_{h=1}^{\infty} \kappa^{h-1} \Delta d_{t+h}\right]}{\Var[\dpr]}}_{b^{(\infty)}_{\Delta d}}.
+  \label{eq:q1d_decomposition}
+\end{equation}
+With the VAR of Question~1c, the covariances follow from (\ref{eq:q1c_cov}) and
+\begin{equation}
+  \sum_{h=1}^{\infty} \kappa^{h-1} \Gamma^{h} = \Gamma (I - \kappa \Gamma)^{-1},
+  \label{eq:q1d_geometric}
+\end{equation}
+which holds when all eigenvalues of $\kappa\Gamma$ lie inside the unit circle. This gives
+\begin{equation}
+  b^{(\infty)}_{r_e} = \frac{e_{r}' \Gamma (I - \kappa \Gamma)^{-1} \Sigma_z e_{dp}}{\Var[\dpr]},
+  \qquad
+  b^{(\infty)}_{\Delta d} = -\frac{e_{\Delta d}' \Gamma (I - \kappa \Gamma)^{-1} \Sigma_z e_{dp}}{\Var[\dpr]},
+  \label{eq:q1d_terms}
+\end{equation}
+with $\Gamma$, $\Sigma_z$, $\kappa = 0.9642$ and the VAR-implied $\Var[\dpr] = e_{dp}' \Sigma_z e_{dp}$
+of Question~1c. The largest eigenvalue of $\kappa\Gamma$ has modulus \kappaGammaMaxEig, so
+(\ref{eq:q1d_geometric}) applies. Table~\ref{tab:q1d} reports the two coefficients
+(code: \texttt{src/q1d.py}).
+
+\begin{table}[H]
+  \centering
+  \begin{tabular}{lc}
+    \toprule
+    Coefficient & Value \\
+    \midrule
+    $b^{(\infty)}_{r_e}$ & \bReInf \\
+    $b^{(\infty)}_{\Delta d}$ & \bDdInf \\
+    \midrule
+    Sum & \bSumInf \\
+    \bottomrule
+  \end{tabular}
+  \caption{VAR-implied infinite-horizon coefficients of (\ref{eq:q1d_decomposition}),
+  computed from (\ref{eq:q1d_terms}) with the VAR of Question~1c (12-month step, estimated by OLS
+  on monthly observations, 1927:12--2021:12) and $\kappa = 0.9642$.}
+  \label{tab:q1d}
+\end{table}
+
+\task{(2) Interpret the results.}
+
+\begin{description}[leftmargin=1.5em, labelindent=0em, itemsep=0.4em]
+  \item[Result.] In the VAR, as $H \to \infty$, expected returns and expected dividend growth
+  each account for about half of the variance of $\dpr$. Together, they account for all of it.
+  \item[Comparison.] The two methods already differ at horizons within the sample
+  (e.g.\ $H = 5$ to $15$), so the difference comes from the VAR(1) restriction: the VAR
+  computes all covariances from one-year dynamics instead of estimating them directly.
+\end{description}
 
 \subsection{Derivation of Equations 1.7--1.9 (Gao and Martin, 2021)}
-% TODO (Q1e): derivation with dy_t = log(1 + D_t/P_t), kappa = e^{-dy}
+% Q1e: derivation with dy_t = log(1 + D_t/P_t), kappa = e^{-dy} (steps from the student)
+% Scaffold only (Interaction 74): same layout as Section 1.1.
+
+\task{(1) Starting from $R_{e,t+1} = (P_{t+1} + D_{t+1})/P_t$, derive the (approximate)
+Equations 1.7, 1.8, and 1.9.}
+
+% Transcribed from the student's step-by-step messages (Interaction 78). The two relations
+% used in the first substitution were not given by the student: STUDENT TO ADD.
+As in the problem statement, $\dy_t = \log(1 + D_t/P_t)$ and $\kappa = e^{-\overline{\dy}}$.
+
+\paragraph{Equation 1.7.}
+Write the gross equity return as
+\begin{equation}
+  R_{e,t+1} = \frac{D_{t+1}}{D_t}\,\frac{D_t}{P_t}\left(1 + \frac{P_{t+1}}{D_{t+1}}\right).
+  \label{eq:q1e_gross_return}
+\end{equation}
+
+Since $1 + D_t/P_t = e^{dy_t}$, we have
+\begin{equation}
+  \frac{D_t}{P_t} = e^{dy_t} - 1 = e^{dy_t}\left(1 - e^{-dy_t}\right)
+  \quad\text{and}\quad
+  1 + \frac{P_{t+1}}{D_{t+1}}
+  = \frac{1 + D_{t+1}/P_{t+1}}{D_{t+1}/P_{t+1}}
+  = \frac{1}{1 - e^{-dy_{t+1}}}.
+\end{equation}
+
+\noindent Substituting the two relations above into (\ref{eq:q1e_gross_return}) and taking
+logs, we get
+\begin{equation}
+  r_{e,t+1} - \Delta d_{t+1}
+    = \dy_t + \log\!\left(1 - e^{-\dy_t}\right) - \log\!\left(1 - e^{-\dy_{t+1}}\right).
+  \label{eq:q1e_log_return}
+\end{equation}
+A first-order Taylor expansion of $\log(1 - e^{-x})$ around $\overline{\dy}$ gives
+\begin{equation}
+  \log\!\left(1 - e^{-x}\right)
+    \approx \log(1 - \kappa) + \frac{\kappa}{1 - \kappa}\,\left(x - \overline{\dy}\right).
+  \label{eq:q1e_taylor}
+\end{equation}
+Substituting (\ref{eq:q1e_taylor}) into both log terms of (\ref{eq:q1e_log_return}), the
+constants cancel, and rearranging gives the one-period identity, with no constant term,
+\begin{equation}
+  \dy_t = (1 - \kappa)\,\left(r_{e,t+1} - \Delta d_{t+1}\right) + \kappa\, \dy_{t+1}.
+  \label{eq:q1e_dy_recursion}
+\end{equation}
+Iterating (\ref{eq:q1e_dy_recursion}) forward $H$ times, we obtain Equation 1.7 of the
+problem statement,
+\begin{equation}
+  \dy_t = (1 - \kappa) \left( \sum_{h=1}^{H} \kappa^{h-1}\, r_{e,t+h}
+          - \sum_{h=1}^{H} \kappa^{h-1}\, \Delta d_{t+h} \right)
+          + \kappa^{H}\, \dy_{t+H}.
+  \label{eq:q1e_H_step}
+\end{equation}
+
+\paragraph{Equation 1.8.}
+Taking $\E_t[\cdot]$ on both sides of (\ref{eq:q1e_H_step}), using the linearity of the
+expectation and $\E_t[\dy_t] = \dy_t$, as in Section~1.1, we get Equation 1.8 of the
+problem statement,
+\begin{equation}
+  \dy_t = (1 - \kappa) \left( \sum_{h=1}^{H} \kappa^{h-1}\, \E_t[r_{e,t+h}]
+          - \sum_{h=1}^{H} \kappa^{h-1}\, \E_t[\Delta d_{t+h}] \right)
+          + \kappa^{H}\, \E_t[\dy_{t+H}].
+  \label{eq:q1e_expectation}
+\end{equation}
+
+\paragraph{Equation 1.9.}
+Let $H \to \infty$ in (\ref{eq:q1e_expectation}) under the following assumptions.
+\begin{enumerate}[label=(\roman*)]
+  \item The no-bubble condition
+    \begin{equation}
+      \lim_{H \to \infty} \kappa^{H}\, \E_t[\dy_{t+H}] = 0.
+      \label{eq:q1e_no_bubble}
+    \end{equation}
+  \item $r_e$ and $\Delta d$ are covariance stationary (see
+    footnote~\ref{fn:q1a_convergence}).
+\end{enumerate}
+Note that $0 < \kappa < 1$ because $\dy > 0$. The limit of (\ref{eq:q1e_expectation}) is
+Equation 1.9 of the problem statement,
+\begin{equation}
+  \dy_t = (1 - \kappa) \left( \sum_{h=1}^{\infty} \kappa^{h-1}\, \E_t[r_{e,t+h}]
+          - \sum_{h=1}^{\infty} \kappa^{h-1}\, \E_t[\Delta d_{t+h}] \right).
+  \label{eq:q1e_infinite}
+\end{equation}
+
+\task{(2) Explain and justify any assumptions you make.}
+
+\noindent Three assumptions enter the derivation.
+\begin{description}[leftmargin=1.5em, labelindent=0em, itemsep=0.4em]
+  \item[Log-linearization.] The only approximation is (\ref{eq:q1e_taylor}). Unlike
+    $\log(D/P)$ in Section~1.1, $\dy = \log(1 + D/P)$ is close to $D/P$ itself when $D/P$ is
+    small, so it moves much less when $D/P$ is far from its mean (e.g.\ in the late 1990s).
+    This is why Gao and Martin (2021) argue that the approximation is more accurate there.
+  \item[No bubble (i).] Condition (\ref{eq:q1e_no_bubble}) is the same as the no-bubble
+    condition of Section~1.1.
+  \item[Stationarity (ii).] This is the same as assumption (ii) of Section~1.1
+    (footnote~\ref{fn:q1a_convergence}).
+\end{description}
 
 % =====================================================================
 \section{Question 2}
@@ -249,6 +570,8 @@ $\widehat{SE}^c(\hat b^c) = \sqrt{(\hat b_u)^2 \,(1 + 3/n + 9/n^2)^2\, \widehat{
 \end{table}
 
 [Explanation of reason why it is natural for the two estimates to differ]
+
+[Contrast with the b estimate of Question 2b]
 
 \subsection{Out-of-sample estimation (expanding window)}
 % TODO (Q2d): interpretation of the figures and of R^2_OS (student to write)
