@@ -1259,4 +1259,4 @@ I'll pass my explanation for now."
 - **Substantive mathematical / economic / empirical suggestions made:** none; critique only, without proposed wording.
 - **Type of assistance:** formatting/translation (grammar, layout, cross-references); economic reasoning review
 - **Grouped follow-up requests:** none
-- **Git commit after:** AFTER_HASH
+- **Git commit after:** 91f17d4abd85c03121d78ba70ea9790c2b64f8f5
