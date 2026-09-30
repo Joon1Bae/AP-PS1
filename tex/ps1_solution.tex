@@ -307,6 +307,8 @@ The VAR is estimated on the EQ Dataset as follows.
     for which $t + 12$ is in the data (1{,}117 observations, 1927:12--2020:12).
     $\Sigma$ is the covariance matrix of the residuals, and $\Sigma_z$ solves
     (\ref{eq:q1c_cov}).
+  \item \textit{Stationarity.} The largest eigenvalue of $\Gamma$ has modulus 0.869, so the
+    VAR is stationary and (\ref{eq:q1c_cov}) has a unique solution.
   \item \textit{Terms.} The same $\kappa = 0.9642$ and $H = 1, \dots, 15$ as in
     Question~1b, in (\ref{eq:q1c_terms}).
 \end{itemize}
@@ -319,7 +321,7 @@ Figure~\ref{fig:q1b}, and Table~\ref{tab:q1c} reports them with their sum (code:
   \includegraphics[width=0.8\textwidth]{q1c_decomposition_var.pdf}
   \caption{VAR-implied coefficients $b^{(H)}_{r_e}$, $b^{(H)}_{\Delta d}$ and $b^{(H)}_{dp}$ of
   (\ref{eq:q1c_terms}) against the horizon $H$ (in years), with $\kappa = 0.9642$. VAR
-  (\ref{eq:q1c_iterate})--(\ref{eq:q1c_cov}) with a 12-month step, estimated by OLS on monthly
+  (1.5) with a 12-month step, estimated by OLS on monthly
   observations, 1927:12--2021:12.}
   \label{fig:q1c}
 \end{figure}
