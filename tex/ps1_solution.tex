@@ -172,7 +172,7 @@ Letting $H \to \infty$ in (\ref{eq:q1a_expectation}) requires the following assu
       \lim_{H \to \infty} \kappa^{H}\, \E_t[\dpr_{t+H}] = 0.
       \label{eq:q1a_no_bubble}
     \end{equation}
-  \item The two infinite sums converge.\footnote{Let $x \in \{r_e, \Delta d\}$ be
+  \item The two infinite sums converge.\footnote{\label{fn:q1a_convergence}Let $x \in \{r_e, \Delta d\}$ be
     stationary with $\E|x_t| < \infty$. By the conditional Jensen inequality,
     $|\E_t[x_{t+h}]| \le \E_t|x_{t+h}|$, which is a two-sided bound. By monotone
     convergence and iterated expectations,
@@ -193,6 +193,20 @@ which is Equation 1.3 of the problem statement. Nothing in the derivation uses t
 cash flow is a dividend.
 
 \task{(2) Explain and justify any assumptions you make.}
+
+Three assumptions enter the derivation.
+
+\textit{Log-linearization.} The only approximation is (\ref{eq:q1a_taylor}), whose error is
+of second order in $\dpr_{t+1} - \overline{\dpr}$. The approximation is accurate when $\dpr$
+is close to its mean and less accurate far from it.
+
+\textit{No bubble (i).} Condition (\ref{eq:q1a_no_bubble}) rules out rational bubbles,
+i.e.\ paths on which $P/D$ grows explosively and becomes detached from expected dividends
+and returns.
+
+\textit{Stationarity (ii).} Covariance stationarity of $r_e$ and $\Delta d$ ensures that
+the infinite sums converge (footnote~\ref{fn:q1a_convergence}). The assumption is mild for
+these variables, which have no trend and are much less persistent than $\dpr$.
 
 \subsection{Variance decomposition by horizon (data)}
 % TODO (Q1b): figure H vs (b_re^(H), b_dd^(H), b_dp^(H)) + inference
