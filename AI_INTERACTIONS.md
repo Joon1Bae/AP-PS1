@@ -1335,3 +1335,18 @@ I'll pass my explanation for now."
 - **Type of assistance:** formatting/translation (presentation of existing results)
 - **Grouped follow-up requests:** none
 - **Git commit after:** 8f3e5f8f245c327e08a742b403c26424c2370e06
+
+## Interaction 85 — Q4a — 2026-09-30 03:04
+
+- **Problem set item:** Q4a (Task blocks of Section 4.1 of the LaTeX solution).
+- **Substantive prompt (verbatim):** "In Section 4.1, merge Task (1) and Task (2) into a single task block, since Table 10 is the only output and the construction of the series is a step toward it." (sent while the AI was working on Interaction 84; handled as a separate `/TP` cycle after that entry was closed)
+- **Purpose:** Layout change to the Task blocks of Section 4.1 (formatting only).
+- **Git commit before:** d2fcc69934b5bfe0b30eff5d15feac90a73b0a74
+- **Assistance provided:** The student did not invoke `/TP`; the AI ran the procedure. Merged the two instructions of Question 4a into one unnumbered Task block above the construction paragraph (the convention numbers blocks only when a subsection has more than one): the first instruction with its list (i)–(iii) of series, followed by the second instruction with its list (i)–(iii) of averages, both verbatim as before. Removed the former Task (2) block above Table 10. Recompiled with `tectonic` (30 pages) and checked the rendered page 27.
+- **Files inspected:** tex/ps1_solution.tex (Section 4.1), the compiled PDF (page 27)
+- **Files directly modified by AI:** tex/ps1_solution.tex (Task blocks of Section 4.1), tex/ps1_solution.pdf (recompiled), AI_INTERACTIONS.md (this entry)
+- **Errors, omissions, or ambiguities identified:** none.
+- **Substantive mathematical / economic / empirical suggestions made:** none
+- **Type of assistance:** formatting/translation
+- **Grouped follow-up requests:** none
+- **Git commit after:** AFTER_HASH

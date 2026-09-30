@@ -1175,12 +1175,18 @@ a coefficient is in percent per month per decile (code: \texttt{src/q3e.py},
 % TODO (Q4a): discussion of the averages (student to write)
 % Table produced by src/q4a.py from spec/q4a.md.
 
-\task{(1) The ``Bond Dataset'' contains yields in percentual terms, $Y^{(H)}_{b,t} \cdot 100\%$.
+\task{The ``Bond Dataset'' contains yields in percentual terms, $Y^{(H)}_{b,t} \cdot 100\%$.
 Construct time series of:
 \begin{enumerate}[label=(\roman*), nosep, leftmargin=2.5em]
   \item Log yields: $y^{(H)}_{b,t} = \log(1 + Y^{(H)}_{b,t})$
   \item Log forward rates: $f^{(H)}_{b,t} = H \cdot y^{(H)}_{b,t} - (H-1) \cdot y^{(H-1)}_{b,t}$
   \item Log annual returns: $r^{(H)}_{b,t} = H \cdot y^{(H)}_{b,t-1} - (H-1) \cdot y^{(H-1)}_{b,t}$
+\end{enumerate}
+For $H = 2, 3, 4, 5$, calculate and report in a table the average values of
+\begin{enumerate}[label=(\roman*), nosep, leftmargin=2.5em]
+  \item $\xy^{(H)}_{b,t} = y^{(H)}_{b,t} - y^{(1)}_{b,t}$
+  \item $\xf^{(H)}_{b,t} = f^{(H)}_{b,t} - f^{(1)}_{b,t}$
+  \item $\xr^{(H)}_{b,t} = r^{(H)}_{b,t} - r^{(1)}_{b,t}$
 \end{enumerate}}
 
 From the Fama--Bliss yields $Y^{(H)}_{b,t}$ (in percent) for $H = 1, \dots, 5$, the log yields,
@@ -1195,13 +1201,6 @@ with $y^{(0)} = 0$, so that $f^{(1)}_{b,t} = y^{(1)}_{b,t}$ and $r^{(1)}_{b,t} =
 $t-1$ is 12 months before $t$. The spreads are $\xy^{(H)} = y^{(H)} - y^{(1)}$,
 $\xf^{(H)} = f^{(H)} - f^{(1)}$ and $\xr^{(H)} = r^{(H)} - r^{(1)}$
 (code: \texttt{src/q4a.py}).
-
-\task{(2) For $H = 2, 3, 4, 5$, calculate and report in a table the average values of
-\begin{enumerate}[label=(\roman*), nosep, leftmargin=2.5em]
-  \item $\xy^{(H)}_{b,t} = y^{(H)}_{b,t} - y^{(1)}_{b,t}$
-  \item $\xf^{(H)}_{b,t} = f^{(H)}_{b,t} - f^{(1)}_{b,t}$
-  \item $\xr^{(H)}_{b,t} = r^{(H)}_{b,t} - r^{(1)}_{b,t}$
-\end{enumerate}}
 
 \begin{table}[H]
   \centering
