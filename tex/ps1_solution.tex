@@ -604,6 +604,11 @@ $\widehat{SE}^c(\hat b^c) = \sqrt{(\hat b_u)^2 \,(1 + 3/n + 9/n^2)^2\, \widehat{
 
 \task{(2) Explain why it is natural for the two estimates to differ.}
 
+OLS is biased here because of the Stambaugh bias. In particular, $D/P$ is very persistent, so
+OLS underestimates its persistence in small samples. Because $D/P$ shocks and return shocks are
+negatively correlated ($\hat b_u < 0$), this error pushes $\hat b$ up. The Amihud--Hurvich
+method corrects for this bias, so $\hat b^c$ is smaller.
+
 
 \subsection{Out-of-sample estimation (expanding window)}
 % TODO (Q2d): interpretation of the figures and of R^2_OS (student to write)
