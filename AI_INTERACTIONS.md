@@ -914,4 +914,4 @@ I'll pass my explanation for now."
 - **Substantive mathematical / economic / empirical suggestions made:** none. The expansion point dp̄ = E[dp_t] is the student's choice; the AI only noted the assumption it carries.
 - **Type of assistance:** formatting/translation (notation change and exposition)
 - **Grouped follow-up requests:** none
-- **Git commit after:** PENDING_AFTER_HASH
+- **Git commit after:** 7a8754cac30c46393a1db70d57582d1d5036ecd6
