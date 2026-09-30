@@ -265,8 +265,72 @@ reports them with their sum (code: \texttt{src/q1b.py}).
 \end{description}
 
 \subsection{Variance decomposition by horizon (VAR-implied)}
-% TODO (Q1c): VAR z_{t+1} = Gamma_0 + Gamma z_t + e_{t+1}, z_t = [dd_t, r_{e,t}, dp_t]
-% \begin{figure}[H] ... q1c_decomposition_var.pdf ... \end{figure}
+% Figure and table produced by src/q1c.py from spec/q1c.md; the derivation below is
+% transcribed from the student's spec (conclusions only, as the spec asks).
+
+\task{Now, use Equation 1.4 and the EQ Dataset to reproduce a figure analogous to the one in
+Question (1b) but with the terms from Equation 1.4 implied by the VAR (estimated by OLS)
+$z_{t+1} = \Gamma_0 + \Gamma z_t + \tilde z_{t+1}$ where $\tilde z_{t+1} \sim IID(0, \Sigma)$
+(1.5) where $z_t = [\Delta d_t \ r_{e,t} \ \dpr_t]$.}
+
+With $\mu = (I - \Gamma)^{-1} \Gamma_0$, iterating (1.5) forward $h$ times gives
+\begin{equation}
+  z_{t+h} - \mu = \Gamma^{h} (z_t - \mu) + \sum_{j=1}^{h} \Gamma^{h-j} \tilde z_{t+j},
+  \qquad \text{so} \qquad
+  \E_t[z_{t+h}] - \mu = \Gamma^{h} (z_t - \mu).
+  \label{eq:q1c_iterate}
+\end{equation}
+Since future shocks are uncorrelated with $z_t$,
+\begin{equation}
+  \Cov[z_{t+h}, \dpr_t] = \Gamma^{h} \Sigma_z e_{dp},
+  \qquad \text{where} \qquad
+  \Sigma_z = \Gamma \Sigma_z \Gamma' + \Sigma,
+  \label{eq:q1c_cov}
+\end{equation}
+and $e_{\Delta d}$, $e_{r}$, $e_{dp}$ select the elements of $z$. Substituting into
+Equation 1.4 gives
+\begin{equation}
+  b^{(H)}_{r_e} = \frac{\sum_{h=1}^{H} \kappa^{h-1} e_{r}' \Gamma^{h} \Sigma_z e_{dp}}{\Var[\dpr]},
+  \qquad
+  b^{(H)}_{\Delta d} = -\frac{\sum_{h=1}^{H} \kappa^{h-1} e_{\Delta d}' \Gamma^{h} \Sigma_z e_{dp}}{\Var[\dpr]},
+  \qquad
+  b^{(H)}_{dp} = \frac{\kappa^{H} e_{dp}' \Gamma^{H} \Sigma_z e_{dp}}{\Var[\dpr]},
+  \label{eq:q1c_terms}
+\end{equation}
+with the VAR-implied variance $\Var[\dpr] = e_{dp}' \Sigma_z e_{dp}$.
+
+The VAR is estimated on the EQ Dataset as follows.
+\begin{itemize}[leftmargin=1.5em, itemsep=0.2em]
+  \item \textit{Timing.} One step of the VAR is 12 months, as one year $h$ in Question~1b:
+    $z$ at month $t+12$ is regressed on $z$ at month $t$.
+  \item \textit{Estimation.} OLS equation by equation, with a constant, on every month $t$
+    for which $t + 12$ is in the data (1{,}117 observations, 1927:12--2020:12).
+    $\Sigma$ is the covariance matrix of the residuals, and $\Sigma_z$ solves
+    (\ref{eq:q1c_cov}).
+  \item \textit{Terms.} The same $\kappa = 0.9642$ and $H = 1, \dots, 15$ as in
+    Question~1b, in (\ref{eq:q1c_terms}).
+\end{itemize}
+Figure~\ref{fig:q1c} plots the three coefficients against $H$ on the same vertical scale as
+Figure~\ref{fig:q1b}, and Table~\ref{tab:q1c} reports them with their sum (code:
+\texttt{src/q1c.py}).
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.8\textwidth]{q1c_decomposition_var.pdf}
+  \caption{VAR-implied coefficients $b^{(H)}_{r_e}$, $b^{(H)}_{\Delta d}$ and $b^{(H)}_{dp}$ of
+  (\ref{eq:q1c_terms}) against the horizon $H$ (in years), with $\kappa = 0.9642$. VAR
+  (\ref{eq:q1c_iterate})--(\ref{eq:q1c_cov}) with a 12-month step, estimated by OLS on monthly
+  observations, 1927:12--2021:12.}
+  \label{fig:q1c}
+\end{figure}
+
+\begin{table}[H]
+  \centering
+  \input{../output/q1c_table.tex}
+  \caption{VAR-implied coefficients of (\ref{eq:q1c_terms}) by horizon $H$ and their sum.
+  $N$ is the number of monthly observations used to estimate the VAR, the same for every $H$.}
+  \label{tab:q1c}
+\end{table}
 
 \subsection{Infinite-horizon decomposition}
 % TODO (Q1d): b_re^(inf), b_dd^(inf) from the VAR + interpretation

@@ -24,3 +24,8 @@ Output should be figure analogous to q1b (same style; same y-axis range as q1b i
 - Substituting into Equation 1.4 gives the three expressions above.
 
 Keep this to a few lines of display math with one short sentence each.
+
+
+Your questions have been answered: 
+- "What is one period in the VAR? The data are monthly observations of annual variables, and in Q1b one step h is 12 months. The spec says 'all months with z_{t+1} in the data' but not how far ahead t+1 is."="12 months, as in Q1b"
+- "Which Var[dp] goes in the denominator of the three terms?"="VAR-implied". You can now continue with these answers in mind.

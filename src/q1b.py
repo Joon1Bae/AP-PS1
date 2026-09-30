@@ -54,7 +54,8 @@ def decomposition(df: pd.DataFrame, kappa: float) -> pd.DataFrame:
     return pd.DataFrame(rows)
 
 
-def plot(tab: pd.DataFrame, path: Path) -> None:
+def plot(tab: pd.DataFrame, path: Path, ylim: tuple | None = None, legend: str = "center right") -> tuple:
+    """Figure of the three coefficients against H; returns the y-axis range used."""
     fig, ax = plt.subplots(figsize=(8, 4))
     for name in TERMS:
         ax.plot(tab["H"], tab[name], color=COLORS[name], marker="o", linewidth=1.8, label=LABELS[name])
@@ -66,10 +67,14 @@ def plot(tab: pd.DataFrame, path: Path) -> None:
     ax.set_axisbelow(True)
     for side in ("top", "right"):
         ax.spines[side].set_visible(False)
-    ax.legend(frameon=False, loc="center right")
+    ax.legend(frameon=False, loc=legend)
+    if ylim is not None:
+        ax.set_ylim(ylim)
+    used = ax.get_ylim()
     fig.tight_layout()
     fig.savefig(path)
     plt.close(fig)
+    return used
 
 
 def write_tex(tab: pd.DataFrame, path: Path) -> None:
