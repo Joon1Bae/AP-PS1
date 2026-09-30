@@ -213,22 +213,27 @@ which is Equation 1.3 of the problem statement.
 of the Module 1 lecture notes. This figure has $H$ in the x-axis and
 $(b^{(H)}_{r_e}, b^{(H)}_{\Delta d}, b^{(H)}_{dp})$ in the y-axis.}
 
-Equation 1.4 of the problem statement decomposes the variance of $\dpr_t$ as
+Equation 1.4 of the problem statement splits the variance of $\dpr_t$ into three parts,
 \begin{equation}
   1 = \underbrace{\frac{\Cov\!\left[\dpr_t,\ \sum_{h=1}^{H} \kappa^{h-1} r_{e,t+h}\right]}{\Var[\dpr]}}_{b^{(H)}_{r_e}}
     + \underbrace{\frac{\Cov\!\left[\dpr_t,\ -\sum_{h=1}^{H} \kappa^{h-1} \Delta d_{t+h}\right]}{\Var[\dpr]}}_{b^{(H)}_{\Delta d}}
     + \underbrace{\frac{\Cov\!\left[\dpr_t,\ \kappa^{H} \dpr_{t+H}\right]}{\Var[\dpr]}}_{b^{(H)}_{dp}}.
   \label{eq:q1b_decomposition}
 \end{equation}
-With the EQ Dataset, $\kappa = 1/(1 + e^{\overline{\dpr}})$ is computed once, with
-$\overline{\dpr}$ the full-sample mean of $\dpr_t$ (1927:12--2021:12), which gives
-$\kappa = 0.9642$, and the same $\kappa$ is used for every $H$. The data are monthly
-observations of annual variables, so $t+h$ is $12h$ months after $t$. For each
-$H = 1, \dots, 15$, each of the three terms is regressed by OLS on a constant and
-$\dpr_t$; the slope is the corresponding coefficient in (\ref{eq:q1b_decomposition}),
-because with a constant the OLS slope equals the sample covariance divided by the sample
-variance of $\dpr_t$. Each regression uses every month $t$ for which $t + 12H$ is in the
-data, so the three terms share one sample for each $H$ (949 to 1{,}117 observations).
+The coefficients are estimated on the EQ Dataset as follows.
+\begin{itemize}[leftmargin=1.5em, itemsep=0.2em]
+  \item \textit{Discount coefficient.} $\kappa = 1/(1 + e^{\overline{\dpr}})$, where
+    $\overline{\dpr}$ is the full-sample mean of $\dpr_t$ (1927:12--2021:12). This gives
+    $\kappa = 0.9642$, which is used for every $H$.
+  \item \textit{Timing.} The data are monthly observations of annual variables, so $t+h$ is
+    $12h$ months after $t$.
+  \item \textit{Estimation.} For each $H = 1, \dots, 15$, each of the three terms is
+    regressed by OLS on a constant and $\dpr_t$. With a constant, the OLS slope equals the
+    sample covariance divided by the sample variance of $\dpr_t$, i.e.\ the corresponding
+    coefficient in (\ref{eq:q1b_decomposition}).
+  \item \textit{Sample.} Each regression uses every month $t$ for which $t + 12H$ is in the
+    data, so the three terms share one sample for each $H$ (949 to 1{,}117 observations).
+\end{itemize}
 Figure~\ref{fig:q1b} plots the three coefficients against $H$, and Table~\ref{tab:q1b}
 reports them with their sum (code: \texttt{src/q1b.py}).
 
