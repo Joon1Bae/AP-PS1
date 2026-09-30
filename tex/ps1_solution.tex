@@ -386,12 +386,13 @@ of Question~1c. The largest eigenvalue of $\kappa\Gamma$ has modulus \kappaGamma
 
 \task{(2) Interpret the results.}
 
-In the VAR, as $H \to \infty$, expected returns and expected dividend growth each account
-for about half of the variance of $\dpr$. Together, they account for all of it.
-
-The two methods already differ at horizons within the sample (e.g.\ $H = 5$ to $15$), so the
-difference comes from the VAR(1) restriction: the VAR computes all covariances from one-year
-dynamics instead of estimating them directly.
+\begin{description}[leftmargin=1.5em, labelindent=0em, itemsep=0.4em]
+  \item[Result.] In the VAR, as $H \to \infty$, expected returns and expected dividend growth
+  each account for about half of the variance of $\dpr$. Together, they account for all of it.
+  \item[Comparison.] The two methods already differ at horizons within the sample
+  (e.g.\ $H = 5$ to $15$), so the difference comes from the VAR(1) restriction: the VAR
+  computes all covariances from one-year dynamics instead of estimating them directly.
+\end{description}
 
 \subsection{Derivation of Equations 1.7--1.9 (Gao and Martin, 2021)}
 % TODO (Q1e): derivation with dy_t = log(1 + D_t/P_t), kappa = e^{-dy} (student to write)
