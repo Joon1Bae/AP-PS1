@@ -195,19 +195,18 @@ which is Equation 1.3 of the problem statement.
 
 \task{(2) Explain and justify any assumptions you make.}
 
-Three assumptions enter the derivation.
-
-\textit{Log-linearization.} The only approximation is (\ref{eq:q1a_taylor}), whose error is
-of second order in $\dpr_{t+1} - \overline{\dpr}$. The approximation is accurate when $\dpr$
-is close to its mean and less accurate far from it.
-
-\textit{No bubble (i).} Condition (\ref{eq:q1a_no_bubble}) rules out rational bubbles,
-i.e.\ paths on which $P/D$ grows explosively and becomes detached from expected dividends
-and returns.
-
-\textit{Stationarity (ii).} Covariance stationarity of $r_e$ and $\Delta d$ ensures that
-the infinite sums converge (footnote~\ref{fn:q1a_convergence}). The assumption is mild for
-these variables, which have no trend and are much less persistent than $\dpr$.
+\noindent Three assumptions enter the derivation.
+\begin{description}[leftmargin=1.5em, labelindent=0em, itemsep=0.4em]
+  \item[Log-linearization.] The only approximation is (\ref{eq:q1a_taylor}), whose error is
+    of second order in $\dpr_{t+1} - \overline{\dpr}$. The approximation is accurate when
+    $\dpr$ is close to its mean and less accurate far from it.
+  \item[No bubble (i).] Condition (\ref{eq:q1a_no_bubble}) rules out rational bubbles,
+    i.e.\ paths on which $P/D$ grows explosively and becomes detached from expected
+    dividends and returns.
+  \item[Stationarity (ii).] Covariance stationarity of $r_e$ and $\Delta d$ ensures that
+    the infinite sums converge (footnote~\ref{fn:q1a_convergence}). The assumption is mild
+    for these variables, which have no trend and are much less persistent than $\dpr$.
+\end{description}
 
 \subsection{Variance decomposition by horizon (data)}
 % TODO (Q1b): figure H vs (b_re^(H), b_dd^(H), b_dp^(H)) + inference

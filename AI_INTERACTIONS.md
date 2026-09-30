@@ -990,3 +990,18 @@ I'll pass my explanation for now."
 - **Type of assistance:** formatting/translation (transcription); math review (two critique points)
 - **Grouped follow-up requests:** none
 - **Git commit after:** 988690673a0eb48b20de7929fa5d02fff9677f26
+
+## Interaction 62 — Q1a — 2026-09-29 23:32
+
+- **Problem set item:** Q1a, instruction (2): layout of the student's answer below the Task (2) block.
+- **Substantive prompt (verbatim):** "For task 2 in q1a, make it more organized."
+- **Purpose:** Reorganize the presentation of the student's written answer (formatting only; the answer is economic reasoning, which the AI may not rewrite).
+- **Git commit before:** e7c08952130d24920c0a8ca0715b55ea6d5bc01b. The snapshot captured the student's own edit, made before this interaction: the sentence "Nothing in the derivation uses that the cash flow is a dividend." after Equation 1.3 was deleted. The AI did not restore it.
+- **Assistance provided:** The student did not invoke `/TP`; the AI reminded them and ran the procedure. The AI read "more organized" as a request about layout, not wording, and turned the three italic-labelled paragraphs into a `description` list (bold labels "Log-linearization.", "No bubble (i).", "Stationarity (ii).", hanging indent) under the unchanged introductory sentence "Three assumptions enter the derivation." Every sentence of the student's text (as edited for English in Interaction 60) is kept word for word; references remain automatic. Recompiled with `tectonic` (19 pages) and checked the rendered page 3.
+- **Files inspected:** tex/ps1_solution.tex (Question 1a), the compiled PDF (page 3)
+- **Files directly modified by AI:** tex/ps1_solution.tex (layout of the Task (2) answer), tex/ps1_solution.pdf (recompiled), AI_INTERACTIONS.md (this entry)
+- **Errors, omissions, or ambiguities identified:** "more organized" is open to a wording change; the AI limited itself to layout and told the student so. Open from Interaction 61: the text of footnote 1, and the reference to "(10)" in item (ii).
+- **Substantive mathematical / economic / empirical suggestions made:** none
+- **Type of assistance:** formatting/translation
+- **Grouped follow-up requests:** none
+- **Git commit after:** PENDING_AFTER_HASH
