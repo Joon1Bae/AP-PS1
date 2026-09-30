@@ -824,4 +824,4 @@ I'll pass my explanation for now."
 - **Substantive mathematical / economic / empirical suggestions made:** none beyond identifying the term to which the condition must apply and the missing assumption; the corrected statement and its justification are left to the student.
 - **Type of assistance:** math review
 - **Grouped follow-up requests:** none
-- **Git commit after:** PENDING_AFTER_HASH
+- **Git commit after:** 91647ead6ab4241a772efa337bf2c10481eb656f
