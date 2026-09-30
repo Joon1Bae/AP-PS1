@@ -915,3 +915,18 @@ I'll pass my explanation for now."
 - **Type of assistance:** formatting/translation (notation change and exposition)
 - **Grouped follow-up requests:** none
 - **Git commit after:** 7a8754cac30c46393a1db70d57582d1d5036ecd6
+
+## Interaction 57 — Q1a — 2026-09-29 23:16
+
+- **Problem set item:** Q1a (LaTeX solution, "Equation 1.3" block): assumption (ii) shortened to its statement, the convergence argument moved to a footnote.
+- **Substantive prompt (verbatim):** "In the "Equation 1.3" block keep (i) and (ii) as they are structured, but shorten (ii) to the assumption itself and move the argument to a footnote."
+- **Purpose:** Apply the student's layout decision (formatting); no mathematical content changed.
+- **Git commit before:** 99d1ee96b545d0075d75a1a970cb98e74b63097d
+- **Assistance provided:** The student did not invoke `/TP`; the AI reminded them and ran the procedure. Item (ii) now reads "The two infinite sums converge." followed by a `\footnote` containing the student's argument of Interaction 52 word for word in substance (conditional Jensen, monotone convergence and iterated expectations, the bound C/(1 − κ), almost-sure finiteness), with the formerly displayed bound set as inline mathematics because a numbered display inside a footnote is not appropriate; the label `eq:q1a_convergence` was dropped (it was not referenced anywhere), so the derivation now runs from (1) to (12) and every cross-reference resolves. Item (i) and the list structure are unchanged. Recompiled with `tectonic` (18 pages) and checked the rendered page 2.
+- **Files inspected:** tex/ps1_solution.tex (Question 1a), the compiled PDF (page 2)
+- **Files directly modified by AI:** tex/ps1_solution.tex (item (ii) and its footnote), tex/ps1_solution.pdf (recompiled), AI_INTERACTIONS.md (this entry)
+- **Errors, omissions, or ambiguities identified:** none
+- **Substantive mathematical / economic / empirical suggestions made:** none
+- **Type of assistance:** formatting/translation
+- **Grouped follow-up requests:** none
+- **Git commit after:** PENDING_AFTER_HASH

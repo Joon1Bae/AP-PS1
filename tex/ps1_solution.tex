@@ -157,19 +157,15 @@ Letting $H \to \infty$ in (\ref{eq:q1a_expectation}) requires the following assu
       \lim_{H \to \infty} \kappa^{H}\, \E_t[\dpr_{t+H}] = 0.
       \label{eq:q1a_no_bubble}
     \end{equation}
-  \item The two infinite sums converge. Let $x \in \{r_e, \Delta d\}$ be stationary
-    with $\E|x_t| < \infty$. By the conditional Jensen inequality,
+  \item The two infinite sums converge.\footnote{Let $x \in \{r_e, \Delta d\}$ be
+    stationary with $\E|x_t| < \infty$. By the conditional Jensen inequality,
     $|\E_t[x_{t+h}]| \le \E_t|x_{t+h}|$, which is a two-sided bound. By monotone
     convergence and iterated expectations,
-    \begin{equation}
-      \E\!\left[\sum_{h=1}^{\infty} \kappa^{h-1}\, \E_t|x_{t+h}|\right]
-        = \sum_{h=1}^{\infty} \kappa^{h-1}\, \E|x_{t+h}|
-        \le \frac{C}{1 - \kappa} < \infty,
-      \label{eq:q1a_convergence}
-    \end{equation}
+    $\E\!\left[\sum_{h=1}^{\infty} \kappa^{h-1}\, \E_t|x_{t+h}|\right]
+      = \sum_{h=1}^{\infty} \kappa^{h-1}\, \E|x_{t+h}| \le C/(1 - \kappa) < \infty$,
     where stationarity enters only through $\E|x_{t+h}| \le C$ for all $h$. A
     non-negative random variable with finite mean is almost surely finite, so
-    $\sum_{h=1}^{\infty} \kappa^{h-1}\, \E_t[x_{t+h}]$ converges absolutely almost surely.
+    $\sum_{h=1}^{\infty} \kappa^{h-1}\, \E_t[x_{t+h}]$ converges absolutely almost surely.}
 \end{enumerate}
 Under (i)--(ii), the limit of (\ref{eq:q1a_expectation}) is
 \begin{equation}
