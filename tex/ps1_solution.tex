@@ -395,20 +395,81 @@ of Question~1c. The largest eigenvalue of $\kappa\Gamma$ has modulus \kappaGamma
 \end{description}
 
 \subsection{Derivation of Equations 1.7--1.9 (Gao and Martin, 2021)}
-% TODO (Q1e): derivation with dy_t = log(1 + D_t/P_t), kappa = e^{-dy} (student to write)
+% Q1e: derivation with dy_t = log(1 + D_t/P_t), kappa = e^{-dy} (steps from the student)
 % Scaffold only (Interaction 74): same layout as Section 1.1.
 
 \task{(1) Starting from $R_{e,t+1} = (P_{t+1} + D_{t+1})/P_t$, derive the (approximate)
 Equations 1.7, 1.8, and 1.9.}
 
+% Transcribed from the student's step-by-step messages (Interaction 78). The two relations
+% used in the first substitution were not given by the student: STUDENT TO ADD.
+As in the problem statement, $\dy_t = \log(1 + D_t/P_t)$ and $\kappa = e^{-\overline{\dy}}$.
+
 \paragraph{Equation 1.7.}
-[Derivation of Equation 1.7]
+Write the gross equity return as
+\begin{equation}
+  R_{e,t+1} = \frac{D_{t+1}}{D_t}\,\frac{D_t}{P_t}\left(1 + \frac{P_{t+1}}{D_{t+1}}\right).
+  \label{eq:q1e_gross_return}
+\end{equation}
+[The two relations substituted into (\ref{eq:q1e_gross_return})]
+
+\noindent Substituting the two relations above into (\ref{eq:q1e_gross_return}) and taking
+logs, we get
+\begin{equation}
+  r_{e,t+1} - \Delta d_{t+1}
+    = \dy_t + \log\!\left(1 - e^{-\dy_t}\right) - \log\!\left(1 - e^{-\dy_{t+1}}\right).
+  \label{eq:q1e_log_return}
+\end{equation}
+A first-order Taylor expansion of $\log(1 - e^{-x})$ around $\overline{\dy}$ gives
+\begin{equation}
+  \log\!\left(1 - e^{-x}\right)
+    \approx \log(1 - \kappa) + \frac{\kappa}{1 - \kappa}\,\left(x - \overline{\dy}\right).
+  \label{eq:q1e_taylor}
+\end{equation}
+Substituting (\ref{eq:q1e_taylor}) into both log terms of (\ref{eq:q1e_log_return}), the
+constants cancel, and rearranging gives the one-period identity, with no constant term,
+\begin{equation}
+  \dy_t = (1 - \kappa)\,\left(r_{e,t+1} - \Delta d_{t+1}\right) + \kappa\, \dy_{t+1}.
+  \label{eq:q1e_dy_recursion}
+\end{equation}
+Iterating (\ref{eq:q1e_dy_recursion}) forward $H$ times, we obtain Equation 1.7 of the
+problem statement,
+\begin{equation}
+  \dy_t = (1 - \kappa) \left( \sum_{h=1}^{H} \kappa^{h-1}\, r_{e,t+h}
+          - \sum_{h=1}^{H} \kappa^{h-1}\, \Delta d_{t+h} \right)
+          + \kappa^{H}\, \dy_{t+H}.
+  \label{eq:q1e_H_step}
+\end{equation}
 
 \paragraph{Equation 1.8.}
-[Derivation of Equation 1.8]
+Taking $\E_t[\cdot]$ on both sides of (\ref{eq:q1e_H_step}), using the linearity of the
+expectation and $\E_t[\dy_t] = \dy_t$, as in Section~1.1, we get Equation 1.8 of the
+problem statement,
+\begin{equation}
+  \dy_t = (1 - \kappa) \left( \sum_{h=1}^{H} \kappa^{h-1}\, \E_t[r_{e,t+h}]
+          - \sum_{h=1}^{H} \kappa^{h-1}\, \E_t[\Delta d_{t+h}] \right)
+          + \kappa^{H}\, \E_t[\dy_{t+H}].
+  \label{eq:q1e_expectation}
+\end{equation}
 
 \paragraph{Equation 1.9.}
-[Derivation of Equation 1.9]
+Let $H \to \infty$ in (\ref{eq:q1e_expectation}) under the following assumptions.
+\begin{enumerate}[label=(\roman*)]
+  \item The no-bubble condition
+    \begin{equation}
+      \lim_{H \to \infty} \kappa^{H}\, \E_t[\dy_{t+H}] = 0.
+      \label{eq:q1e_no_bubble}
+    \end{equation}
+  \item $r_e$ and $\Delta d$ are covariance stationary (see
+    footnote~\ref{fn:q1a_convergence}).
+\end{enumerate}
+Note that $0 < \kappa < 1$ because $\dy > 0$. The limit of (\ref{eq:q1e_expectation}) is
+Equation 1.9 of the problem statement,
+\begin{equation}
+  \dy_t = (1 - \kappa) \left( \sum_{h=1}^{\infty} \kappa^{h-1}\, \E_t[r_{e,t+h}]
+          - \sum_{h=1}^{\infty} \kappa^{h-1}\, \E_t[\Delta d_{t+h}] \right).
+  \label{eq:q1e_infinite}
+\end{equation}
 
 \task{(2) Explain and justify any assumptions you make.}
 
