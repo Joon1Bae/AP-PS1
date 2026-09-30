@@ -1287,7 +1287,8 @@ rule, as in method (v) of Question~2b (code: \texttt{src/q4c.py}).
 \end{table}
 
 \subsection{Cochrane--Piazzesi factor}
-% TODO (Q4d): time-series plot of cp_t with NBER recession shading
+% TODO (Q4d): interpretation (student to write)
+% Figure produced by src/q4d.py from spec/q4d.md.
 
 \task{Estimate the Cochrane and Piazzesi (2005) factor from
 \[
@@ -1298,14 +1299,60 @@ rule, as in method (v) of Question~2b (code: \texttt{src/q4c.py}).
 and provide a time-series plot of $cp_t$ with NBER recession gray areas in the background (the
 NBER recession dummies are available under \url{https://fred.stlouisfed.org/series/USREC})}
 
+The regression
+\begin{equation}
+  \frac{1}{4} \sum_{H=2}^{5} \xr^{(H)}_{b,t+1}
+  = \theta_0 + \sum_{H=1}^{5} \theta_H\, f^{(H)}_{b,t} + u_t
+  \label{eq:q4d_regression}
+\end{equation}
+is estimated by OLS, with $\xr$ and $f$ as in (\ref{eq:q4a_defs}) and $t+1$ being 12 months
+after $t$. It uses every month $t$ for which the dependent variable is observed, i.e.\
+$t + 12 \le$ 2024:12, so the sample is 1952:06--2023:12 (859 observations; $R^2 = 0.158$). The
+Cochrane--Piazzesi factor is the fitted value
+$cp_t = \hat\theta_0 + \sum_{H=1}^{5} \hat\theta_H\, f^{(H)}_{b,t}$, defined on the regression
+months only. Figure~\ref{fig:q4d} plots $cp_t$, with the NBER recession months (FRED series
+USREC, 1 for a recession month) shaded in gray (code: \texttt{src/q4d.py}).
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.95\textwidth]{q4d_cp.pdf}
+  \caption{Cochrane--Piazzesi factor $cp_t$, the fitted value of regression
+  (\ref{eq:q4d_regression}), 1952:06--2023:12. Gray areas are NBER recessions.}
+  \label{fig:q4d}
+\end{figure}
+
 \subsection{Excess return regressions on the CP factor}
-% TODO (Q4e): table analogous to slide 5.5, second table; NW(1994) t-stats
+% TODO (Q4e): discussion of the results (student to write)
+% Table produced by src/q4e.py from spec/q4e.md.
 
 \task{For $H = 2, 3, 4, 5$, estimate the regression
 $\xr^{(H)}_{b,t+1} = a^{(H)} + b^{(H)} \cdot cp_t + \varepsilon^{(H)}_t$ (4.4). Using the
 results from the regressions in Equation 4.4, reproduce a table analogous to the second table
 on slide 5.5 of the Module 1 lecture notes. For the t-statistics, use the method in Newey and
 West (1987, 1994) (see Footnote 3).}
+
+Table~\ref{tab:q4e} reports OLS estimates of
+\begin{equation}
+  \xr^{(H)}_{b,t+1} = a^{(H)} + b^{(H)}\, cp_t + \varepsilon^{(H)}_t,
+  \qquad H = 2, \dots, 5,
+  \label{eq:q4e_regression}
+\end{equation}
+with $\xr$ as in (\ref{eq:q4a_defs}), $cp_t$ from Question~4d and $t+1$ being 12 months after
+$t$. Each regression uses every month $t$ for which $\xr^{(H)}_{b,t+1}$ is observed, i.e.\
+$t + 12 \le$ 2024:12, so all four samples are 1952:06--2023:12, the months on which $cp_t$ is
+defined. The $t$-statistics use Newey--West (1987) standard errors with the lag length
+selected by the Newey--West (1994) automatic bandwidth rule, as in method (v) of Question~2b
+(code: \texttt{src/q4e.py}).
+
+\begin{table}[H]
+  \centering
+  \input{../output/q4e_table.tex}
+  \caption{OLS estimates of $b^{(H)}$ in regression (\ref{eq:q4e_regression}), with
+  Newey--West (1987, 1994) $t$-statistics in brackets (23 selected lags for every $H$) and
+  $R^2$ in percent. Monthly observations, predictor months 1952:06--2023:12 (859 observations
+  for each $H$).}
+  \label{tab:q4e}
+\end{table}
 
 % =====================================================================
 % \bibliographystyle{...}

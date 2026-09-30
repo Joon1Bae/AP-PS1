@@ -1320,3 +1320,18 @@ I'll pass my explanation for now."
 - **Type of assistance:** formatting/translation (grammar, layout); economic reasoning review
 - **Grouped follow-up requests:** none
 - **Git commit after:** 229d8faf4ec8cd140e3fe1a52188c8a66af38222
+
+## Interaction 84 — Q4d, Q4e — 2026-09-30 03:03
+
+- **Problem set item:** Q4d and Q4e (Sections 4.4 and 4.5 of the LaTeX solution).
+- **Substantive prompt (verbatim):** "Could you attach my analysis result into .tex file?" (following the AI's explanation, in the preceding administrative reply, that the Q4d and Q4e outputs of Interactions 29–30 had never been added to the `.tex`).
+- **Purpose:** Add the existing Q4d and Q4e results to the LaTeX solution in the format of Q4b and Q4c (formatting/presentation of existing results; no new analysis).
+- **Git commit before:** ad3ae3a51be7bd5f496911969d6a0491682db79c
+- **Assistance provided:** Section 4.4 (below the Task block): a paragraph stating regression (4.3) as estimated (OLS, t+1 = 12 months, sample of every t with t + 12 ≤ 2024:12, i.e. 1952:06–2023:12, 859 observations, R² = 0.158), cp_t as the fitted value on the regression months only, the NBER shading from FRED USREC; and the figure `output/q4d_cp.pdf` with a caption. As in `spec/q4d.md`, the θ estimates and their t-statistics are not reported (they remain in `output/q4d_coefficients.csv`). In the displayed regression the coefficient is written θ_H, matching the summation index (the problem statement writes θ_h). Section 4.5: a paragraph stating regression (4.4), the sample (1952:06–2023:12, the months on which cp_t is defined) and the Newey–West (1987, 1994) t-statistics with the method (v) lag rule; and the table `output/q4e_table.tex` with a caption (23 lags for every H, 859 observations). The two TODO comments were changed to "interpretation / discussion (student to write)" comments. No script was re-run and no number was changed; all numbers are read from `output/q4d_coefficients.csv` and `output/q4e_regressions.csv`. No interpretation written. Recompiled with `tectonic` (30 pages) and checked the rendered pages 29–30.
+- **Files inspected:** tex/ps1_solution.tex (Sections 4.3–4.5), src/q4d.py, output/q4d_coefficients.csv, output/q4d_cp.csv, output/q4e_regressions.csv, output/q4e_table.tex, output/q4c_table.tex, spec/q4d.md, spec/q4e.md, the compiled PDF (pages 29–30)
+- **Files directly modified by AI:** tex/ps1_solution.tex (Sections 4.4 and 4.5), tex/ps1_solution.pdf (recompiled), AI_INTERACTIONS.md (this entry)
+- **Errors, omissions, or ambiguities identified:** none.
+- **Substantive mathematical / economic / empirical suggestions made:** none
+- **Type of assistance:** formatting/translation (presentation of existing results)
+- **Grouped follow-up requests:** none
+- **Git commit after:** AFTER_HASH
