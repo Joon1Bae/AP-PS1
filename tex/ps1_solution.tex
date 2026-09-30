@@ -14,6 +14,7 @@
 \usepackage{subcaption}
 \usepackage{float}
 \usepackage{enumitem}
+\usepackage{needspace}
 \usepackage[colorlinks=true, linkcolor=blue, citecolor=blue, urlcolor=blue]{hyperref}
 
 \graphicspath{{../output/}}
@@ -34,10 +35,15 @@
 \newcommand{\Dur}{\mathit{Dur}}
 
 % ---------- Task blocks ----------
-% Convention (student's instruction, AI_INTERACTIONS.md Interaction 58): every subsection
-% opens with a "Task" block that quotes the problem's instructions verbatim, split into
-% numbered items (1), (2), ... where the problem gives more than one instruction.
-\newcommand{\task}[1]{\noindent\textbf{Task.} #1\par\medskip}
+% Convention (student's instructions, AI_INTERACTIONS.md Interactions 58-59): every
+% subsection states which instruction of the problem it answers with "Task" blocks that
+% quote the problem's instructions verbatim, numbered (1), (2), ... where the problem gives
+% more than one instruction. Each quoted instruction is placed directly above the part of
+% the answer that addresses it, not collected at the top of the subsection.
+\makeatletter
+\newcommand{\task}[1]{\par\needspace{5\baselineskip}\medskip\noindent\textbf{Task.} #1\par
+  \nopagebreak\medskip\@afterheading}   % like a heading: no page break right after it
+\makeatother
 
 % ---------- Title ----------
 \title{BUSFIN 8200: Asset Pricing Foundations\\Problem Set 1}
@@ -61,7 +67,7 @@
 % taking expectations) is not displayed; the student did not write it separately.
 
 \task{(1) Starting from $R_{e,t+1} = (P_{t+1} + D_{t+1})/P_t$, derive the (approximate)
-Equations 1.1, 1.2, and 1.3. (2) Explain and justify any assumptions you make.}
+Equations 1.1, 1.2, and 1.3.}
 
 Throughout, a lowercase letter denotes the log of the corresponding uppercase variable,
 e.g.\ $r_{e,t+1} = \log(R_{e,t+1})$, $p_t = \log(P_t)$ and $d_t = \log(D_t)$. The log
@@ -185,6 +191,8 @@ Under (i)--(ii), the limit of (\ref{eq:q1a_expectation}) is
 \end{equation}
 which is Equation 1.3 of the problem statement. Nothing in the derivation uses that the
 cash flow is a dividend.
+
+\task{(2) Explain and justify any assumptions you make.}
 
 \paragraph{Assumptions.}
 [Explain and justify the assumptions made in the derivation]

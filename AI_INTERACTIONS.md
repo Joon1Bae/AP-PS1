@@ -945,3 +945,18 @@ I'll pass my explanation for now."
 - **Type of assistance:** formatting/translation
 - **Grouped follow-up requests:** none
 - **Git commit after:** 9f99fe5d76ee226f20c9fac6584857ea97efbc25
+
+## Interaction 59 — Document convention (Task blocks); Q1a — 2026-09-29 23:22
+
+- **Problem set item:** Document-wide Task-block convention (revised) and Section 1.1 (Q1a): the two quoted instructions placed separately, each directly above the part of the answer that addresses it. No answer content changed.
+- **Substantive prompt (verbatim):** "Split the Task block in Section 1.1. Do not quote both instructions together at the top; place each quoted instruction directly above the part of the answer that addresses it."
+- **Purpose:** Apply the student's layout decision to Section 1.1 and to the convention defined in Interaction 58 (formatting).
+- **Git commit before:** c008f27f25f5bed230a0083cb91a07e59d3206df
+- **Assistance provided:** The student did not invoke `/TP`; the AI reminded them and ran the procedure. This interaction was carried out after the student switched the session's model to claude-opus-5-5 (`/model opus`). In `tex/ps1_solution.tex`: split the Task block of Section 1.1 into `\task{(1) Starting from ... derive the (approximate) Equations 1.1, 1.2, and 1.3.}` at the top of the derivation (before the notation sentence and the "Equation 1.1" paragraph, which together with "Equation 1.2" and "Equation 1.3" answer instruction (1)) and `\task{(2) Explain and justify any assumptions you make.}` directly above the "Assumptions" paragraph; the quoted text is unchanged from Interaction 58. Updated the preamble comment of the convention: Task blocks quote the instructions verbatim, numbered where the problem gives more than one, and each quoted instruction is placed directly above the part of the answer that addresses it. Typesetting of `\task` (programming choice, no content): space above the block, `\needspace{5\baselineskip}` (package `needspace` added), and `\@afterheading` at the end so that, like a heading, a Task block is never separated by a page break from the answer below it; this was needed because the first compilation put Task (2) at the bottom of page 2 and the Assumptions paragraph at the top of page 3. Recompiled with `tectonic` (18 pages) and checked the rendered pages 1–3.
+- **Files inspected:** tex/ps1_solution.tex (preamble, Question 1a), the compiled PDF (pages 1–3)
+- **Files directly modified by AI:** tex/ps1_solution.tex (preamble: convention comment, `\task` definition, `needspace` package; Section 1.1: Task block split), tex/ps1_solution.pdf (recompiled), AI_INTERACTIONS.md (this entry)
+- **Errors, omissions, or ambiguities identified:** none. The Task blocks of the other subsections are still to be added, following the revised convention.
+- **Substantive mathematical / economic / empirical suggestions made:** none
+- **Type of assistance:** formatting/translation
+- **Grouped follow-up requests:** none
+- **Git commit after:** PENDING_AFTER_HASH
