@@ -1229,4 +1229,4 @@ I'll pass my explanation for now."
 - **Substantive mathematical / economic / empirical suggestions made:** none
 - **Type of assistance:** formatting/translation
 - **Grouped follow-up requests:** none
-- **Git commit after:** AFTER_HASH
+- **Git commit after:** 4f17f1393da133b37df7a9bd7482c929548aff6b
