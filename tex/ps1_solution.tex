@@ -747,12 +747,12 @@ $R^2_{OS} = \input{../output/q2e_r2os.tex}$.
 % Figures and table produced by src/q3a.py (common rules in src/q3_common.py)
 % from spec/q3a.md and spec/q3_common.md.
 
-\task{(1) Construct the momentum signal ($\MOM$) monthly for the firms with data available in
-CRSP. Focus on the period from June of 1963 to the recent date to match the book-to-market
-construction of Questions (3b). As it is standard in the literature, restrict the analysis to
-common stocks of firms incorporated in the United States (CRSP shrcd = 10 or 11) trading on
-NYSE, Amex, or Nasdaq (CRSP exchcd = 1, 2 or 3), and exclude utilities
-($4900 \le \mathit{SIC} \le 4949$) and financials ($6000 \le \mathit{SIC} \le 6999$).}
+\task{Construct the momentum signal ($\MOM$) monthly for the firms with data available in CRSP.
+[\dots] To validate your $\MOM$ construction, merge your dataset with the CZ Dataset and define
+$\MOM^{CZ} = \texttt{Mom12m}$ [\dots]. For each month in the sample, estimate a cross-firm
+regression of $\MOM^{CZ}$ onto your $\MOM$ and record the intercept and slope coefficients as
+well as the $R^2$ from these regressions. Provide three time series plots, one for the
+intercepts, one for the slopes, and one for the $R^2$ values.}
 
 The momentum signal of stock $j$ at the end of month $\tau$ is
 \begin{equation}
@@ -776,13 +776,6 @@ and requiring non-missing market equity at $\tau$. The SIC code is the CRSP \tex
 $\tau$; a code of zero is treated as missing and replaced by the most recent earlier non-zero
 code of the same PERMNO or, if there is none, by its next later one, and a stock that never
 has a non-zero code is kept.
-
-\task{(2) To validate your $\MOM$ construction, merge your dataset with the CZ Dataset and
-define $\MOM^{CZ} = \texttt{Mom12m}$ (use the column ``permno'' to identify the stock and the
-column ``yyyymm'' to identify the date). For each month in the sample, estimate a cross-firm
-regression of $\MOM^{CZ}$ onto your $\MOM$ and record the intercept and slope coefficients as
-well as the $R^2$ from these regressions. Provide three time series plots, one for the
-intercepts, one for the slopes, and one for the $R^2$ values.}
 
 For each month $\tau$, the cross-firm regression
 \begin{equation}
@@ -834,20 +827,13 @@ $R^2$ of these regressions, and Table~\ref{tab:q3a} summarizes them (code:
 % Figures produced by src/q3b.py (common rules in src/q3_common.py)
 % from spec/q3b.md and spec/q3_common.md.
 
-\task{(1) Construct the book-to-market signal ($\BM$) monthly for the firms with data
-available in the CRSP and COMPUSTAT datasets. To ensure all information used in the
-construction of $\BM$ is available to investors (see Fama and French (1992)), construct $\BM$
-as of the end of June of year $t$ using CRSP market equity data from December of calendar year
-$t-1$ (for $\mathit{ME}$) and COMPUSTAT accounting data from the fiscal year ending in calendar
-year $t-1$ (for $\mathit{BE}$). Then, keep $\BM$ fixed from June of year $t$ to May of year
-$t+1$, updating $\BM$ again at June of year $t+1$. Also exclude firm-month observations with
-$\mathit{BE} \le 0$. To avoid backfilling bias (see Fama and French (1993)), require a minimum
-of two previous years in COMPUSTAT for a company to be included in the analysis and construct
-$\BM$ from June of 1963 to the most recent date so that the first fiscal year of COMPUSTAT
-data is 1962. As it is standard in the literature, restrict the analysis to common stocks of
-firms incorporated in the United States (CRSP shrcd = 10 or 11) trading on NYSE, Amex, or
-Nasdaq (CRSP exchcd = 1, 2 or 3), and exclude utilities ($4900 \le \mathit{SIC} \le 4949$) and
-financials ($6000 \le \mathit{SIC} \le 6999$).}
+\task{Construct the book-to-market signal ($\BM$) monthly for the firms with data available in the
+CRSP and COMPUSTAT datasets. [\dots] To validate your $\mathit{BE}/\mathit{ME}$ construction,
+merge your dataset with the CZ Dataset and calculate $\BM^{CZ} = \exp(\texttt{BMdec})$
+[\dots]. For each month in the sample, estimate a cross-firm regression of $\BM^{CZ}$ onto your
+$\BM$ and record the intercept and slope coefficients as well as the $R^2$ from these
+regressions. Provide three time series plots, one for the intercepts, one for the slopes, and
+one for the $R^2$ values.}
 
 The book-to-market signal of stock $j$ for year $t$ is
 \begin{equation}
@@ -876,13 +862,6 @@ several records with a fiscal year-end in the same calendar year, a \texttt{P} l
 preferred to a \texttt{C} link, and then the latest fiscal year-end date is used. To avoid
 backfilling bias, the record used must be preceded by at least two earlier records
 (distinct fiscal year-end dates) of the same firm in the file.
-
-\task{(2) To validate your $\mathit{BE}/\mathit{ME}$ construction, merge your dataset with the
-CZ Dataset and calculate $\BM^{CZ} = \exp(\texttt{BMdec})$ (use the column ``permno'' to
-identify the stock and the column ``yyyymm'' to identify the date). For each month in the
-sample, estimate a cross-firm regression of $\BM^{CZ}$ onto your $\BM$ and record the
-intercept and slope coefficients as well as the $R^2$ from these regressions. Provide three
-time series plots, one for the intercepts, one for the slopes, and one for the $R^2$ values.}
 
 In the release of the CZ Dataset used here (2025.10), \texttt{BMdec} is the book-to-market
 ratio in levels and not its logarithm, so $\BM^{CZ} = \texttt{BMdec}$ is used instead of
@@ -935,7 +914,12 @@ $\MOM^{CZ}$, and $\GP^{CZ}$), construct decile portfolios as described in the le
   \item Value-weighted, rebalanced monthly, and with NYSE breakpoints
   \item Value-weighted, rebalanced annually (at June), and with general breakpoints
   \item Equal-weighted, rebalanced monthly, and with general breakpoints
-\end{enumerate}}
+\end{enumerate}
+For each of the five types of decile portfolios, provide a scatterplot with the decile value
+(1 to 10) in the x-axis and the average portfolio excess return in the y-axis. To keep the
+three signals in the same scatterplot (so that you have a total of five scatterplots), use the
+color blue for $\BM^{CZ}$ portfolios, red for $\MOM^{CZ}$ portfolios, and green for
+$\GP^{CZ}$ portfolios.}
 
 Decile portfolios are formed on each of the three signals of the CZ Dataset,
 $\BM^{CZ} = \texttt{BMdec}$ (in levels, as in Question~3b), $\MOM^{CZ} = \texttt{Mom12m}$ and
@@ -965,12 +949,6 @@ breakpoints; (v) EW, monthly rebalancing, general breakpoints. The return months
 1963:07--2025:01 (739 months) for all five types; the last annual formation is June 2024
 (code: \texttt{src/q3c.py}, \texttt{src/q3\_common.py}).
 
-\task{(2) For each of the five types of decile portfolios, provide a scatterplot with the
-decile value (1 to 10) in the x-axis and the average portfolio excess return in the y-axis. To
-keep the three signals in the same scatterplot (so that you have a total of five
-scatterplots), use the color blue for $\BM^{CZ}$ portfolios, red for $\MOM^{CZ}$ portfolios,
-and green for $\GP^{CZ}$ portfolios.}
-
 \begin{figure}[H]
   \centering
   \includegraphics[width=0.49\textwidth]{q3c_deciles_i.pdf}\hfill
@@ -984,7 +962,7 @@ and green for $\GP^{CZ}$ portfolios.}
   \label{fig:q3c_deciles}
 \end{figure}
 
-\task{(3) Moreover calculate the HML portfolio (decile 10 - decile 1) in each case (you should
+\task{(2) Moreover calculate the HML portfolio (decile 10 - decile 1) in each case (you should
 have a total of 15 HML portfolios) and report in a table the HML average returns as well as
 their respective t-statistics (using Newey and West (1987, 1994) standard errors, see
 Footnote 3).}
@@ -1011,23 +989,8 @@ portfolio, defined as decile 10 minus decile 1.
 \task{Estimate Fama-MacBeth regressions of $\xR_{j,\tau+1}$ on signals available at month
 $\tau$ and report the results in a table (including the t-statistic of each coefficient).
 Estimate the following regression specifications (at each $\tau$, use both OLS and WLS with
-monht $\tau$ market-equity weights):
-\begin{enumerate}[label=(\roman*), nosep, leftmargin=2.5em]
-  \item $\xR_{j,\tau+1} = a + b_{\BM} \cdot Q^{\BM}_{j,\tau} + \varepsilon_{j,\tau+1}$
-  \item $\xR_{j,\tau+1} = a + b_{\GP} \cdot Q^{\GP}_{j,\tau} + \varepsilon_{j,\tau+1}$
-  \item $\xR_{j,\tau+1} = a + b_{\Dur} \cdot Q^{\Dur}_{j,\tau} + \varepsilon_{j,\tau+1}$
-  \item $\xR_{j,\tau+1} = a + b_{\BM} \cdot Q^{\BM}_{j,\tau} + b_{\GP} \cdot Q^{\GP}_{j,\tau}
-    + \varepsilon_{j,\tau+1}$
-  \item $\xR_{j,\tau+1} = a + b_{\Dur} \cdot Q^{\Dur}_{j,\tau} + b_{\BM} \cdot Q^{\BM}_{j,\tau}
-    + \varepsilon_{j,\tau+1}$
-  \item $\xR_{j,\tau+1} = a + b_{\Dur} \cdot Q^{\Dur}_{j,\tau} + b_{\GP} \cdot Q^{\GP}_{j,\tau}
-    + \varepsilon_{j,\tau+1}$
-  \item $\xR_{j,\tau+1} = a + b_{\Dur} \cdot Q^{\Dur}_{j,\tau} + b_{\BM} \cdot Q^{\BM}_{j,\tau}
-    + b_{\GP} \cdot Q^{\GP}_{j,\tau} + \varepsilon_{j,\tau+1}$
-\end{enumerate}
-where $Q^{X}_{j,\tau}$ reflects the quantile of signal $X_{j,\tau}$ in the cross-firm
-distribution of $X$ at month $\tau$ (for $\BM$ and $\GP$ you should use the Chen and
-Zimmermann (2022) version of the signals).}
+monht $\tau$ market-equity weights): [\dots] where $Q^{X}_{j,\tau}$ reflects the quantile of
+signal $X_{j,\tau}$ in the cross-firm distribution of $X$ at month $\tau$ [\dots].}
 
 The signals at month $\tau$ are $\BM^{CZ} = \texttt{BMdec}$ and $\GP^{CZ} = \texttt{GP}$ from
 the CZ Dataset, as in Question~3c, and the equity duration $\Dur$ from the Dur Dataset, where
@@ -1095,25 +1058,9 @@ $\xR_{p,\tau+1} = a + b_{\BM} \cdot \mathit{Dec}^{\BM}_{p,\tau}
 + b_{\GP} \cdot \mathit{Dec}^{\GP}_{p,\tau} + \varepsilon_{p,\tau+1}$ by pooled OLS using the
 20 portfolios with Driscoll and Kraay (1998) standard errors. Following this approach,
 estimate the following regression specifications and report the results in a table
-(including t-statistics):
-\begin{enumerate}[label=(\roman*), nosep, leftmargin=2.5em]
-  \item $\xR_{p,\tau+1} = a + b_{\BM} \cdot \mathit{Dec}^{\BM}_{p,\tau} + \varepsilon_{p,\tau+1}$
-  \item $\xR_{p,\tau+1} = a + b_{\GP} \cdot \mathit{Dec}^{\GP}_{p,\tau} + \varepsilon_{p,\tau+1}$
-  \item $\xR_{p,\tau+1} = a + b_{\Dur} \cdot \mathit{Dec}^{\Dur}_{p,\tau} + \varepsilon_{p,\tau+1}$
-  \item $\xR_{p,\tau+1} = a + b_{\BM} \cdot \mathit{Dec}^{\BM}_{p,\tau}
-    + b_{\GP} \cdot \mathit{Dec}^{\GP}_{p,\tau} + \varepsilon_{p,\tau+1}$
-  \item $\xR_{p,\tau+1} = a + b_{\Dur} \cdot \mathit{Dec}^{\Dur}_{p,\tau}
-    + b_{\BM} \cdot \mathit{Dec}^{\BM}_{p,\tau} + \varepsilon_{p,\tau+1}$
-  \item $\xR_{p,\tau+1} = a + b_{\Dur} \cdot \mathit{Dec}^{\Dur}_{p,\tau}
-    + b_{\GP} \cdot \mathit{Dec}^{\GP}_{p,\tau} + \varepsilon_{p,\tau+1}$
-  \item $\xR_{p,\tau+1} = a + b_{\Dur} \cdot \mathit{Dec}^{\Dur}_{p,\tau}
-    + b_{\BM} \cdot \mathit{Dec}^{\BM}_{p,\tau} + b_{\GP} \cdot \mathit{Dec}^{\GP}_{p,\tau}
-    + \varepsilon_{p,\tau+1}$
-\end{enumerate}
-Estimate each specification above using value-weighted portfolios as well as equal-weighted
-portfolios (in both cases the portfolios are rebalanced annually and rely on NYSE
-breakpoints). Moreover, for the $\BM$ and $\GP$ portfolios use the Chen and Zimmermann (2022)
-version of the signals.}
+(including t-statistics): [\dots] Estimate each specification above using value-weighted
+portfolios as well as equal-weighted portfolios (in both cases the portfolios are rebalanced
+annually and rely on NYSE breakpoints). [\dots]}
 
 The portfolios are decile portfolios sorted on $\BM^{CZ}$, on $\GP^{CZ}$ and on $\Dur$,
 rebalanced annually with NYSE breakpoints, value-weighted or equal-weighted. For $\BM^{CZ}$
@@ -1176,13 +1123,8 @@ a coefficient is in percent per month per decile (code: \texttt{src/q3e.py},
 % Table produced by src/q4a.py from spec/q4a.md.
 
 \task{The ``Bond Dataset'' contains yields in percentual terms, $Y^{(H)}_{b,t} \cdot 100\%$.
-Construct time series of:
-\begin{enumerate}[label=(\roman*), nosep, leftmargin=2.5em]
-  \item Log yields: $y^{(H)}_{b,t} = \log(1 + Y^{(H)}_{b,t})$
-  \item Log forward rates: $f^{(H)}_{b,t} = H \cdot y^{(H)}_{b,t} - (H-1) \cdot y^{(H-1)}_{b,t}$
-  \item Log annual returns: $r^{(H)}_{b,t} = H \cdot y^{(H)}_{b,t-1} - (H-1) \cdot y^{(H-1)}_{b,t}$
-\end{enumerate}
-For $H = 2, 3, 4, 5$, calculate and report in a table the average values of
+Construct time series of: [\dots] For $H = 2, 3, 4, 5$, calculate and report in a table the
+average values of
 \begin{enumerate}[label=(\roman*), nosep, leftmargin=2.5em]
   \item $\xy^{(H)}_{b,t} = y^{(H)}_{b,t} - y^{(1)}_{b,t}$
   \item $\xf^{(H)}_{b,t} = f^{(H)}_{b,t} - f^{(1)}_{b,t}$
