@@ -40,8 +40,11 @@
 % quote the problem's instructions verbatim, numbered (1), (2), ... where the problem gives
 % more than one instruction. Each quoted instruction is placed directly above the part of
 % the answer that addresses it, not collected at the top of the subsection.
+% ---------- Numbers produced by src/*.py ----------
+\input{../output/q1d_values.tex}
+
 \makeatletter
-\newcommand{\task}[1]{\par\needspace{5\baselineskip}\medskip\noindent\textbf{Task.} #1\par
+\newcommand{\task}[1]{\par\if@nobreak\else\needspace{5\baselineskip}\fi\medskip\noindent\textbf{Task.} #1\par
   \nopagebreak\medskip\@afterheading}   % like a heading: no page break right after it
 \makeatother
 
@@ -335,7 +338,54 @@ Figure~\ref{fig:q1b}, and Table~\ref{tab:q1c} reports them with their sum (code:
 \end{table}
 
 \subsection{Infinite-horizon decomposition}
-% TODO (Q1d): b_re^(inf), b_dd^(inf) from the VAR + interpretation
+% Numbers produced by src/q1d.py from spec/q1d.md (macros in output/q1d_values.tex).
+
+\task{(1) Using the VAR in Equation 1.5, calculate the values for $b^{(\infty)}_{r_e}$ and
+$b^{(\infty)}_{\Delta d}$.}
+
+Taking $H \to \infty$, Equation 1.4 becomes Equation 1.6 of the problem statement,
+\begin{equation}
+  1 = \underbrace{\frac{\Cov\!\left[\dpr_t,\ \sum_{h=1}^{\infty} \kappa^{h-1} r_{e,t+h}\right]}{\Var[\dpr]}}_{b^{(\infty)}_{r_e}}
+    + \underbrace{\frac{\Cov\!\left[\dpr_t,\ -\sum_{h=1}^{\infty} \kappa^{h-1} \Delta d_{t+h}\right]}{\Var[\dpr]}}_{b^{(\infty)}_{\Delta d}}.
+  \label{eq:q1d_decomposition}
+\end{equation}
+With the VAR of Question~1c, the covariances follow from (\ref{eq:q1c_cov}) and
+\begin{equation}
+  \sum_{h=1}^{\infty} \kappa^{h-1} \Gamma^{h} = \Gamma (I - \kappa \Gamma)^{-1},
+  \label{eq:q1d_geometric}
+\end{equation}
+which holds when all eigenvalues of $\kappa\Gamma$ lie inside the unit circle. This gives
+\begin{equation}
+  b^{(\infty)}_{r_e} = \frac{e_{r}' \Gamma (I - \kappa \Gamma)^{-1} \Sigma_z e_{dp}}{\Var[\dpr]},
+  \qquad
+  b^{(\infty)}_{\Delta d} = -\frac{e_{\Delta d}' \Gamma (I - \kappa \Gamma)^{-1} \Sigma_z e_{dp}}{\Var[\dpr]},
+  \label{eq:q1d_terms}
+\end{equation}
+with $\Gamma$, $\Sigma_z$, $\kappa = 0.9642$ and the VAR-implied $\Var[\dpr] = e_{dp}' \Sigma_z e_{dp}$
+of Question~1c. The largest eigenvalue of $\kappa\Gamma$ has modulus \kappaGammaMaxEig, so
+(\ref{eq:q1d_geometric}) applies. Table~\ref{tab:q1d} reports the two coefficients
+(code: \texttt{src/q1d.py}).
+
+\begin{table}[H]
+  \centering
+  \begin{tabular}{lc}
+    \toprule
+    Coefficient & Value \\
+    \midrule
+    $b^{(\infty)}_{r_e}$ & \bReInf \\
+    $b^{(\infty)}_{\Delta d}$ & \bDdInf \\
+    \midrule
+    Sum & \bSumInf \\
+    \bottomrule
+  \end{tabular}
+  \caption{VAR-implied infinite-horizon coefficients of (\ref{eq:q1d_decomposition}),
+  computed from (\ref{eq:q1d_terms}) with the VAR of Question~1c (12-month step, estimated by OLS
+  on monthly observations, 1927:12--2021:12) and $\kappa = 0.9642$.}
+  \label{tab:q1d}
+\end{table}
+
+\task{(2) Interpret the results.}
+
 [Interpret the results]
 
 \subsection{Derivation of Equations 1.7--1.9 (Gao and Martin, 2021)}
