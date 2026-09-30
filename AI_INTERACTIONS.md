@@ -795,3 +795,18 @@ I'll pass my explanation for now."
 - **Type of assistance:** formatting/translation (LaTeX exposition of the student's specifications)
 - **Grouped follow-up requests:** none
 - **Git commit after:** 6f1bbe7fa9070c270c88c9bdbd944a185a6783c3
+
+## Interaction 49 — Q1a — 2026-09-29 21:59
+
+- **Problem set item:** Q1a (derivation of Equations 1.1–1.3): the student's step after Step 6 of `tex/ps1_solution.tex` (closed form of the geometric sum and conditional expectation), stated in the prompt.
+- **Substantive prompt (verbatim):** "Then, let's move onto problem 1 again. From the step 6, Sigma^{H-1}_{h=0} K^h = (1 - k^H)/(1-k) And we can take conditional expectation given the information available until time t on both sides. Then, we get dp_t = -k0 * (1 - k^H) / (1-k) + k^H * E[dp_{t+H} | t] + \Sigma^H_{h=1} * k^h-1 * E[r_{t+h} | t] -  \Sigma^H_{h=1} * k^h-1 * E[\delta cf_{t+h} | t]" (a first message with the same content had stopped at "+ \Sigma"; the AI asked for the complete expression and for what should be done with it, and the student re-sent the complete expression without saying; the AI treated it as a request to check the step.)
+- **Purpose:** Check one specific step of the student's partial derivation (math: AI checks, does not continue).
+- **Git commit before:** 15dea413fc74b26d78953fbb1f271d15dda43f8d (contains the student's own staged edits to `tex/ps1_solution.tex`: author name and placeholder lines in Question 1, made by the student before this interaction and captured by the snapshot)
+- **Assistance provided:** The student did not invoke `/TP`; the AI reminded them and ran the procedure. The AI read Step 6 in the `.tex` (equation `eq:q1a_H_step`) and Equations 1.1–1.3 of the problem statement, read the student's "k" as κ, "k^h-1" as κ^{h−1}, "E[· | t]" as E_t[·] and "\delta cf" as Δcf, and checked: (1) the finite geometric sum Σ_{h=0}^{H−1} κ^h = (1 − κ^H)/(1 − κ) is correct for κ ≠ 1, and κ = 1/(1 + e^a) lies in (0, 1); (2) taking the expectation conditional on the information at t on both sides of Step 6 is valid because Step 6 holds for every realization, expectations are linear, the constant passes through, and E_t[dp_t] = dp_t because dp_t is known at t; (3) the resulting expression equals Equation 1.2 of the problem statement, since −κ0(1 − κ^H)/(1 − κ) = κ0(κ^H − 1)/(1 − κ), the form used there and noted in the TODO comment under Step 6. The AI reported that the step is correct and that nothing needs to change. Non-substantive observations reported: the problem statement writes r_e and Δd where the student's Steps 4–6 write r and Δcf, so the notation will need to be reconciled at some point in the write-up; the step does not yet address Equation 1.3 (the limit H → ∞), which the AI did not discuss beyond naming it as the next step in the problem statement. No part of the derivation was written, completed or rewritten by the AI, and the `.tex` was not changed.
+- **Files inspected:** tex/ps1_solution.tex (Question 1a, Steps 1–6), ps1.pdf Question 1 (extraction of Interaction 32)
+- **Files directly modified by AI:** AI_INTERACTIONS.md (this entry only)
+- **Errors, omissions, or ambiguities identified:** none in the step checked. Notation differences between the write-up and the problem statement (r vs. r_e, Δcf vs. Δd) noted as a formatting matter.
+- **Substantive mathematical / economic / empirical suggestions made:** none
+- **Type of assistance:** math review
+- **Grouped follow-up requests:** none
+- **Git commit after:** PENDING_AFTER_HASH
