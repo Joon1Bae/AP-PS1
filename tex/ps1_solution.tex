@@ -411,7 +411,15 @@ Write the gross equity return as
   R_{e,t+1} = \frac{D_{t+1}}{D_t}\,\frac{D_t}{P_t}\left(1 + \frac{P_{t+1}}{D_{t+1}}\right).
   \label{eq:q1e_gross_return}
 \end{equation}
-[The two relations substituted into (\ref{eq:q1e_gross_return})]
+
+Since $1 + D_t/P_t = e^{dy_t}$, we have
+\begin{equation}
+  \frac{D_t}{P_t} = e^{dy_t} - 1 = e^{dy_t}\left(1 - e^{-dy_t}\right)
+  \quad\text{and}\quad
+  1 + \frac{P_{t+1}}{D_{t+1}}
+  = \frac{1 + D_{t+1}/P_{t+1}}{D_{t+1}/P_{t+1}}
+  = \frac{1}{1 - e^{-dy_{t+1}}}.
+\end{equation}
 
 \noindent Substituting the two relations above into (\ref{eq:q1e_gross_return}) and taking
 logs, we get
