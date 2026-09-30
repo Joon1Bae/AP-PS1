@@ -839,4 +839,4 @@ I'll pass my explanation for now."
 - **Substantive mathematical / economic / empirical suggestions made:** none beyond identifying what the bound must be and that the stationarity argument is incomplete; the argument is left to the student.
 - **Type of assistance:** math review
 - **Grouped follow-up requests:** none
-- **Git commit after:** PENDING_AFTER_HASH
+- **Git commit after:** bea48151159bff10f26737e96b71421c659f4c7c
