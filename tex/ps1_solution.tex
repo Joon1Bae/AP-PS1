@@ -175,8 +175,6 @@ $-\kappa_0 (1 - \kappa^{H})/(1 - \kappa) = \kappa_0 (\kappa^{H} - 1)/(1 - \kappa
 \paragraph{Step 8: the limit $H \to \infty$.}
 Letting $H \to \infty$ in (\ref{eq:q1a_expectation}) requires the following assumptions.
 \begin{enumerate}[label=(\roman*)]
-  \item $0 < \kappa < 1$, shown in Step 7, so that $\kappa^{H} \to 0$ and the constant
-    converges to $-\kappa_0/(1 - \kappa)$.
   \item The no-bubble condition
     \begin{equation}
       \lim_{H \to \infty} \kappa^{H}\, \E_t[\dpr_{t+H}] = 0.
@@ -196,7 +194,7 @@ Letting $H \to \infty$ in (\ref{eq:q1a_expectation}) requires the following assu
     non-negative random variable with finite mean is almost surely finite, so
     $\sum_{h=1}^{\infty} \kappa^{h-1}\, \E_t[x_{t+h}]$ converges absolutely almost surely.
 \end{enumerate}
-Under (i)--(iii), the limit of (\ref{eq:q1a_expectation}) is
+Under (i)--(ii), the limit of (\ref{eq:q1a_expectation}) is
 \begin{equation}
   \dpr_t = -\frac{\kappa_0}{1 - \kappa}
            + \sum_{h=1}^{\infty} \kappa^{h-1}\, \E_t[r_{t+h}]
