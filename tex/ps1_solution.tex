@@ -44,7 +44,8 @@
 \input{../output/q1d_values.tex}
 
 \makeatletter
-\newcommand{\task}[1]{\par\if@nobreak\else\needspace{5\baselineskip}\fi\medskip\noindent\textbf{Task.} #1\par
+\newcommand{\task}[1]{\par\if@nobreak\else\needspace{5\baselineskip}\fi\medskip\noindent
+  \begin{minipage}{\linewidth}\textbf{Task.} #1\end{minipage}\par   % never split across pages
   \nopagebreak\medskip\@afterheading}   % like a heading: no page break right after it
 \makeatother
 
@@ -499,6 +500,13 @@ Equation 1.9 of the problem statement,
 
 \subsection{Predictive regressions by horizon}
 % TODO (Q2a): description of the results (student to write)
+
+\task{(1) Using the EQ Dataset, estimate the regression (by OLS)
+$\frac{1}{H} \cdot \sum_{h=1}^{H} \xR_{e,t+h} = a^{(H)} + b^{(H)} \cdot D_t/P_t + \varepsilon^{(H)}_t$
+(2.1) for $H = 1, 2, 3, \dots, 14, 15$ years (with $\xR_{e,t} = e^{r_{e,t}} - e^{r_{f,t}}$ and
+$D_t/P_t = e^{\dpr_t}$). Plot a graph with $H$ in the x-axis and the $R^2_{adj}$ of these
+regressions in the y-axis.}
+
 Figure~\ref{fig:q2a} plots the adjusted $R^2$ of the regression
 \begin{equation}
   \frac{1}{H}\sum_{h=1}^{H} \xR_{e,t+h} = a^{(H)} + b^{(H)}\,\frac{D_t}{P_t} + \varepsilon^{(H)}_t,
@@ -518,10 +526,25 @@ $H$ years of subsequent data are available (code: \texttt{src/q2a.py}).
   \label{fig:q2a}
 \end{figure}
 
+\task{(2) Describe the results you observe.}
+
 [Describe the results you observe]
 
 \subsection{Standard errors for the one-year predictive regression}
 % TODO (Q2b): report / discussion of the results (student to write)
+
+\task{Estimate the regression (by OLS) $\xR_{e,t+1} = a + b \cdot D_t/P_t + \varepsilon_t$ (2.2)
+but this time also obtain standard errors for $\hat b$ using five different methods:
+\begin{enumerate}[label=(\roman*), nosep, leftmargin=2.5em]
+  \item The baseline OLS standard errors
+  \item The White (1980) standard errors
+  \item The Newey and West (1987) standard errors with 11 lags
+  \item The Hansen and Hodrick (1980) standard errors with 11 lags
+  \item The Newey and West (1987, 1994) standard errors
+\end{enumerate}
+[\dots] Report $\hat b$ as well as its t-statistic based on each of the five standard error
+estimation methods above.}
+
 Table~\ref{tab:q2b} reports the OLS estimates of
 \begin{equation}
   \xR_{e,t+1} = a + b\,\frac{D_t}{P_t} + \varepsilon_t,
@@ -544,6 +567,10 @@ for which the subsequent annual return is available (code: \texttt{src/q2b.py}).
 
 \subsection{Amihud and Hurvich (2004) bias-corrected estimate}
 % TODO (Q2c): contrast with Q2b and explain why the two estimates differ (student to write)
+
+\task{(1) Reestimate the regression in Equation 2.2 but this time using the method in Amihud
+and Hurvich (2004).}
+
 Table~\ref{tab:q2c} reports the Amihud and Hurvich (2004) estimate $\hat b^c$ of $b$ in
 regression (\ref{eq:q2b_regression}), on the same sample as Table~\ref{tab:q2b}. First,
 $D_{t+1}/P_{t+1}$ is regressed on $D_t/P_t$ by OLS, giving $\hat\theta$ and $\hat\rho$, and the
@@ -569,13 +596,28 @@ $\widehat{SE}^c(\hat b^c) = \sqrt{(\hat b_u)^2 \,(1 + 3/n + 9/n^2)^2\, \widehat{
   \label{tab:q2c}
 \end{table}
 
-[Explanation of reason why it is natural for the two estimates to differ]
+\task{(2) Report the $b$ estimate obtained in this question and contrast it to the $b$
+estimated obtained in Question (2b).}
 
 [Contrast with the b estimate of Question 2b]
+
+\task{(3) Explain why it is natural for the two estimates to differ.}
+
+[Explanation of reason why it is natural for the two estimates to differ]
 
 \subsection{Out-of-sample estimation (expanding window)}
 % TODO (Q2d): interpretation of the figures and of R^2_OS (student to write)
 % Figures and the R^2_OS number are produced by src/q2d.py from spec/q2d.md.
+
+\task{(1) Estimate the regression in Equation 2.2 again, but this time using out-of-sample (OS)
+estimation with an expanding window (i.e., using time-varying $a_t$ and $b_t$ that are
+estimated with historical data). Initiate your OS estimation in December/1940 (i.e.,
+$D_t/P_t$ in December/1939 and $\xR_{e,t+1}$ in December/1940). Label the historical
+(expanding window) mean as $\overline{\xR}_{e,t}$, the fitted values from Question (1b) as
+$\hat{E}^{IS}_t[\xR_e]$, and the OS forecasts from this question as $\hat{E}^{OS}_t[\xR_e]$.
+Plot the time-series of $\overline{\xR}_{e,t}$, $\hat{E}^{IS}_t[\xR_e]$, and
+$\hat{E}^{OS}_t[\xR_e]$ from December/1940 to the end of the sample.}
+
 At each forecast origin $t$, only the information available at $t$ is used. Regression
 (\ref{eq:q2b_regression}) is estimated by OLS on the pairs
 $\left(D_s/P_s,\ \xR_{e,s+1}\right)$ whose return is realized by $t$, i.e.\ with $s$ at
@@ -607,6 +649,11 @@ forecast targets $t+1$ are the 973 months 1940:12--2021:12 (code: \texttt{src/q2
   \label{fig:q2d_forecasts}
 \end{figure}
 
+\task{(2) Then, calculate and report the $R^2_{OS}$ value using the forecasting errors from
+December/1940 to the end of the sample (note that we calculate $R^2_{OS}$ instead of
+$\overline{R}^2_{OS}$ because a degree of freedom adjustment is not needed in an OS
+analysis).}
+
 The out-of-sample $R^2$ compares the squared forecast errors of
 (\ref{eq:q2d_forecast}) with those of the historical mean (\ref{eq:q2d_mean}),
 \begin{equation}
@@ -617,6 +664,11 @@ The out-of-sample $R^2$ compares the squared forecast errors of
 where $\mathcal{T}$ is the set of forecast origins. Over all origins, i.e.\ over the
 forecast-target months 1940:12--2021:12,
 $R^2_{OS} = \input{../output/q2d_r2os.tex}$.
+
+\task{(3) Now, to understand how $R^2_{OS}$ varies over time, calculate $R^2_{OS}$ using a
+50-year rolling window for the forecasting errors (without modifying the $a_t$ and $b_t$
+calculations) and provide a time-series plot of these $R^2_{OS}$ values (note that the
+time-series will start in December/1990 and end at the end of your sample).}
 
 For the rolling version, $\hat a_t$, $\hat b_t$ and $\overline{\xR}_{e,t}$ are unchanged
 and only the two sums in (\ref{eq:q2d_r2os}) are restricted to a window: $R^2_{OS}(T)$ uses
@@ -635,6 +687,12 @@ the 600 consecutive forecast-target months ending at $T$, for $T = $ 1990:12, \d
 \subsection{Out-of-sample estimation with steady-state restrictions}
 % TODO (Q2e): interpretation of the figures and of R^2_OS, and comparison with Q2d (student to write)
 % Figures and the R^2_OS number are produced by src/q2e.py from spec/q2e.md.
+
+\task{Repeat Question (2d). However, this time estimate the OS coefficients using
+$\hat a_t = G_t - 1$ and $\hat b_t = G_t$ when obtaining $\hat{E}^{OS}_t[\xR_e]$, where $G_t$
+is the historical (expanding window) average of $e^{\Delta d_t}$ over the same sample used to
+calculate $\overline{\xR}_{e,t}$.}
+
 The procedure is that of Question~2d except for the coefficients, which are restricted to
 $\hat a_t = G_t - 1$ and $\hat b_t = G_t$, where
 \begin{equation}
@@ -683,6 +741,14 @@ $R^2_{OS} = \input{../output/q2e_r2os.tex}$.
 % TODO (Q3a): interpretation of the results (student to write)
 % Figures and table produced by src/q3a.py (common rules in src/q3_common.py)
 % from spec/q3a.md and spec/q3_common.md.
+
+\task{(1) Construct the momentum signal ($\MOM$) monthly for the firms with data available in
+CRSP. Focus on the period from June of 1963 to the recent date to match the book-to-market
+construction of Questions (3b). As it is standard in the literature, restrict the analysis to
+common stocks of firms incorporated in the United States (CRSP shrcd = 10 or 11) trading on
+NYSE, Amex, or Nasdaq (CRSP exchcd = 1, 2 or 3), and exclude utilities
+($4900 \le \mathit{SIC} \le 4949$) and financials ($6000 \le \mathit{SIC} \le 6999$).}
+
 The momentum signal of stock $j$ at the end of month $\tau$ is
 \begin{equation}
   \MOM_{j,\tau} = \prod_{m=\tau-11}^{\tau-1} \left(1 + R_{j,m}\right) - 1,
@@ -705,6 +771,13 @@ and requiring non-missing market equity at $\tau$. The SIC code is the CRSP \tex
 $\tau$; a code of zero is treated as missing and replaced by the most recent earlier non-zero
 code of the same PERMNO or, if there is none, by its next later one, and a stock that never
 has a non-zero code is kept.
+
+\task{(2) To validate your $\MOM$ construction, merge your dataset with the CZ Dataset and
+define $\MOM^{CZ} = \texttt{Mom12m}$ (use the column ``permno'' to identify the stock and the
+column ``yyyymm'' to identify the date). For each month in the sample, estimate a cross-firm
+regression of $\MOM^{CZ}$ onto your $\MOM$ and record the intercept and slope coefficients as
+well as the $R^2$ from these regressions. Provide three time series plots, one for the
+intercepts, one for the slopes, and one for the $R^2$ values.}
 
 For each month $\tau$, the cross-firm regression
 \begin{equation}
@@ -755,6 +828,22 @@ $R^2$ of these regressions, and Table~\ref{tab:q3a} summarizes them (code:
 % TODO (Q3b): interpretation of the results (student to write)
 % Figures produced by src/q3b.py (common rules in src/q3_common.py)
 % from spec/q3b.md and spec/q3_common.md.
+
+\task{(1) Construct the book-to-market signal ($\BM$) monthly for the firms with data
+available in the CRSP and COMPUSTAT datasets. To ensure all information used in the
+construction of $\BM$ is available to investors (see Fama and French (1992)), construct $\BM$
+as of the end of June of year $t$ using CRSP market equity data from December of calendar year
+$t-1$ (for $\mathit{ME}$) and COMPUSTAT accounting data from the fiscal year ending in calendar
+year $t-1$ (for $\mathit{BE}$). Then, keep $\BM$ fixed from June of year $t$ to May of year
+$t+1$, updating $\BM$ again at June of year $t+1$. Also exclude firm-month observations with
+$\mathit{BE} \le 0$. To avoid backfilling bias (see Fama and French (1993)), require a minimum
+of two previous years in COMPUSTAT for a company to be included in the analysis and construct
+$\BM$ from June of 1963 to the most recent date so that the first fiscal year of COMPUSTAT
+data is 1962. As it is standard in the literature, restrict the analysis to common stocks of
+firms incorporated in the United States (CRSP shrcd = 10 or 11) trading on NYSE, Amex, or
+Nasdaq (CRSP exchcd = 1, 2 or 3), and exclude utilities ($4900 \le \mathit{SIC} \le 4949$) and
+financials ($6000 \le \mathit{SIC} \le 6999$).}
+
 The book-to-market signal of stock $j$ for year $t$ is
 \begin{equation}
   \BM_{j,t} = \frac{\mathit{BE}_{j,t-1}}{\mathit{ME}_{j,t-1}},
@@ -782,6 +871,13 @@ several records with a fiscal year-end in the same calendar year, a \texttt{P} l
 preferred to a \texttt{C} link, and then the latest fiscal year-end date is used. To avoid
 backfilling bias, the record used must be preceded by at least two earlier records
 (distinct fiscal year-end dates) of the same firm in the file.
+
+\task{(2) To validate your $\mathit{BE}/\mathit{ME}$ construction, merge your dataset with the
+CZ Dataset and calculate $\BM^{CZ} = \exp(\texttt{BMdec})$ (use the column ``permno'' to
+identify the stock and the column ``yyyymm'' to identify the date). For each month in the
+sample, estimate a cross-firm regression of $\BM^{CZ}$ onto your $\BM$ and record the
+intercept and slope coefficients as well as the $R^2$ from these regressions. Provide three
+time series plots, one for the intercepts, one for the slopes, and one for the $R^2$ values.}
 
 In the release of the CZ Dataset used here (2025.10), \texttt{BMdec} is the book-to-market
 ratio in levels and not its logarithm, so $\BM^{CZ} = \texttt{BMdec}$ is used instead of
@@ -824,6 +920,18 @@ and the $R^2$ of these regressions (code: \texttt{src/q3b.py}, \texttt{src/q3\_c
 % TODO (Q3c): interpretation of the results (student to write)
 % Figures and table produced by src/q3c.py (common rules in src/q3_common.py)
 % from spec/q3c.md and spec/q3_common.md.
+
+\task{(1) Let $\GP^{CZ} = \texttt{GP}$. Then, for each of the three signals ($\BM^{CZ}$,
+$\MOM^{CZ}$, and $\GP^{CZ}$), construct decile portfolios as described in the lectures
+(returns come from CRSP). Create five types of decile portfolios (for each signal):
+\begin{enumerate}[label=(\roman*), nosep, leftmargin=2.5em]
+  \item Value-weighted, rebalanced annually (at June), and with NYSE breakpoints
+  \item Equal-weighted, rebalanced annually (at June), and with NYSE breakpoints
+  \item Value-weighted, rebalanced monthly, and with NYSE breakpoints
+  \item Value-weighted, rebalanced annually (at June), and with general breakpoints
+  \item Equal-weighted, rebalanced monthly, and with general breakpoints
+\end{enumerate}}
+
 Decile portfolios are formed on each of the three signals of the CZ Dataset,
 $\BM^{CZ} = \texttt{BMdec}$ (in levels, as in Question~3b), $\MOM^{CZ} = \texttt{Mom12m}$ and
 $\GP^{CZ} = \texttt{GP}$, dated $\tau$. A stock enters a sort if it is in the universe at the
@@ -852,6 +960,12 @@ breakpoints; (v) EW, monthly rebalancing, general breakpoints. The return months
 1963:07--2025:01 (739 months) for all five types; the last annual formation is June 2024
 (code: \texttt{src/q3c.py}, \texttt{src/q3\_common.py}).
 
+\task{(2) For each of the five types of decile portfolios, provide a scatterplot with the
+decile value (1 to 10) in the x-axis and the average portfolio excess return in the y-axis. To
+keep the three signals in the same scatterplot (so that you have a total of five
+scatterplots), use the color blue for $\BM^{CZ}$ portfolios, red for $\MOM^{CZ}$ portfolios,
+and green for $\GP^{CZ}$ portfolios.}
+
 \begin{figure}[H]
   \centering
   \includegraphics[width=0.49\textwidth]{q3c_deciles_i.pdf}\hfill
@@ -864,6 +978,11 @@ breakpoints; (v) EW, monthly rebalancing, general breakpoints. The return months
   $\GP^{CZ}$. Return months 1963:07--2025:01.}
   \label{fig:q3c_deciles}
 \end{figure}
+
+\task{(3) Moreover calculate the HML portfolio (decile 10 - decile 1) in each case (you should
+have a total of 15 HML portfolios) and report in a table the HML average returns as well as
+their respective t-statistics (using Newey and West (1987, 1994) standard errors, see
+Footnote 3).}
 
 Table~\ref{tab:q3c_hml} reports, for each type and signal, the average return of the HML
 portfolio, defined as decile 10 minus decile 1.
@@ -883,6 +1002,28 @@ portfolio, defined as decile 10 minus decile 1.
 % TODO (Q3d): interpretation of the results (student to write)
 % Table produced by src/q3d.py (common rules in src/q3_common.py)
 % from spec/q3d.md and spec/q3_common.md.
+
+\task{Estimate Fama-MacBeth regressions of $\xR_{j,\tau+1}$ on signals available at month
+$\tau$ and report the results in a table (including the t-statistic of each coefficient).
+Estimate the following regression specifications (at each $\tau$, use both OLS and WLS with
+monht $\tau$ market-equity weights):
+\begin{enumerate}[label=(\roman*), nosep, leftmargin=2.5em]
+  \item $\xR_{j,\tau+1} = a + b_{\BM} \cdot Q^{\BM}_{j,\tau} + \varepsilon_{j,\tau+1}$
+  \item $\xR_{j,\tau+1} = a + b_{\GP} \cdot Q^{\GP}_{j,\tau} + \varepsilon_{j,\tau+1}$
+  \item $\xR_{j,\tau+1} = a + b_{\Dur} \cdot Q^{\Dur}_{j,\tau} + \varepsilon_{j,\tau+1}$
+  \item $\xR_{j,\tau+1} = a + b_{\BM} \cdot Q^{\BM}_{j,\tau} + b_{\GP} \cdot Q^{\GP}_{j,\tau}
+    + \varepsilon_{j,\tau+1}$
+  \item $\xR_{j,\tau+1} = a + b_{\Dur} \cdot Q^{\Dur}_{j,\tau} + b_{\BM} \cdot Q^{\BM}_{j,\tau}
+    + \varepsilon_{j,\tau+1}$
+  \item $\xR_{j,\tau+1} = a + b_{\Dur} \cdot Q^{\Dur}_{j,\tau} + b_{\GP} \cdot Q^{\GP}_{j,\tau}
+    + \varepsilon_{j,\tau+1}$
+  \item $\xR_{j,\tau+1} = a + b_{\Dur} \cdot Q^{\Dur}_{j,\tau} + b_{\BM} \cdot Q^{\BM}_{j,\tau}
+    + b_{\GP} \cdot Q^{\GP}_{j,\tau} + \varepsilon_{j,\tau+1}$
+\end{enumerate}
+where $Q^{X}_{j,\tau}$ reflects the quantile of signal $X_{j,\tau}$ in the cross-firm
+distribution of $X$ at month $\tau$ (for $\BM$ and $\GP$ you should use the Chen and
+Zimmermann (2022) version of the signals).}
+
 The signals at month $\tau$ are $\BM^{CZ} = \texttt{BMdec}$ and $\GP^{CZ} = \texttt{GP}$ from
 the CZ Dataset, as in Question~3c, and the equity duration $\Dur$ from the Dur Dataset, where
 the value with \texttt{FF.YEAR} $= t$ is the signal for the months from June of year $t$ to
@@ -938,6 +1079,37 @@ difference in percent per month between the highest and the lowest quantile
 % TODO (Q3e): interpretation of the results (student to write)
 % Table produced by src/q3e.py (portfolio rules in src/q3c.py, common rules in
 % src/q3_common.py) from spec/q3e.md, spec/q3c.md and spec/q3_common.md.
+
+\task{Gon\c{c}alves (2021b) proposes the use of multivariate regressions for portfolios
+analogous to the use of firm-level multivariate regressions in Question (3d). For instance, if
+we have 10 $\BM^{CZ}$ decile portfolios and 10 $\GP^{CZ}$ decile portfolios, then for each
+portfolio $p$ we can calculate the average $\BM^{CZ}$ decile of its firms (let's call it
+$\mathit{Dec}^{\BM}_{p,\tau}$) as well as the average $\GP^{CZ}$ decile of its firms (let's
+call it $\mathit{Dec}^{\GP}_{p,\tau}$) and estimate the panel regression
+$\xR_{p,\tau+1} = a + b_{\BM} \cdot \mathit{Dec}^{\BM}_{p,\tau}
++ b_{\GP} \cdot \mathit{Dec}^{\GP}_{p,\tau} + \varepsilon_{p,\tau+1}$ by pooled OLS using the
+20 portfolios with Driscoll and Kraay (1998) standard errors. Following this approach,
+estimate the following regression specifications and report the results in a table
+(including t-statistics):
+\begin{enumerate}[label=(\roman*), nosep, leftmargin=2.5em]
+  \item $\xR_{p,\tau+1} = a + b_{\BM} \cdot \mathit{Dec}^{\BM}_{p,\tau} + \varepsilon_{p,\tau+1}$
+  \item $\xR_{p,\tau+1} = a + b_{\GP} \cdot \mathit{Dec}^{\GP}_{p,\tau} + \varepsilon_{p,\tau+1}$
+  \item $\xR_{p,\tau+1} = a + b_{\Dur} \cdot \mathit{Dec}^{\Dur}_{p,\tau} + \varepsilon_{p,\tau+1}$
+  \item $\xR_{p,\tau+1} = a + b_{\BM} \cdot \mathit{Dec}^{\BM}_{p,\tau}
+    + b_{\GP} \cdot \mathit{Dec}^{\GP}_{p,\tau} + \varepsilon_{p,\tau+1}$
+  \item $\xR_{p,\tau+1} = a + b_{\Dur} \cdot \mathit{Dec}^{\Dur}_{p,\tau}
+    + b_{\BM} \cdot \mathit{Dec}^{\BM}_{p,\tau} + \varepsilon_{p,\tau+1}$
+  \item $\xR_{p,\tau+1} = a + b_{\Dur} \cdot \mathit{Dec}^{\Dur}_{p,\tau}
+    + b_{\GP} \cdot \mathit{Dec}^{\GP}_{p,\tau} + \varepsilon_{p,\tau+1}$
+  \item $\xR_{p,\tau+1} = a + b_{\Dur} \cdot \mathit{Dec}^{\Dur}_{p,\tau}
+    + b_{\BM} \cdot \mathit{Dec}^{\BM}_{p,\tau} + b_{\GP} \cdot \mathit{Dec}^{\GP}_{p,\tau}
+    + \varepsilon_{p,\tau+1}$
+\end{enumerate}
+Estimate each specification above using value-weighted portfolios as well as equal-weighted
+portfolios (in both cases the portfolios are rebalanced annually and rely on NYSE
+breakpoints). Moreover, for the $\BM$ and $\GP$ portfolios use the Chen and Zimmermann (2022)
+version of the signals.}
+
 The portfolios are decile portfolios sorted on $\BM^{CZ}$, on $\GP^{CZ}$ and on $\Dur$,
 rebalanced annually with NYSE breakpoints, value-weighted or equal-weighted. For $\BM^{CZ}$
 and $\GP^{CZ}$ they are the portfolios of types (i) and (ii) of Question~3c; the $\Dur$
@@ -997,6 +1169,15 @@ a coefficient is in percent per month per decile (code: \texttt{src/q3e.py},
 \subsection{Yields, forward rates, and returns}
 % TODO (Q4a): discussion of the averages (student to write)
 % Table produced by src/q4a.py from spec/q4a.md.
+
+\task{(1) The ``Bond Dataset'' contains yields in percentual terms, $Y^{(H)}_{b,t} \cdot 100\%$.
+Construct time series of:
+\begin{enumerate}[label=(\roman*), nosep, leftmargin=2.5em]
+  \item Log yields: $y^{(H)}_{b,t} = \log(1 + Y^{(H)}_{b,t})$
+  \item Log forward rates: $f^{(H)}_{b,t} = H \cdot y^{(H)}_{b,t} - (H-1) \cdot y^{(H-1)}_{b,t}$
+  \item Log annual returns: $r^{(H)}_{b,t} = H \cdot y^{(H)}_{b,t-1} - (H-1) \cdot y^{(H-1)}_{b,t}$
+\end{enumerate}}
+
 From the Fama--Bliss yields $Y^{(H)}_{b,t}$ (in percent) for $H = 1, \dots, 5$, the log yields,
 log forward rates and log annual returns are
 \begin{equation}
@@ -1009,6 +1190,13 @@ with $y^{(0)} = 0$, so that $f^{(1)}_{b,t} = y^{(1)}_{b,t}$ and $r^{(1)}_{b,t} =
 $t-1$ is 12 months before $t$. The spreads are $\xy^{(H)} = y^{(H)} - y^{(1)}$,
 $\xf^{(H)} = f^{(H)} - f^{(1)}$ and $\xr^{(H)} = r^{(H)} - r^{(1)}$
 (code: \texttt{src/q4a.py}).
+
+\task{(2) For $H = 2, 3, 4, 5$, calculate and report in a table the average values of
+\begin{enumerate}[label=(\roman*), nosep, leftmargin=2.5em]
+  \item $\xy^{(H)}_{b,t} = y^{(H)}_{b,t} - y^{(1)}_{b,t}$
+  \item $\xf^{(H)}_{b,t} = f^{(H)}_{b,t} - f^{(1)}_{b,t}$
+  \item $\xr^{(H)}_{b,t} = r^{(H)}_{b,t} - r^{(1)}_{b,t}$
+\end{enumerate}}
 
 \begin{table}[H]
   \centering
@@ -1023,6 +1211,16 @@ $\xf^{(H)} = f^{(H)} - f^{(1)}$ and $\xr^{(H)} = r^{(H)} - r^{(1)}$
 \subsection{Hold-to-maturity excess return regressions}
 % TODO (Q4b): discussion of the results (student to write)
 % Table produced by src/q4b.py from spec/q4b.md.
+
+\task{For $H = 2, 3, 4, 5$, estimate the regression
+$(1/H) \cdot \xr^{(H)}_{b,t\to t+H} = a^{(H)} + b^{(H)} \cdot \xy^{(H)}_{b,t} + \varepsilon^{(H)}_t$
+(4.1) where the hold-to-maturity excess return is
+$\xr^{(H)}_{b,t\to t+H} = \sum_{h=1}^{H} \xr^{(H-h+1)}_{t+h}
+= \sum_{h=1}^{H} (r^{(H-h+1)}_{t+h} - r^{(1)}_{t+h})$. Using the results from the regressions in
+Equation 4.1, reproduce a table analogous to the first panel of the first table on slide 5.5 of
+the Module 1 lecture notes. For the t-statistics, use the method in Hansen and Hodrick (1980)
+(see Footnote 3).}
+
 Table~\ref{tab:q4b} reports OLS estimates of
 \begin{equation}
   \frac{1}{H}\,\xr^{(H)}_{b,t\to t+H} = a^{(H)} + b^{(H)}\,\xy^{(H)}_{b,t} + \varepsilon^{(H)}_t,
@@ -1054,6 +1252,13 @@ lags (code: \texttt{src/q4b.py}).
 \subsection{One-year excess return regressions on forward spreads}
 % TODO (Q4c): discussion of the results (student to write)
 % Table produced by src/q4c.py from spec/q4c.md.
+
+\task{For $H = 2, 3, 4, 5$, estimate the regression
+$\xr^{(H)}_{b,t+1} = a^{(H)} + b^{(H)} \cdot \xf^{(H)}_{b,t} + \varepsilon^{(H)}_t$ (4.2).
+Using the results from the regressions in Equation 4.2, reproduce a table analogous to the
+second panel of the first table on slide 5.5 of the Module 1 lecture notes. For the
+t-statistics, use the method in Newey and West (1987, 1994) (see Footnote 3).}
+
 Table~\ref{tab:q4c} reports OLS estimates of
 \begin{equation}
   \xr^{(H)}_{b,t+1} = a^{(H)} + b^{(H)}\,\xf^{(H)}_{b,t} + \varepsilon^{(H)}_t,
@@ -1079,8 +1284,23 @@ rule, as in method (v) of Question~2b (code: \texttt{src/q4c.py}).
 \subsection{Cochrane--Piazzesi factor}
 % TODO (Q4d): time-series plot of cp_t with NBER recession shading
 
+\task{Estimate the Cochrane and Piazzesi (2005) factor from
+\[
+  \frac{1}{4} \cdot \sum_{H=2}^{5} \xr^{(H)}_{b,t+1}
+  = \underbrace{\theta_0 + \sum_{H=1}^{5} \theta_h \cdot f^{(H)}_{b,t}}_{cp_t} + u_t
+  \tag*{(4.3)}
+\]
+and provide a time-series plot of $cp_t$ with NBER recession gray areas in the background (the
+NBER recession dummies are available under \url{https://fred.stlouisfed.org/series/USREC})}
+
 \subsection{Excess return regressions on the CP factor}
 % TODO (Q4e): table analogous to slide 5.5, second table; NW(1994) t-stats
+
+\task{For $H = 2, 3, 4, 5$, estimate the regression
+$\xr^{(H)}_{b,t+1} = a^{(H)} + b^{(H)} \cdot cp_t + \varepsilon^{(H)}_t$ (4.4). Using the
+results from the regressions in Equation 4.4, reproduce a table analogous to the second table
+on slide 5.5 of the Module 1 lecture notes. For the t-statistics, use the method in Newey and
+West (1987, 1994) (see Footnote 3).}
 
 % =====================================================================
 % \bibliographystyle{...}
