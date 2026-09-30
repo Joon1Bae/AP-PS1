@@ -1139,4 +1139,4 @@ I'll pass my explanation for now."
 - **Substantive mathematical / economic / empirical suggestions made:** none
 - **Type of assistance:** empirical implementation; math review (check of the identity in the spec); other (spec check)
 - **Grouped follow-up requests:** none
-- **Git commit after:** PENDING_AFTER_HASH
+- **Git commit after:** fec6d18f784823aefa75a806fe4a05572be0130d
